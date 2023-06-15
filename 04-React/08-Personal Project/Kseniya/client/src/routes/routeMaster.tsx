@@ -5,5 +5,5 @@ export const routeMaster = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-  },
+  }
 ]);

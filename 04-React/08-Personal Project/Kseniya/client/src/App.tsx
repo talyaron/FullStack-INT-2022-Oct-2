@@ -4,7 +4,7 @@ function App() {
 
   return (
     <>
-     
+     I'm just the App component
     </>
   )
 }
