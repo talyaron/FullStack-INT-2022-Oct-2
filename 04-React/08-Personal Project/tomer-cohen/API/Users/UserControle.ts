@@ -20,7 +20,6 @@ export const addUser = async (req: any, res: any) => {
     console.log(userName, password, email);
 
     const userDB = await UserModel.create({ userName, password, email });
-    console.log(userDB);
 
     res.status(201).send({ ok: true });
   } catch (error) {
@@ -32,11 +31,11 @@ export const addUser = async (req: any, res: any) => {
 
 export const login = async (req: any, res: any) => {
   try {
-    const { userName, password } = req.body;
-    console.log(userName, password);
-    const userDB = await UserModel.findOne({ userName, password });
+    const { email, password } = req.body;
+    console.log(email, password);
+    const userDB = await UserModel.findOne({ email, password });
     if (!userDB) {
-      return res.status(401).json({ message: "Username or password are not correct" });
+      return res.status(401).json({ message: "email or password are not correct" });
     }
     const secret = process.env.JWT_SECRET;
     if (!secret) throw new Error("Missing JWT secret");
