@@ -19,7 +19,7 @@ const recipe: FC<RecipeProps> = ({ recipe,user }) => {
 
   return (
     <div className="recipe-container">
-        <p>{user?.userName}</p>
+        <p>{user?.username}</p>
       <h1>{recipe?.title}</h1>
       <p>{recipe?.description}</p>
     </div>
