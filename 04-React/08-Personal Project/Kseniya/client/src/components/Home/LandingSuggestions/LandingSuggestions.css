@@ -1,0 +1,31 @@
+.mainTitle {
+  font-size: 1.8rem;
+  color: #ffce00;
+  font-weight: bold;
+  padding: 4rem 0 0rem 3rem;
+}
+
+.concertsContainer{
+    padding: 3rem;
+}
+.concertWrapper{
+    text-align: center;
+    background-color: #f7eecc;
+    padding: 3rem;
+}
+
+.concertImg{
+    width: 100%;
+}
+
+.concertLabel{
+    font-size: 1.4rem;
+    font-weight: bold;
+    padding: 0.5rem ;
+}
+
+.concertDate{
+    font-weight: bold;
+}
+
+

@@ -1,0 +1,18 @@
+.HeaderContainer {
+  background-image:linear-gradient(#ffcb33, #ffffff) ;
+  height: 15em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding-bottom: 3rem;
+}
+.HeaderIntro {
+  font-size: 2rem;
+  width: 42rem;
+  color: #2734a8;
+  font-weight: bold;
+  padding: 0 0 2rem 0;
+}
+
+
