@@ -6,6 +6,7 @@ addUser,
 login,
 deleteUser,
 updateUserType,
+logout,
 getUser,
 } from "./UserControle";
 
@@ -14,6 +15,7 @@ router
 .post("/add-user",addUser)
 .get("/get-user",getUser)
 .post("/login",login)
+.get("/logout",logout)
 .delete("/delete-user",deleteUser)
 .patch("/update-user-type",updateUserType)
 

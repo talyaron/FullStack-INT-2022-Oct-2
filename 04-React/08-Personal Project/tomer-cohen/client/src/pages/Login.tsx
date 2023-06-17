@@ -44,7 +44,7 @@ function LoginForm() {
     <>
     <NavBar />
     <div className="login-form-container">
-    <h2>Register</h2>
+    <h2>Login</h2>
     <form className="login-form" onSubmit={handleLogin}>
       <div className="form-group">
         <label>Email:</label>

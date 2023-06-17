@@ -13,6 +13,19 @@ export const getUsers = async (req: any, res: any) => {
     res.status(500).send({Error: Error.Messages})
   }
 };
+export const logout = (req: any, res: any) => {
+  try {
+    res.clearCookie('user');
+    res.send('Cookie deleted');
+
+    res.status(200).send({ ok: true});
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ error: "Internal server error" });
+
+  }
+};
 
 export const addUser = async (req: any, res: any) => {
   try {
