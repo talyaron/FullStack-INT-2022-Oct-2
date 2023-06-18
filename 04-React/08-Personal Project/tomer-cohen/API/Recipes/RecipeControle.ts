@@ -3,11 +3,11 @@ import RecipeModel from './RecipeModel';
 
 export const getRecipes = async (req: any, res: any) => {
   try {
-    const recipes = await RecipeModel.find();
-    res.status(200).send(recipes);
+    const recipesDB = await RecipeModel.find({});
+    res.status(200).send( {ok:true ,recipesDB});
   } catch (error) {
     console.error(error);
-    
+    res.status(500).send({ ok: false, error });
   }
 };
 

@@ -1,4 +1,7 @@
 import axios from "axios";
+import NavBar from "../NavBar/NavBar";
+import { User } from "../../pages/Register";
+import { useRef } from "react";
 
 
 export interface Recipe {
@@ -7,15 +10,18 @@ export interface Recipe {
     author: string;
   }
 
-
-function AddRecipe() {
-    async function handleSubmit(ev: any) {
-      ev.preventDefault();
-      console.log(ev.target);
-      const title = ev.target.title.value;
-      const description = ev.target.description.value;
-      const author = ev.target.author.value;
+  function AddRecipe({ user }: { user: User | undefined }) {
+    const formRef = useRef<HTMLFormElement>(null);
   
+    async function handleSubmit(ev: React.FormEvent<HTMLFormElement>) {
+      ev.preventDefault();
+      
+      const form = formRef.current;
+      if (!form) return;
+  
+      const title = form.title.valueOf;
+      const description = form.description.value;
+      const author = user?.userName || ""; 
       console.log(title, description, author);
       const { data } = await axios.post("/api/recipes/add-recipe", {
         title,
@@ -27,9 +33,10 @@ function AddRecipe() {
   
     return (
       <>
+        
         <div className="login-box">
           <h2>recipe</h2>
-          <form onSubmit={handleSubmit}>
+          <form ref={formRef} onSubmit={handleSubmit}>
             <div className="user-box">
               <input type="text" name="title" placeholder="" />
               <label>title</label>

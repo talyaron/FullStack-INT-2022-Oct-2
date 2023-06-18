@@ -6,14 +6,24 @@ import Register from './pages/Register.tsx'
 import ErrorPage from "../src/pages/ErrorPage.tsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Login from './pages/Login.tsx'
+import Recipe from './comp/Recipe/Recipe.tsx'
 
 
 const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <App />,
-    errorElement: <ErrorPage />,
-  },
+{
+  path: "/",
+  element: <App />,
+  children: [
+    {
+      path: "/recipe/:recipeId", // Updated path
+      element: (
+        <Recipe setRecipe={undefined} recipes={[]} recipe={undefined} user={undefined}  />
+      ),
+    },
+  ],
+  errorElement: <ErrorPage />,
+},
+
   {
     path: "/register",
     element: <Register />,
