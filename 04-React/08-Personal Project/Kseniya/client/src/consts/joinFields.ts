@@ -2,15 +2,19 @@ import { IFormField } from "./loginFields"
 
 export const JOIN_FIELDS:IFormField[] = [
     {
-        label: 'Email'
+        label: 'Email',
+        property: 'email'
     },
     {
-        label: 'Full Name'
+        label: 'Full Name',
+        property: 'fullName'
     },
     {
-        label: 'Phone Number'
+        label: 'Phone Number',
+        property: 'phoneNumber'
     },
     {
-        label: 'Password'
+        label: 'Password',
+        property: 'password'
     },
 ]
