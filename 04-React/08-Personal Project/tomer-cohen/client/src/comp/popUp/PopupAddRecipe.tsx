@@ -1,11 +1,17 @@
+import { FC } from "react";
 import AddRecipe from "../Recipe/addRecipe";
+import {User} from "../../pages/Register"
 
+ interface Prop2{
+  setRecipes?: Function;
+}
 
-const PopUp = () => {
+const PopUp: FC<Prop2>= ({setRecipes}) => {
+
   return (
     <div className="popUpRecipe">
       <button className="popupButton">
-        <AddRecipe user={undefined} />
+        <AddRecipe  setRecipes={setRecipes}  />
       </button>
     </div>
   );

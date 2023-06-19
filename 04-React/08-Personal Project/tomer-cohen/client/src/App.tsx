@@ -66,7 +66,7 @@ function App() {
         <Button onClick={togglePopUp} variant="contained" className="addRecipe__openButton">
           {isPopUpOpen ? "Close" : "Add Recipe"}
         </Button>
-        {isPopUpOpen && <PopUp />}
+        {isPopUpOpen && <PopUp setRecipes={setRecipes} />} 
       </div>
       <div className="recipes">
         <div className="recipes-container">

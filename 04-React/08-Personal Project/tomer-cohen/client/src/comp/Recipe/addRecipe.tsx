@@ -1,8 +1,13 @@
 import axios from "axios";
 import NavBar from "../NavBar/NavBar";
 import { User } from "../../pages/Register";
-import { useRef } from "react";
+import { FC, useRef, useState } from "react";
+import recipe from "./Recipe";
 
+
+interface Prop{
+  setRecipes?: Function;
+}
 
 export interface Recipe {
     title: string;
@@ -11,27 +16,32 @@ export interface Recipe {
     author: string;
   }
 
-  function AddRecipe({ user }: { user: User | undefined }) {
+
+  const AddRecipe: FC<Prop> =({setRecipes}) =>{
     const formRef = useRef<HTMLFormElement>(null);
-  
-    async function handleSubmit(ev: React.FormEvent<HTMLFormElement>) {
+
+    
+    async function handleSubmit(ev: any) {
       ev.preventDefault();
-      
-      const form = formRef.current;
+      const form = ev.target;
       if (!form) return;
   
-      const title = form.title.valueOf;
+      const title = form.title.value;
       const image= form.image.value;
       const description = form.description.value;
-      const author = user?.userName || ""; 
-      console.log(title, description, author);
+      console.log(title, description, );
       const { data } = await axios.post("/api/recipes/add-recipe", {
         title,
         image,
         description,
-        author,
       });
       console.log(data);
+      if(!setRecipes){
+        throw new Error("no setRecipes");
+        
+      }
+      setRecipes((recipes: any)=>[...recipes,{title,image,description}])
+    
     }
   
     return (
@@ -51,10 +61,6 @@ export interface Recipe {
             <div className="user-box">
               <input type="text" name="description" placeholder="" />
               <label>description</label>
-            </div>
-            <div className="user-box">
-              <input type="text" name="author" placeholder="" />
-              <label>author</label>
             </div>
             <input className="submit" type="submit" value="Submit" />
           </form>
