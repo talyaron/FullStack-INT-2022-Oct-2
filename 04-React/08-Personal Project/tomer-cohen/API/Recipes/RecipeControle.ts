@@ -1,12 +1,13 @@
+import { link } from 'fs';
 import RecipeModel from './RecipeModel';
 
 export const getRecipes = async (req: any, res: any) => {
   try {
-    const recipes = await RecipeModel.find();
-    res.status(200).send(recipes);
+    const recipesDB = await RecipeModel.find({});
+    res.status(200).send( {ok:true ,recipesDB});
   } catch (error) {
     console.error(error);
-    res.status(500).send({ Error: error.message });
+    res.status(500).send({ ok: false, error });
   }
 };
 
@@ -16,12 +17,11 @@ export const addRecipe = async (req: any, res: any) => {
     console.log(title, description, author);
 
     const recipeDB = await RecipeModel.create({ title, description, author });
-    console.log(recipeDB);
 
     res.status(201).send({ ok: true });
-  } catch (error) {
+  } catch (error:any) {
     console.error(error);
-    res.status(500).send({ Error: error.message });
+
   }
 };
 
@@ -32,7 +32,6 @@ export const deleteRecipe = async (req: any, res: any) => {
     res.status(204).send();
   } catch (error) {
     console.error(error);
-    res.status(500).send({ Error: error.message });
   }
 };
 
@@ -45,7 +44,6 @@ export const getRecipe = async (req: any, res: any) => {
 
   } catch (error) {
     console.error(error);
-    res.status(500).send({ Error: error.message });
   }
 };
 

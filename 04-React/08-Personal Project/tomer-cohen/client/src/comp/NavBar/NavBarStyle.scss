@@ -11,11 +11,16 @@
 
 .left h1 {
   font-size: 2.5rem;
-  // cursor: pointer;
-  color: white;
-  text-decoration: none;
+  cursor: pointer;
+
 }
 
+a { 
+  text-decoration: none; 
+  color: white;  
+   text-decoration:none;
+ }
+ 
 .checkBtn {
   display: none;
 }
@@ -24,13 +29,13 @@
   display: none;
 }
 
-.checkBtn {
-  cursor: pointer;
-  font-size: 30px;
-  float: right;
-  color: #ed1e79;
-  line-height: 80px;
-}
+// .checkBtn {
+//   cursor: pointer;
+//   font-size: 30px;
+//   float: right;
+//   color: #ed1e79;
+//   line-height: 80px;
+// }
 
 .right ul {
   display: flex;
