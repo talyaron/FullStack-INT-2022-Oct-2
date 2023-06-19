@@ -9,6 +9,7 @@ import Button from "@mui/material/Button";
 export interface Recipe {
   title: string;
   description: string;
+  image:string;
   createdBy: string; // Change 'author' to 'createdBy'
   _id: string;
 }

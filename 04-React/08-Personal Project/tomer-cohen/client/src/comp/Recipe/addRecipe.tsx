@@ -6,6 +6,7 @@ import { useRef } from "react";
 
 export interface Recipe {
     title: string;
+    image: string
     description: string;
     author: string;
   }
@@ -20,11 +21,13 @@ export interface Recipe {
       if (!form) return;
   
       const title = form.title.valueOf;
+      const image= form.image.value;
       const description = form.description.value;
       const author = user?.userName || ""; 
       console.log(title, description, author);
       const { data } = await axios.post("/api/recipes/add-recipe", {
         title,
+        image,
         description,
         author,
       });
@@ -40,6 +43,10 @@ export interface Recipe {
             <div className="user-box">
               <input type="text" name="title" placeholder="" />
               <label>title</label>
+            </div>
+            <div className="user-box">
+              <input type="url" name="image" placeholder="" />
+              <label>image</label>
             </div>
             <div className="user-box">
               <input type="text" name="description" placeholder="" />
