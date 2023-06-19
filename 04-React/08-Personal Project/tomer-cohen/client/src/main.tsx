@@ -7,6 +7,7 @@ import ErrorPage from "../src/pages/ErrorPage.tsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Login from './pages/Login.tsx'
 import Recipe from './comp/Recipe/Recipe.tsx'
+import Admin from './pages/Admin.tsx'
 
 
 const router = createBrowserRouter([
@@ -33,6 +34,11 @@ const router = createBrowserRouter([
     path: "/Login",
     element: <Login />,
     errorElement: <ErrorPage />,
+  },
+  {
+    path:"Admin",
+    element: <Admin />,
+    errorElement: <ErrorPage />
   }
   // {
   //   path: "/about",

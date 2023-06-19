@@ -1,6 +1,5 @@
 import { FC } from "react";
 import AddRecipe from "../Recipe/addRecipe";
-import {User} from "../../pages/Register"
 
  interface Prop2{
   setRecipes?: Function;

@@ -1,8 +1,5 @@
 import axios from "axios";
-import NavBar from "../NavBar/NavBar";
-import { User } from "../../pages/Register";
-import { FC, useRef, useState } from "react";
-import recipe from "./Recipe";
+import { FC, useRef } from "react";
 
 
 interface Prop{
