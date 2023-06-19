@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 
 interface CardProps {
     head:string;
@@ -7,21 +7,22 @@ interface CardProps {
 }
 
 const HomeCard:FC<CardProps> = ({head, number, description}) => {
+  const [color, setColor] = useState("black")
+
+  useEffect(() => {
+    setColor(randomNumberColors())
+  }, [])
 
   function randomNumberColors(){
-    const numbers:any = document.querySelectorAll(".number")
-
-    for (let i = 0 ; i < numbers.length ; i++){
-        numbers[i].style.color = `#${Math.floor(Math.random()*16777215).toString(16)}`;
-    }
-}
-
-randomNumberColors();
+    const newColor = `#${Math.floor(Math.random()*16777215).toString(16)}`
+    return newColor
+    
+  }
 
   return (
     <div className="card">
         <h1>{head}</h1>
-        <p className="number">{number}</p>
+        <p className="number" style={{color:color}}>{number}</p>
         <p>{description}</p>
     </div>
   )
