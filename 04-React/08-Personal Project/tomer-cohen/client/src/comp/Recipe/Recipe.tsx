@@ -16,6 +16,7 @@ const recipe: FC<RecipeProps> = ({ recipe, user }) => {
     <div className="recipe-container">
       {user && <p>{user.userName}</p>}
       <h1>{recipe?.title}</h1>
+      <img src={recipe?.image} alt="" />
       <p>{recipe?.description}</p>
     </div>
   );
