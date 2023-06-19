@@ -27,6 +27,8 @@ app.use(express.json(), cors());
 // import userRouter from "./modules/User/UserRoutes";
 // app.use("/user", userRouter);
 
+import userRouter from "./enteties/User/UserRoute";
+app.use("/user", userRouter);
 
 app.listen(3000, () => {
   console.log("server listen on port 3000");
