@@ -7,7 +7,8 @@ const secret = process.env.JWT_SECRET;
 export const getUsers = async (req: any, res: any) => {
   try {
     const usersDB = await UserModel.find({});
-    res.send({ usersDB });
+    console.log(usersDB)
+    res.send({ usersDB, ok:true });
   } catch (error) {
     console.error(error);
     res.status(500).send({Error: Error.Messages})

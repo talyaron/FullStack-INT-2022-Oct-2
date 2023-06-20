@@ -15,6 +15,7 @@ export interface Recipe {
 }
 
 export interface User {
+  _id:string;
   userName: string;
   password: string;
   email: string;
@@ -22,7 +23,7 @@ export interface User {
 
 function App() {
   const [recipes, setRecipes] = useState<Recipe[]>([]);
-  const [selectedRecipe, setSelectedRecipe] = useState<Recipe | null>(null);
+  const [, setSelectedRecipe] = useState<Recipe | null>(null);
   const [isPopUpOpen, setIsPopUpOpen] = useState(false);
   const [user, setUser] = useState<User | undefined>(undefined);
 
@@ -66,7 +67,7 @@ function App() {
         <Button onClick={togglePopUp} variant="contained" className="addRecipe__openButton">
           {isPopUpOpen ? "Close" : "Add Recipe"}
         </Button>
-        {isPopUpOpen && <PopUp />}
+        {isPopUpOpen && <PopUp setRecipes={setRecipes} />} 
       </div>
       <div className="recipes">
         <div className="recipes-container">
