@@ -97,6 +97,24 @@ export const updateUserType = async (req: any, res: any) => {
     res.status(500).send({Error: Error.Messages})
   }
 };
+export const getUserById  = async (req: any, res: any) => {
+  try {
+    const { user } = req.cookies;
+    if (!secret) throw new Error("No secret");
+    
+    const decoded = jwt.decode(user, secret);
+    
+    const { userId } = decoded;
+
+    const userDB = await UserModel.findById(userId);
+
+    res.send({ ok: true, user: userDB });
+  } catch (error: any) {
+    console.error(error);
+    res.status(500).send({ error: error.message });
+  }
+};
+
 
 export const getUser = async (req: any, res: any) => {
   try {

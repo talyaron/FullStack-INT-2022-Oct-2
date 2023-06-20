@@ -10,8 +10,9 @@ export interface Recipe {
   title: string;
   description: string;
   image:string;
-  createdBy: string; // Change 'author' to 'createdBy'
+  userId:string;
   _id: string;
+  author:string
 }
 
 export interface User {

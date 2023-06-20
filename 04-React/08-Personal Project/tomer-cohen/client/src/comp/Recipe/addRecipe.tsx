@@ -1,5 +1,6 @@
 import axios from "axios";
 import { FC, useRef } from "react";
+import { User } from "../../App";
 
 
 interface Prop{
@@ -13,32 +14,44 @@ export interface Recipe {
     author: string;
   }
 
-
-  const AddRecipe: FC<Prop> =({setRecipes}) =>{
+  interface AddRecipeProps {
+    setRecipes: (recipes: Recipe[]) => void;
+    setUser: (user: User | undefined) => void;
+  }
+  
+  const AddRecipe: FC<AddRecipeProps> = ({ setRecipes, setUser }) => {
     const formRef = useRef<HTMLFormElement>(null);
-
-    
+  
     async function handleSubmit(ev: any) {
       ev.preventDefault();
       const form = ev.target;
       if (!form) return;
   
       const title = form.title.value;
-      const image= form.image.value;
+      const image = form.image.value;
       const description = form.description.value;
-      console.log(title, description, );
-      const { data } = await axios.post("/api/recipes/add-recipe", {
-        title,
-        image,
-        description,
-      });
-      console.log(data);
-      if(!setRecipes){
-        throw new Error("no setRecipes");
-        
+  
+      try {
+        await axios.post("/api/recipes/add-recipe", {
+          title,
+          image,
+          description,
+        });
+  
+        // Fetch updated recipes
+        const response = await axios.get("/api/recipes/get-recipes");
+        const updatedRecipes = response.data.recipesDB;
+        setRecipes(updatedRecipes);
+  
+        // Fetch updated user info
+        const userResponse = await axios.get("/api/users/get-user");
+        const updatedUser = userResponse.data.user;
+        setUser(updatedUser);
+      } catch (error) {
+        console.error(error);
       }
-      setRecipes((recipes: any)=>[...recipes,{title,image,description}])
-    
+  
+      form.reset();
     }
   
     return (

@@ -9,6 +9,7 @@ deleteUser,
 updateUserType,
 logout,
 getUser,
+getUserById
 } from "./UserControle";
 
 router
@@ -19,6 +20,7 @@ router
 .get("/logout",logout)
 .delete("/delete-user", isAdmin, deleteUser)
 .patch("/update-user-type",updateUserType)
+.get("/get-user-by-id",getUserById)
 
 
 export default router;
