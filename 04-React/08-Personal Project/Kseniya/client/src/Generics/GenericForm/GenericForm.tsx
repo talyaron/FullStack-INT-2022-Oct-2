@@ -10,11 +10,13 @@ const GenericForm: FC<IGenericForm> = ({
   fieldInfo,
   setFieldInfo,
 }) => {
-  const handleChange = (value: string, property: string) => {
+
+  const handleFieldChange = (value: string, property: string) => {
     setFieldInfo((prev) => {
       return { ...prev, [property]: value };
     });
   };
+
   return (
     <div className="formContainer">
       {formFields.map((field, index) => (
@@ -23,7 +25,7 @@ const GenericForm: FC<IGenericForm> = ({
             className="singleField"
             label={field.label}
             onChange={(e) => {
-              handleChange(e.target.value, field.property);
+              handleFieldChange(e.target.value, field.property);
             }}
           />
         </div>
