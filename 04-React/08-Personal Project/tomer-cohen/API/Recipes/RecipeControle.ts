@@ -28,9 +28,11 @@ export const deleteRecipe = async (req: any, res: any) => {
   try {
     const { _id } = req.body;
     await RecipeModel.findByIdAndDelete(_id);
-    res.status(204).send();
+    const recipes = await RecipeModel.find({});
+    res.status(201).send({ ok: true, recipes });
   } catch (error) {
     console.error(error);
+    res.status(500).send({ error: 'Internal Server Error' });
   }
 };
 

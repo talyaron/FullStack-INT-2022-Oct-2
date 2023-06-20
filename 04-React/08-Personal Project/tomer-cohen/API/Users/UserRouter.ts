@@ -17,7 +17,8 @@ router
 .get("/get-user",getUser)
 .post("/login",login)
 .get("/logout",logout)
-.delete("/delete-user",deleteUser)
+.delete("/delete-user", isAdmin, deleteUser)
 .patch("/update-user-type",updateUserType)
+
 
 export default router;

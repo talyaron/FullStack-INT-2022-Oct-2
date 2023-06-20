@@ -69,18 +69,20 @@ export const login = async (req: any, res: any) => {
 };
 
 
-export const deleteUser = async (res: any, req: any) => {
+export const deleteUser = async (req: any, res: any) => {
   try {
     const { _id } = req.body;
 
-    const deleteUser = await UserModel.deleteOne({ _id });
+    await UserModel.findByIdAndDelete(_id);
     const users = await UserModel.find({});
-    res.status(201).send({ ok: true });
+
+    res.status(201).send({ ok: true, users });
   } catch (error) {
     console.error(error);
-    res.status(500).send({Error: Error.Messages})
+    res.status(500).send({ error: 'Failed to delete user.' });
   }
 };
+
 
 export const updateUserType = async (req: any, res: any) => {
   try {
@@ -89,7 +91,7 @@ export const updateUserType = async (req: any, res: any) => {
       { _id: userId },
       { userType }
     );
-    res.status(201).send({ ok: true, userDB });
+    res.status(201).send({ ok: true });
   } catch (error) {
     console.error(error);
     res.status(500).send({Error: Error.Messages})
