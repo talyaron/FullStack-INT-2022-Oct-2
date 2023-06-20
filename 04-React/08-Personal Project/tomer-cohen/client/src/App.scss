@@ -15,8 +15,15 @@
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
-    width: 250px;
+    width: 400px;
+    img{
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
   }
+  
   .selected-recipe{
       align-items: center;
       justify-content: center;
@@ -28,17 +35,10 @@
   .recipe-link:visited {
     color: inherit;
   }
-  .recipe-img {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-    margin-bottom: 10px;
-  }
   .addRecipe{
     display: flex;
     align-items: center;
     justify-content: center;
     margin-top: 5%;
-  &__openButton{
-  }
+
 }
