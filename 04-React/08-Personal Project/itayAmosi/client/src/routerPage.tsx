@@ -11,13 +11,13 @@ import ProjectData from "./pages/ProjectData.tsx";
 
 export const router = ([
 <Routes>
-  <Route path={"/"} element={<App />}/>,
-  <Route path="/about" element={<About />}/>,
-  <Route path="/register" element={<Register />}/>,
-  <Route path="/login" element={<Login />}/>,
-  <Route path="/admin" element={<Admin />}/>,
+  <Route key="home" path={"/"} element={<App />}/>,
+  <Route key="about" path="/about" element={<About />}/>,
+  <Route key="register" path="/register" element={<Register />}/>,
+  <Route key="login" path="/login" element={<Login />}/>,
+  <Route key="admin" path="/admin" element={<Admin />}/>,
   <Route path="*" element={<ErrorPage />}/>,
-  <Route path="/projects" element={<Projects />}/>,
+  <Route key="projects" path="/projects" element={<Projects />}/>,
   <Route path="/projects/:_id" element={<ProjectData />}/>,
 </Routes>
 ]);

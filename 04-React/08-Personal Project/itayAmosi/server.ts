@@ -27,29 +27,6 @@ if (uri) {
 
 
 
-// app.post("/api/add-user", async (req, res) => {
-//   try {
-//    const {username, password} = req.body;
-//    console.log(username, password)
-   
-//    //register
-//     const salt = bcrypt.genSaltSync(10);
-//     const hash = bcrypt.hashSync(password, salt);
-
-//     console.log(hash);
-
-//     //login
-//     const isOriginalPasssword = bcrypt.compareSync(password, hash); // true
-//     console.log("is it the user password? password:",isOriginalPasssword)
-
-//     res.status(201).send({ ok: true, login:isOriginalPasssword });
-//   } catch (error: any) {
-//     console.error(error);
-//     res.status(500).send({ error: error.message });
-//   }
-// });
-
-
 
 import projectRouter from "./API/project/projectRouter";
 app.use('/api/project', projectRouter)

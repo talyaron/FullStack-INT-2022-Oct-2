@@ -1,45 +1,61 @@
 // ProfileStyle.scss
 
-
 .recipes-container {
-    margin-bottom: 40px;
-  
+    margin-top: 20px;
+    
     h2 {
       font-size: 24px;
-      font-weight: bold;
-      color: #333333;
       margin-bottom: 10px;
     }
-  
+    
     .recipe-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 20px;
-    }
-  
-    .recipe-item {
-      background-color: #ffffff;
-      padding: 10px;
-      border-radius: 8px;
-      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-      text-align: center;
-  
-      h3 {
-        font-size: 16px;
-        color: #333333;
-        margin-bottom: 10px;
+      align-items: center;
+      justify-items: center;
+        
+        .recipe-item {
+          background-color: #a48989;
+          width: 40%;
+          padding: 20px;
+          border-radius: 5px;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+          transition: transform 0.3s ease;
+          
+          &:hover {
+            transform: translateY(-5px);
+          }
+          
+          img {
+            width: 100%;
+            height: auto;
+            margin-bottom: 10px;
+            border-radius: 5px;
+          }
+          
+          h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+          }
+          
+          button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            
+            &:hover {
+              background-color: #0056b3;
+            }
+          }
+        }
       }
-  
-      img {
-        width: 50%;
-        height: 40%;
-        object-fit: cover;
-        border-radius: 4px;
-        margin-bottom: 10px;
-      }
-    }
   }
-
+  
   .mainPagePost {
     width: 30rem;
     height: 30rem;
@@ -149,3 +165,20 @@
         height: 1.5rem;
       }
     }}
+    .user-info {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 10px;
+        align-items: flex-start;
+        justify-content: center;
+        
+        h3 {
+          font-size: 18px;
+          margin-bottom: 5px;
+        }
+        
+        h2 {
+          font-size: 24px;
+          margin-bottom: 0;
+        }
+      }

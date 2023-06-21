@@ -1,17 +1,28 @@
 import NavBar from "../components/NavBar";
 import "../style/about.scss";
+import useLoading from "../hooks/useLoading";
+import { BallTriangle } from "react-loader-spinner";
 
 const About = () => {
+  const {isLoading} =useLoading();
+
   return (
     <>
       <NavBar />
+      {isLoading ? <div className="loadigContainer "> ( <BallTriangle
+  margin-left= "50"
+  height="580"
+  width="580"
+  color="lightblue"
+  ariaLabel="loading"
+/>)</div>:
       <div id="resume">
         <div className="left-column">
-          <div className="substrate">
+          <div className="substrate" key="profile">
             <h2>My Profile</h2>
             <img
               className="profilepic"
-              src="https://imgtr.ee/images/2023/06/13/QfO5i.jpg"
+              src="../../public/me.jpg"
               alt="abhaymakadia"
             />
             <ul className="main-info-list">
@@ -34,7 +45,7 @@ const About = () => {
             </ul>
             <div className="paper-clip"></div>
           </div>
-          <div className="substrate">
+          <div className="substrate" key="history">
             <h2>history</h2>
             <div className="left-blue">
               <div className="time-period-left-blue"></div>
@@ -74,7 +85,7 @@ const About = () => {
           </div>
         </div>
         <div className="right-column">
-          <div className="substrate gradient-blue font-blue">
+          <div className="substrate gradient-blue font-blue" key="about-me">
             <h2>About Me</h2>
             <h3>Hay, I'm Abhay Makadia . . .</h3>
             <div className="p">
@@ -89,7 +100,7 @@ const About = () => {
             </div>
           </div>
 
-          <div className="substrate">
+          <div className="substrate" key="progress">
             <h2>My Progress</h2>
             <h3>Web Development</h3>
             <ul className="skills">
@@ -129,7 +140,7 @@ const About = () => {
         </div>
 
         <div className="floatlimit"></div>
-      </div>
+      </div>}
     </>
   );
 };

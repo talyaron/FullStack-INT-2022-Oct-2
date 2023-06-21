@@ -14,6 +14,7 @@ interface Project {
 }
 
 function App() {
+  
   const [projects, setProjects] = useState<Project[]>([]);
 
   useEffect(() => {
@@ -32,7 +33,7 @@ function App() {
   return (
     <>
       <NavBar />
-      <h1 className="text">
+      <h1 className="text" key="intro-text">
         Hello and welcome to my portfolio site! Here you can see the various
         projects I have worked on recently, both individually and in a team.
         Through these projects, I gained experience building and programming in
@@ -43,7 +44,7 @@ function App() {
         can comment your personal opinion!
       </h1>
       <h2 className="textLINK">Let's get started:
-        <Link to={"/projects"}>projects</Link>
+        <Link className="btn" to={"/projects"}><h1>Projects</h1></Link>
 
       </h2>
     </>

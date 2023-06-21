@@ -32,7 +32,6 @@ const register = () => {
         
       }
     }
-    console.log(gender);
   }
 
   return (

@@ -1,10 +1,10 @@
 import express from "express";
 const router = express.Router();
 
-import { addComment } from "./commentControl";
+import { addComment, getComments } from "./commentControl";
 
 router
   .post("/add-comment", addComment)
-//   .get("/get-projects", getProjects)
+  .get("/get-comments-by-projectId", getComments)
 
 export default router;
