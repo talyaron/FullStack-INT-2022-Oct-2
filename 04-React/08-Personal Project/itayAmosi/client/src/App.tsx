@@ -14,6 +14,7 @@ interface Project {
 }
 
 function App() {
+  
   const [projects, setProjects] = useState<Project[]>([]);
 
   useEffect(() => {
@@ -43,7 +44,7 @@ function App() {
         can comment your personal opinion!
       </h1>
       <h2 className="textLINK">Let's get started:
-        <Link to={"/projects"}>projects</Link>
+        <Link className="btn" to={"/projects"}><h1>Projects</h1></Link>
 
       </h2>
     </>

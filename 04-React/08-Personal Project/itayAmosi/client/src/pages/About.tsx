@@ -1,17 +1,28 @@
 import NavBar from "../components/NavBar";
 import "../style/about.scss";
+import useLoading from "../hooks/useLoading";
+import { BallTriangle } from "react-loader-spinner";
 
 const About = () => {
+  const {isLoading} =useLoading();
+
   return (
     <>
       <NavBar />
+      {isLoading ? <div className="loadigContainer "> ( <BallTriangle
+  margin-left= "50"
+  height="580"
+  width="580"
+  color="lightblue"
+  ariaLabel="loading"
+/>)</div>:
       <div id="resume">
         <div className="left-column">
           <div className="substrate" key="profile">
             <h2>My Profile</h2>
             <img
               className="profilepic"
-              src="https://imgtr.ee/images/2023/06/13/QfO5i.jpg"
+              src="../../public/me.jpg"
               alt="abhaymakadia"
             />
             <ul className="main-info-list">
@@ -129,7 +140,7 @@ const About = () => {
         </div>
 
         <div className="floatlimit"></div>
-      </div>
+      </div>}
     </>
   );
 };
