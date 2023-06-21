@@ -3,7 +3,7 @@ import "../style/navBar.scss"
 import useGetUser from '../hooks/useGetUser';
 import axios from 'axios';
 
-const NavBar = () => {
+export const NavBar = () => {
 const {isAdmin, user} = useGetUser();
 const logout = async () =>{
   await axios.get("api/user/delete-cookie");

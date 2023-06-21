@@ -23,6 +23,7 @@
     "jsonwebtoken": "^9.0.0",
     "jwt-simple": "^0.5.6",
     "mongoose": "^7.0.3",
+    "react-loader-spinner": "^5.3.4",
     "uuidv4": "^6.2.13"
   },
   "devDependencies": {

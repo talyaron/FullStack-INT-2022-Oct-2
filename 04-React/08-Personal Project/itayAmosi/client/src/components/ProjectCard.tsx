@@ -2,6 +2,7 @@ import axios from "axios";
 import { FC, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
+
 interface Project {
   _id: string;
   name: string;
@@ -11,31 +12,37 @@ interface Project {
   src4: string;
   description: string;
 }
-  
-
 
 const ProjectCard: FC<Project> = () => {
-
   const [projects, setProject] = useState<Project[]>([]);
   useEffect(() => {
     (async () => {
       const { data } = await axios.get(`/api/project/get-projects`);
 
-        const { projectDB } = data
+      const { projectDB } = data;
       setProject(projectDB);
     })();
   }, []);
   return (
     <>
+
       {projects.map((project, _id) => (
         <div className="project-card" key={project._id}>
           <div className="project-details">
             <h2 key={project._id}>{project.name}</h2>
-            <img className="project-image" src={project.src1} key={project._id} />
+            <img
+              className="project-image"
+              src={project.src1}
+              key={project._id}
+            />
             <p key={project._id}>{project.description}</p>
-            <Link key={project._id} to={`/projects/${project._id}`} className="project-link">
-                  View Project
-                </Link>
+            <Link
+              key={project._id}
+              to={`/projects/${project._id}`}
+              className="project-link"
+            >
+              View Project
+            </Link>
           </div>
         </div>
       ))}
