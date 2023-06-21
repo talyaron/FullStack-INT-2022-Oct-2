@@ -12,6 +12,7 @@ export interface IEvent {
   title: string;
   date: string;
   price: number;
+  img: string
 }
 
 export const EventSchema = new Schema({
@@ -22,6 +23,7 @@ export const EventSchema = new Schema({
   title: String,
   date: String,
   price: Number,
+  img: String
 });
 
 const EventModel = mongoose.model("event", EventSchema);
