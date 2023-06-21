@@ -9,12 +9,15 @@
     }
     
     .recipe-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      align-items: center;
+      justify-items: center;
         
         .recipe-item {
-          background-color: #f5f5f5;
+          background-color: #a48989;
+          width: 40%;
           padding: 20px;
           border-radius: 5px;
           box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);

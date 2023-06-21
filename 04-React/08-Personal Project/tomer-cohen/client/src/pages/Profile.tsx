@@ -121,8 +121,8 @@ function Profile() {
             {user.map((user) => (
               <div key={user._id} className="recipe-item">
                 <div className="user-info">
-                  <h3>Email: {user.email}</h3>
                   <h2>User Name: {user.userName}</h2>
+                  <h3>Email: {user.email}</h3>
                 </div>
                 {showInputFields && (
                   <>
