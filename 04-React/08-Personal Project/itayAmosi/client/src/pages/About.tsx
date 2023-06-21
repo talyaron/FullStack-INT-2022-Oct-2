@@ -7,7 +7,7 @@ const About = () => {
       <NavBar />
       <div id="resume">
         <div className="left-column">
-          <div className="substrate">
+          <div className="substrate" key="profile">
             <h2>My Profile</h2>
             <img
               className="profilepic"
@@ -34,7 +34,7 @@ const About = () => {
             </ul>
             <div className="paper-clip"></div>
           </div>
-          <div className="substrate">
+          <div className="substrate" key="history">
             <h2>history</h2>
             <div className="left-blue">
               <div className="time-period-left-blue"></div>
@@ -74,7 +74,7 @@ const About = () => {
           </div>
         </div>
         <div className="right-column">
-          <div className="substrate gradient-blue font-blue">
+          <div className="substrate gradient-blue font-blue" key="about-me">
             <h2>About Me</h2>
             <h3>Hay, I'm Abhay Makadia . . .</h3>
             <div className="p">
@@ -89,7 +89,7 @@ const About = () => {
             </div>
           </div>
 
-          <div className="substrate">
+          <div className="substrate" key="progress">
             <h2>My Progress</h2>
             <h3>Web Development</h3>
             <ul className="skills">

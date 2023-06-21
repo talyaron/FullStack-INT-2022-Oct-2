@@ -32,7 +32,7 @@ function App() {
   return (
     <>
       <NavBar />
-      <h1 className="text">
+      <h1 className="text" key="intro-text">
         Hello and welcome to my portfolio site! Here you can see the various
         projects I have worked on recently, both individually and in a team.
         Through these projects, I gained experience building and programming in

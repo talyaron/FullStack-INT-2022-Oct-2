@@ -16,7 +16,6 @@ import { Link, useNavigate } from "react-router-dom";
       const loginUser: any = { username, password };
 
       const { data } = await axios.post("/api/user/get-user", loginUser);
-      console.log(data);
       const { ok } = data;
       if (ok) {
         navigate("/");

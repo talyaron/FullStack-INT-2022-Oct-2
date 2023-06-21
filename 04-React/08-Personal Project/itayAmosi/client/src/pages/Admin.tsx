@@ -2,42 +2,51 @@ import { Link } from "react-router-dom";
 import "../style/admin.scss";
 import Form from "../components/Form";
 import NavBar from "../components/NavBar";
+import useGetUser from "../hooks/useGetUser";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Admin = () => {
+  const { isAdmin, user } = useGetUser();
+  const navigate = useNavigate();
+  
+  useEffect(() => {
+    if (!isAdmin && user) {
+      navigate("/");
+    }
+  }, [isAdmin, user]);
+
   return (
     <>
       <NavBar />
       <aside>
         <header>
-          <div className="profile">
-            <img
-              className="profile-picture"
-              src="https://imgtr.ee/images/2023/06/13/Qj1oL.jpg"
-            />
+          <div className="profile" key="profile">
+            <img className="profile-picture" src="../../public/me.jpg" alt="Profile" />
             <p>Itay Amosi</p>
           </div>
         </header>
         <nav className="side-navigation">
           <ul>
-            <p className="active">
+            <p className="active" key="home">
               <Link to={"/"}>
                 {" "}
                 <i className="fa fa-dashboard"></i>Home
               </Link>
             </p>
-            <p>
+            <p key="projects">
               <Link to={"/"}>
                 {" "}
                 <i className="fa fa-dashboard"></i>Projects
               </Link>
             </p>
-            <p>
+            <p key="comments">
               <Link to={"/"}>
                 {" "}
                 <i className="fa fa-dashboard"></i>Comments
               </Link>
             </p>
-            <p>
+            <p key="users">
               <Link to={"/"}>
                 {" "}
                 <i className="fa fa-dashboard"></i>Users

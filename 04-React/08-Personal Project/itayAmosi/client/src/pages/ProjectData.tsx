@@ -48,7 +48,7 @@ const ProjectData = () => {
   <label className="gallery__item"><img src={project.src4}/></label>
 </div>
 
-      <Comment />
+      <Comment projectId={_id}/>
     </>
   );
 }

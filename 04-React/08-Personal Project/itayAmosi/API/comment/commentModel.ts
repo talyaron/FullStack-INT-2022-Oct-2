@@ -1,29 +1,20 @@
 import mongoose, { Schema, Document } from "mongoose";
 
-interface Comment extends Document {
-  user: {
-    type: Schema.Types.ObjectId;
-    ref: "user";
-    required: false;
-  };
-  project: {
-    type: Schema.Types.ObjectId;
-    ref: "project";
-    required: false;
-  };
+interface Comment {
+  user: string;
+  project:string;
   comment: string;
 }
 
 const CommentSchema = new Schema<Comment>({
   user: {
-    type: Schema.Types.ObjectId,
-    ref: "user",
-    required: false,
+    type: String,
+    ref:"Users"
+
   },
   project: {
-    type: Schema.Types.ObjectId,
-    ref: "project",
-    required: false,
+    type: String,
+    ref:"Project"
   },
   comment: String,
 

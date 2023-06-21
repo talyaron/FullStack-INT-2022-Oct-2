@@ -20,7 +20,7 @@ const ProjectCard: FC<Project> = () => {
   useEffect(() => {
     (async () => {
       const { data } = await axios.get(`/api/project/get-projects`);
-      console.log(data);
+
         const { projectDB } = data
       setProject(projectDB);
     })();
@@ -28,7 +28,7 @@ const ProjectCard: FC<Project> = () => {
   return (
     <>
       {projects.map((project, _id) => (
-        <div className="project-card">
+        <div className="project-card" key={project._id}>
           <div className="project-details">
             <h2 key={project._id}>{project.name}</h2>
             <img className="project-image" src={project.src1} key={project._id} />

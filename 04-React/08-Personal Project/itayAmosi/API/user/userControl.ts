@@ -29,27 +29,49 @@ export const login = async (req: any, res: any) => {
   try {
     const JWT_SECRET="sdsdgffdgdfasSFDFBDF"
     const secret = process.env.JWT_SECRET;
-
     const { username, password } = req.body;
-console.log(username, password);
     const userDB = await UserModel.findOne({ username });
-console.log(userDB);
+
     if (!userDB) {
       res.status(401).send({
         error: "username or password are inncorect",
       });
       return;
     }
-    // if (!bcrypt.compareSync(password, userDB.password))
-    //   throw new Error("wrong username or password");
-
-    // if (!secret) throw new Error("Server Error");
-    // const token = jwt.encode({ userId: userDB._id }, secret);
-    res.cookie("currentUser", JSON.stringify( {userId: userDB._id }), {
+    if (!secret) throw new Error("Server Error");
+    const token = jwt.encode({ userId: userDB._id }, secret);
+    res.cookie("currentUser", token, {
       maxAge: 999 * 999 * 999,
       httpOnly: true,
     });
     res.status(201).send({ ok: true, userDB });
+  } catch (error: any) {
+    console.error(error);
+    res.status(500).send({ error: error.message });
+  }
+};
+
+
+export const getCurrentUser = async (req: any, res: any) => {
+  try {
+    const secret = process.env.JWT_SECRET;
+    const { currentUser } = req.cookies;
+    if (!secret) throw new Error("No secret");
+    const decoded = jwt.decode(currentUser, secret);
+    const { userId } = decoded;
+    const userDB = await UserModel.findById(userId);
+    res.status(201).send({ ok: true, userDB });
+  } catch (error: any) {
+    console.error(error);
+    res.status(500).send({ error: error.message });
+  }
+};
+
+
+export const logout = async (req: any, res: any) => {
+  try {
+    res.clearCookie("currentUser");
+    res.send("Cookie deleted!");
   } catch (error: any) {
     console.error(error);
     res.status(500).send({ error: error.message });
