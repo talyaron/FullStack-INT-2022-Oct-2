@@ -116,7 +116,7 @@ export const getUserById  = async (req: any, res: any) => {
 };
 export const updateUserName = async (req: any, res: any) => {
   try {
-    const { username, email , userId } = req.body;
+    const { userName, email , userId } = req.body;
 
     if (!userId) {
       return res.status(400).send({ error: "userId is required" });
@@ -124,7 +124,7 @@ export const updateUserName = async (req: any, res: any) => {
 
     const userDB = await UserModel.findByIdAndUpdate(
       userId,
-      { $set: { username, email } },
+      { $set: { userName, email } },
       { new: true }
     );
 

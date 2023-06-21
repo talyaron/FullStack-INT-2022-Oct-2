@@ -1,12 +1,12 @@
 import axios from 'axios';
-import NavBar from '../comp/NavBar/NavBar'
-import '../style/ProfileStyle.scss'
+import NavBar from '../comp/NavBar/NavBar';
+import '../style/ProfileStyle.scss';
 import { useEffect, useState } from 'react';
 import { Recipe } from '../App';
 import { User } from './Register';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
-import ConfirmationDialog from "../comp/popUp/popupDelete";
+import ConfirmationDialog from '../comp/popUp/popupDelete';
 
 function Profile() {
   const [recipes, setRecipes] = useState<Recipe[]>([]);
@@ -15,6 +15,7 @@ function Profile() {
   const [selectedRecipeId, setSelectedRecipeId] = useState<string | null>(null);
   const [newUsername, setNewUsername] = useState('');
   const [newEmail, setNewEmail] = useState('');
+  const [showInputFields, setShowInputFields] = useState(false); 
 
   useEffect(() => {
     getRecipes();
@@ -37,7 +38,7 @@ function Profile() {
     try {
       const response = await axios.get('/api/users/get-user-by-id');
       const userDB = response.data.user;
-      setuser([userDB]); // Wrap the user object in an array
+      setuser([userDB]); 
     } catch (error) {
       console.error(error);
     }
@@ -67,23 +68,26 @@ function Profile() {
 
   const handleUpdateInfo = async () => {
     try {
-      const userId = user[0]?._id; // Assuming there is only one user in the array
+      const userId = user[0]?._id;
 
       if (!userId) {
         console.error('User ID not found');
         return;
       }
 
-      const { data } = await axios.put('/api/users/update-info', {
-        username: newUsername,
+      if (!newUsername || !newEmail) {
+        console.error('Please enter both a new username and email');
+        return;
+      }
+
+      const { data } = await axios.patch('/api/users/update-info', {
+        userName: newUsername,
         email: newEmail,
-        userId: userId
+        userId: userId,
       });
 
-      // Update the user state with the updated user data
       setuser([data.user]);
 
-      // Reset the input fields
       setNewUsername('');
       setNewEmail('');
 
@@ -101,32 +105,44 @@ function Profile() {
         <div className="recipe-grid">
           {user.map((user) => (
             <div key={user._id} className="recipe-item">
+              <div className='user-info'>
+
               <h3>Email: {user.email}</h3>
               <h2>User Name: {user.userName}</h2>
-              <input
-                type="text"
-                value={newUsername}
-                onChange={(e) => setNewUsername(e.target.value)}
-                placeholder="New Username"
-              />
-              <input
-                type="email"
-                value={newEmail}
-                onChange={(e) => setNewEmail(e.target.value)}
-                placeholder="New Email"
-              />
-              <button onClick={handleUpdateInfo}>Update Info</button>
+              </div>
+              {showInputFields && (
+                <>
+                  <input
+                    type="text"
+                    value={newUsername}
+                    onChange={(e) => setNewUsername(e.target.value)}
+                    placeholder="New Username"
+                  />
+                  <input
+                    type="email"
+                    value={newEmail}
+                    onChange={(e) => setNewEmail(e.target.value)}
+                    placeholder="New Email"
+                  />
+                </>
+              )}
+              <button onClick={() => setShowInputFields(!showInputFields)}>
+                {showInputFields ? 'Cancel' : 'Update Info'}
+              </button>
+              {showInputFields && (
+                <button onClick={handleUpdateInfo}>Confirm Update</button>
+              )}
             </div>
           ))}
         </div>
       </div>
       <div className="mainPagePost">
-        <h2>Your Recipes</h2>
+        <h2>Your Recipes:</h2>
         <div className="recipe-grid">
           {recipes.map((recipe) => (
             <div key={recipe._id} className="recipe-item">
               <img src={recipe.image} alt={recipe.title} />
-              <h3>titel: {recipe.title}</h3>
+              <h3>title: {recipe.title}</h3>
               <button
                 className={`main__container__deletePost ${
                   selectedRecipeId === recipe._id ? 'selected' : ''
