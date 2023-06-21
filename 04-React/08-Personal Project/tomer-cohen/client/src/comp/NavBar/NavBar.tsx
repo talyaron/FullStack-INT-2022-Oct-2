@@ -22,6 +22,9 @@ const NavBar = () => {
     }
   }
   return (
+    <body>
+      
+    
     <div>
       <nav className="navbar">
         <div className="left">
@@ -59,6 +62,7 @@ const NavBar = () => {
         </div>
       </nav>
     </div>
+    </body>
   );
 };
 

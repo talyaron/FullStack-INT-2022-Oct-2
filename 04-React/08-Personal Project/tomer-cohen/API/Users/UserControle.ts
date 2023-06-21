@@ -69,18 +69,20 @@ export const login = async (req: any, res: any) => {
 };
 
 
-export const deleteUser = async (res: any, req: any) => {
+export const deleteUser = async (req: any, res: any) => {
   try {
     const { _id } = req.body;
 
-    const deleteUser = await UserModel.deleteOne({ _id });
+    await UserModel.findByIdAndDelete(_id);
     const users = await UserModel.find({});
-    res.status(201).send({ ok: true });
+
+    res.status(201).send({ ok: true, users });
   } catch (error) {
     console.error(error);
-    res.status(500).send({Error: Error.Messages})
+    res.status(500).send({ error: 'Failed to delete user.' });
   }
 };
+
 
 export const updateUserType = async (req: any, res: any) => {
   try {
@@ -89,12 +91,55 @@ export const updateUserType = async (req: any, res: any) => {
       { _id: userId },
       { userType }
     );
-    res.status(201).send({ ok: true, userDB });
+    res.status(201).send({ ok: true });
   } catch (error) {
     console.error(error);
     res.status(500).send({Error: Error.Messages})
   }
 };
+export const getUserById  = async (req: any, res: any) => {
+  try {
+    const { user } = req.cookies;
+    if (!secret) throw new Error("No secret");
+    
+    const decoded = jwt.decode(user, secret);
+    
+    const { userId } = decoded;
+
+    const userDB = await UserModel.findById(userId);
+
+    res.send({ ok: true, user: userDB });
+  } catch (error: any) {
+    console.error(error);
+    res.status(500).send({ error: error.message });
+  }
+};
+export const updateUserName = async (req: any, res: any) => {
+  try {
+    const { username, email , userId } = req.body;
+
+    if (!userId) {
+      return res.status(400).send({ error: "userId is required" });
+    }
+
+    const userDB = await UserModel.findByIdAndUpdate(
+      userId,
+      { $set: { username, email } },
+      { new: true }
+    );
+
+    if (!userDB) {
+      return res.status(404).send({ error: "User not found" });
+    }
+
+    res.status(200).send({ ok: true, user: userDB });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ error: "Internal server error" });
+  }
+};
+
+
 
 export const getUser = async (req: any, res: any) => {
   try {

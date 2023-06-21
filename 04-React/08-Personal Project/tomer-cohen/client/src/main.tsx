@@ -8,6 +8,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Login from './pages/Login.tsx'
 import Recipe from './comp/Recipe/Recipe.tsx'
 import Admin from './pages/Admin.tsx'
+import Profile from './pages/Profile.tsx'
 
 
 const router = createBrowserRouter([
@@ -39,20 +40,12 @@ const router = createBrowserRouter([
     path:"Admin",
     element: <Admin />,
     errorElement: <ErrorPage />
-  }
-  // {
-  //   path: "/about",
-  //   element: <About />,
-  //   children: [
-  //     {
-  //       path: "/about/project/:projectId",
-  //       element: (
-  //         <Project setProject={undefined} projects={[]} project={undefined} />
-  //       ),
-  //     },
-  //   ],
-  //   errorElement: <ErrorPage />,
-  // },
+  },
+  {
+    path: "/Profile",
+    element: <Profile />,
+    errorElement: <ErrorPage />,
+  },
 
 ]);
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
