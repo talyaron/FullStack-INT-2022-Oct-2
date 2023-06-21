@@ -1,29 +1,25 @@
 import { FC, SetStateAction } from "react";
-// import { useParams } from 'react-router-dom';
 import { Recipe, User } from "../../App";
 
-interface RecipeProps {
+export interface RecipeProps extends UserProps {
   setRecipe: SetStateAction<any>;
   recipes: Recipe[];
   recipe: Recipe | undefined;
-  user:User | undefined;
 }
-// interface UserProps{
-//     setUser: SetStateAction<any>;
-//     users: User[];
-//     user: User;
-// }
 
-const recipe: FC<RecipeProps> = ({ recipe,user }) => {
-  // const { recipeId } = useParams<{ recipeId: string }>();
+interface UserProps {
+  user: User | undefined;
+}
 
+const RecipeProps: FC<RecipeProps> = ({ recipe }) => { // Change the component name from 'recipe' to 'RecipeProps'
   return (
     <div className="recipe-container">
-        <p>{user?.username}</p>
+      <p>Created by: {recipe?.author}</p>
       <h1>{recipe?.title}</h1>
+      <img src={recipe?.image} alt="" />
       <p>{recipe?.description}</p>
     </div>
   );
 };
 
-export default recipe;
+export default RecipeProps;

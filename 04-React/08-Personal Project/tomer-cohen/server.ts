@@ -25,6 +25,9 @@ app.use(express.static("./client"));
 import userRouter from "./API/Users/UserRouter";
 app.use("/api/users", userRouter);
 
+import recipeRouter from "./API/Recipes/RecipeRouter";
+app.use("/api/recipes",recipeRouter)
+
 app.listen(3000, () => {
   console.log("server listen on port 3000");
 });

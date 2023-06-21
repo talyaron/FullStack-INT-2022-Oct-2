@@ -22,13 +22,16 @@ const NavBar = () => {
     }
   }
   return (
+    <body>
+      
+    
     <div>
       <nav className="navbar">
         <div className="left">
           <li>
-            <Link to="/">
-              <h1>Recipes</h1>
-            </Link>
+          <Link to="/"  >
+      <h1> {'Recipe'}</h1>
+</Link>
           </li>
         </div>
 
@@ -59,6 +62,7 @@ const NavBar = () => {
         </div>
       </nav>
     </div>
+    </body>
   );
 };
 
