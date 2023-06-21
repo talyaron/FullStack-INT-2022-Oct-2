@@ -45,6 +45,9 @@ body {
   text-shadow: 0.025em 0.025em 0 #c7408f, 0.019em 0.08em 0 #cac115,
     0.05em 0.05em 0 #14c42b, 0.07em 0.01em 0 #1142c9;
 }
+.btn{
+  color:#c7408f
+}
 
 .home{
   color: #3668f0;
@@ -67,4 +70,11 @@ body {
 .admin{
   color: #000000;
 
+}
+
+
+.loadigContainer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
