@@ -10,19 +10,33 @@ import axios from "axios";
 import "./App.css";
 import FeedbackCarousel from "./components/FeedbackCarousel/FeedbackCarousel";
 import Feedback from "./pages/Feedback";
+import useLoader from '../src/hooks/useLoder';
+import { ThreeDots } from "react-loader-spinner";
+
 
 const App: React.FC = () => {
+  const { isLoader } = useLoader();
   return (
     <div>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/projects" element={<Projects />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/feedback" element={<FeedbackForm />} />
-        <Route path="*" element={<ErrorPage />} />
-      </Routes>
+             {isLoader ? (
+        <div className="loaderContainer">
+          <ThreeDots
+            height={80}
+            width={80}
+            color="green"
+            ariaLabel="loading"
+          />
+        </div>
+      ) : (
+      <><Navbar /><Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/projects" element={<Projects />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/feedback" element={<FeedbackForm />} />
+            <Route path="*" element={<ErrorPage />} />
+          </Routes></>
+      )}
     </div>
   );
 };
@@ -44,6 +58,8 @@ const Home: React.FC = () => {
   }, []);
 
   return (
+    <div>
+
     <div className="home-container">
       <h2>Welcome to the Home Page</h2>
       <p>
@@ -54,6 +70,7 @@ const Home: React.FC = () => {
           <FeedbackCarousel feedbackData={feedbackData} />
         </div>
       </div>
+    </div>
     </div>
   );
 };

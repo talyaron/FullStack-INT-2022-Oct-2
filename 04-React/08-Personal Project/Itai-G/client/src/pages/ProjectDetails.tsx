@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import Navbar from '../components/navbar/Navbar';
+import { ThreeDots } from 'react-loader-spinner';
+import useLoader from '../hooks/useLoder';
 
 
 interface Project {
@@ -13,6 +15,7 @@ interface Project {
 
 const ProjectDetails: React.FC = () => {
   const { _id } = useParams();
+  const { isLoader } = useLoader();
   console.log("_id:",_id) 
   const [project, setProject] = useState<Project | null>(null);
 
@@ -38,13 +41,24 @@ const ProjectDetails: React.FC = () => {
 
   return (
     <div>
-      <Navbar />
-      <div className="projectCard">
-        <h2>Project Details</h2>
-        <h3>{project.name}</h3>
-        <img src={project.img} alt="{project.name}" />
-        <p>{project.description}</p>
-      </div>
+      {isLoader ? (
+        <div className="loaderContainer">
+          <ThreeDots
+            height={80}
+            width={80}
+            color="green"
+            ariaLabel="loading"
+          />
+        </div>
+      ) : (
+        <><Navbar />
+            <div className="projectCard">
+            <h2>Project Details</h2>
+            <h3>{project.name}</h3>
+            <img src={project.img} alt="{project.name}" />
+            <p>{project.description}</p>
+          </div></>
+      )}
     </div>
   );
 };

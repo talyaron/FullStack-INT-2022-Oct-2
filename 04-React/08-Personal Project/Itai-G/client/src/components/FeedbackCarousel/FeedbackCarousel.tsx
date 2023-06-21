@@ -22,8 +22,8 @@ const FeedbackCarousel: React.FC<FeedbackCarouselProps> = ({ feedbackData }) => 
             prevIndex === feedbackData.length - 1 ? 0 : prevIndex + 1
           );
           setIsAnimating(false);
-        }, 1000); // Delay before switching to next feedback
-      }, 5000); // Interval of 5 seconds
+        }, 1000); 
+      }, 2000);
 
       return () => clearInterval(timer);
     }
