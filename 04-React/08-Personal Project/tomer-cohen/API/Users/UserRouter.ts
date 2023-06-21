@@ -9,7 +9,8 @@ deleteUser,
 updateUserType,
 logout,
 getUser,
-getUserById
+getUserById,
+updateUserName,
 } from "./UserControle";
 
 router
@@ -17,6 +18,7 @@ router
 .post("/add-user",addUser)
 .get("/get-user",getUser)
 .post("/login",login)
+.patch("/update-info",updateUserName)
 .get("/logout",logout)
 .delete("/delete-user", isAdmin, deleteUser)
 .patch("/update-user-type",updateUserType)

@@ -114,6 +114,31 @@ export const getUserById  = async (req: any, res: any) => {
     res.status(500).send({ error: error.message });
   }
 };
+export const updateUserName = async (req: any, res: any) => {
+  try {
+    const { username, email , userId } = req.body;
+
+    if (!userId) {
+      return res.status(400).send({ error: "userId is required" });
+    }
+
+    const userDB = await UserModel.findByIdAndUpdate(
+      userId,
+      { $set: { username, email } },
+      { new: true }
+    );
+
+    if (!userDB) {
+      return res.status(404).send({ error: "User not found" });
+    }
+
+    res.status(200).send({ ok: true, user: userDB });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ error: "Internal server error" });
+  }
+};
+
 
 
 export const getUser = async (req: any, res: any) => {

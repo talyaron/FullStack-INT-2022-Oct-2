@@ -2,7 +2,7 @@ import { FC } from "react";
 import AddRecipe from "../Recipe/addRecipe";
 
  interface Prop2{
-  setRecipes?: Function;
+  setRecipes?: Function ;
 }
 
 const PopUp: FC<Prop2>= ({setRecipes}) => {
