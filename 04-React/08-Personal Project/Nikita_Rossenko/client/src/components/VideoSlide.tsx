@@ -1,4 +1,4 @@
-import React from "react";
+import { useEffect, useState } from "react";
 
 const VideoSlide = () => {
     const sentences = [
@@ -7,30 +7,33 @@ const VideoSlide = () => {
         "The ultimate goal of flying to Mars for colonization is to establish a sustainable human settlement that can support long-term exploration and research of the planet.",
         "Until humans reach Mars, it is crucial to prioritize the protection of planet Earth by implementing sustainable practices and reducing our impact on the environment."
     ];
+    const [sentence, setSentence] = useState(sentences[0])
+
+    function changeSentence() {
+        const timer = setTimeout(() => {
+            let currentSentence = sentences.indexOf(sentence)
+            if (currentSentence === sentences.length -1) {
+                currentSentence = 0
+                setSentence(sentences[currentSentence])
+            } else {
+                currentSentence += 1
+                setSentence(sentences[currentSentence])
+                console.log(currentSentence)
+            }
+          }, 10000)
+    }
+    useEffect (() => {
+        console.log("Changing sentence")
+        changeSentence()
+    }, [sentence])
+
 
 
     return (
         <div className="videoContainer">
             <div className="sentensesContainer">
                 <h1 className="sentensesSlide w3-animate-fading">
-                    Mission MARS - Reaching Mars is a challenging and ambitious
-                    endeavor that requires advanced technologies and extensive
-                    planning.
-                </h1>
-                <h1 className="sentensesSlide w3-animate-fading">
-                    Mars exploration missions aim to expand our knowledge of the
-                    red planet's geology, atmosphere, and potential for
-                    supporting microbial life.
-                </h1>
-                <h1 className="sentensesSlide w3-animate-fading">
-                    The ultimate goal of flying to Mars for colonization is to
-                    establish a sustainable human settlement that can support
-                    long-term exploration and research of the planet.
-                </h1>
-                <h1 className="sentensesSlide w3-animate-fading">
-                    Until humans reach Mars, it is crucial to prioritize the
-                    protection of planet Earth by implementing sustainable
-                    practices and reducing our impact on the environment.
+                        {sentence}
                 </h1>
             </div>
             <div className="darken"></div>
