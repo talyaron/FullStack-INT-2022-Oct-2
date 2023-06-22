@@ -1,8 +1,4 @@
-
-
-type Props = {};
-
-function Search({}: Props) {
+function Search() {
   return (
     <form>
       <label htmlFor="search">

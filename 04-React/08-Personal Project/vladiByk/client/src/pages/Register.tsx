@@ -2,12 +2,14 @@ import "../styles/Register.scss";
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { UserType } from "../App";
-
-// const initNewUser: UserType = { userName: "", email: "", password: "", _id: "" };
+import { UserType } from "../app/userSlice";
+import { login } from "../app/userSlice";
+import { useAppDispatch } from "../hooks/reduxHook";
 
 const Register = () => {
   const [newUser, setNewUser] = useState<UserType | null>(null);
+
+  const dispatch = useAppDispatch();
 
   const navigate = useNavigate();
 
@@ -16,7 +18,9 @@ const Register = () => {
 
     const user = await data.user;
 
-    if(!user) return 
+    if (!user) return;
+
+    dispatch(login(user));
 
     setTimeout(() => {
       navigate(`/profile`);
@@ -48,7 +52,7 @@ const Register = () => {
                 pattern="[^\s]+"
                 onChange={(e) =>
                   setNewUser((prev) => {
-                    if(!prev) return null
+                    if (!prev) return null;
                     prev.userName = e.target.value;
                     return prev;
                   })
@@ -75,7 +79,7 @@ const Register = () => {
                 // pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$"
                 onChange={(e) =>
                   setNewUser((prev) => {
-                    if(!prev) return null
+                    if (!prev) return null;
                     prev.email = e.target.value;
                     return prev;
                   })
@@ -101,7 +105,7 @@ const Register = () => {
                 placeholder=" "
                 onChange={(e) =>
                   setNewUser((prev) => {
-                    if(!prev) return null
+                    if (!prev) return null;
                     prev.password = e.target.value;
                     return prev;
                   })

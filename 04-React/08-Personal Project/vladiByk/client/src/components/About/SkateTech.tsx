@@ -1,5 +1,3 @@
-import React from "react";
-
 const SkateTech = () => {
   return (
     <div className="brand">

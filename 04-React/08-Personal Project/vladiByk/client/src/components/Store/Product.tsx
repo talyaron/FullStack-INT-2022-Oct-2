@@ -1,35 +1,26 @@
-import { ProductType } from "../../context/ProductProvider";
-import { ReducerActionType, ReducerAction } from "../../context/CartProvider";
-import { ReactElement, useState, useEffect } from "react";
-import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
-import { CartItemType, CartStateType } from "../../context/CartProvider";
 import axios from "axios";
-import { UserType } from "../../App";
+import { ProductType } from "../../app/productsSlice";
+import { ReactElement, useState } from "react";
+import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
+import { UserType } from "../../app/userSlice";
+import { CartStateType } from "../../app/cartSlice";
+import { useAppDispatch } from "../../hooks/reduxHook";
+import { addItems } from "../../app/cartSlice";
+
 interface ProductProps {
   product: ProductType;
-  dispatch: React.Dispatch<ReducerAction>;
-  REDUCER_ACTIONS: ReducerActionType;
-  cart: CartItemType[];
-  currentUser: UserType | null
+  currentUser: UserType;
 }
 
-const Product = ({
-  product,
-  dispatch,
-  REDUCER_ACTIONS,
-  currentUser
-}: ProductProps): ReactElement => {
+const Product = ({ product, currentUser }: ProductProps): ReactElement => {
   const [count, setCount] = useState(0);
-
+  const dispatch = useAppDispatch();
 
   const img: string = new URL(`${product.imgUrl}`, import.meta.url).href;
 
-
   const onAddToCart = async () => {
-    dispatch({
-      type: REDUCER_ACTIONS.ADD,
-      payload: { ...product, qty: count },
-    });
+    dispatch(addItems({ ...product, qty: count }));
+
     if (!currentUser) return setCount(0);
 
     const carts: CartStateType[] = currentUser.carts;
