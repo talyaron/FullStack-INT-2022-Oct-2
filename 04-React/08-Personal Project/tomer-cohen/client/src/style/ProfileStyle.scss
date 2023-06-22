@@ -1,0 +1,184 @@
+// ProfileStyle.scss
+
+.recipes-container {
+    margin-top: 20px;
+    
+    h2 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+    
+    .recipe-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      align-items: center;
+      justify-items: center;
+        
+        .recipe-item {
+          background-color: #a48989;
+          width: 40%;
+          padding: 20px;
+          border-radius: 5px;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+          transition: transform 0.3s ease;
+          
+          &:hover {
+            transform: translateY(-5px);
+          }
+          
+          img {
+            width: 100%;
+            height: auto;
+            margin-bottom: 10px;
+            border-radius: 5px;
+          }
+          
+          h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+          }
+          
+          button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            
+            &:hover {
+              background-color: #0056b3;
+            }
+          }
+        }
+      }
+  }
+  
+  .mainPagePost {
+    width: 30rem;
+    height: 30rem;
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 10px;
+      transition: transform 0.5s ease;
+    }
+
+    h3 {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 10px;
+      margin: 0;
+      color: white;
+      background-color: rgba(0, 0, 0, 0.7);
+      font-size: 1.2rem;
+      text-align: center;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+
+    &:hover {
+      img {
+        transform: scale(1.1);
+      }
+
+      h3 {
+        opacity: 1;
+      }
+    }
+}
+.mainPagePost {
+    width: 25rem;
+    height: 25rem;
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 10px;
+      transition: transform 0.5s ease;
+    }
+
+    h3 {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 10px;
+      margin: 0;
+      color: white;
+      background-color: rgba(0, 0, 0, 0.7);
+      font-size: 1.2rem;
+      text-align: center;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+
+    &:hover {
+      img {
+        transform: scale(1.1);
+      }
+
+      h3 {
+        opacity: 1;
+      }
+
+
+      .main__container__deletePost{
+        opacity: 1;
+      }
+    }
+    .main__container__deletePost {
+      position: absolute;
+      top: 15%;
+      right: 80%;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+
+      button {
+        background-color: transparent;
+        cursor: pointer;
+        font-size: 1.5rem;
+        color: white;
+
+        &:hover {
+          color: #000000;
+        }
+      }
+
+      svg {
+        width: 1.5rem;
+        height: 1.5rem;
+      }
+    }}
+    .user-info {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 10px;
+        align-items: flex-start;
+        justify-content: center;
+        
+        h3 {
+          font-size: 18px;
+          margin-bottom: 5px;
+        }
+        
+        h2 {
+          font-size: 24px;
+          margin-bottom: 0;
+        }
+      }
