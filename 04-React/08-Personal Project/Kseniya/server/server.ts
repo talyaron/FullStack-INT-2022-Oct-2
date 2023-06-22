@@ -24,11 +24,11 @@ if (uri) {
 //getting data from public
 app.use(express.json(), cors());
 
-// import userRouter from "./modules/User/UserRoutes";
-// app.use("/user", userRouter);
-
 import userRouter from "./enteties/User/UserRoute";
 app.use("/user", userRouter);
+
+import eventRouter from './enteties/Event/EventRoute'
+app.use("/event", eventRouter);
 
 app.listen(3000, () => {
   console.log("server listen on port 3000");

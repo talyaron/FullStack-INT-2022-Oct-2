@@ -11,9 +11,14 @@ const Join: FC = () => {
 
   const navigate = useNavigate();
 
-  const registerUser = (newUser: IUserInfo) => {
-    axios.post("http://localhost:3000/user/add", newUser).then(() => {
-      console.log(newUser)
+  const handleFieldChange = (value: string, property: string) => {
+    setNewUserInfo((prev) => {
+      return { ...prev, [property]: value };
+    });
+  };
+
+  const registerUser = () => {
+    axios.post("http://localhost:3000/user/add", newUserInfo).then(() => {
       navigate(ACCOUNT_PATH);
     });
   };
@@ -21,12 +26,11 @@ const Join: FC = () => {
   return (
     <div>
       <GenericForm
-        fieldInfo={newUserInfo}
-        setFieldInfo={setNewUserInfo}
+        changeFieldFunc={handleFieldChange}
         formFields={JOIN_FIELDS}
         buttonTitle="Join"
         buttonFunc={() => {
-          registerUser(newUserInfo);
+          registerUser();
         }}
       />
     </div>

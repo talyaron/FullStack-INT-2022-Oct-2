@@ -1,0 +1,41 @@
+.login{
+    height: 25vw;
+    width: 25vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    vertical-align: middle;
+    border: 0.5rem solid rgb(225, 96, 4);
+    margin: auto;
+    margin-top: 5%;
+    border-radius: 5%;
+    background-color: rgb(216, 187, 153);
+    padding: 0.5rem;
+    input{
+        margin: 1rem;
+        width: 50%;
+        height: 10%;
+        margin: auto;
+        font-size: 1rem;
+        border-radius: 5px;
+        padding-inline-start: 0.5rem;
+        &::placeholder{
+            color: rgb(255, 81, 0);
+            text-align: center;
+        }
+    }
+    button{
+        width: 50%;
+        height: 10%;
+        margin: auto;
+        border: 0.2rem solid rgb(26, 14, 2);
+        background-color: rgb(255, 78, 2);
+        font-weight: 700;
+        &:hover{
+            transition: 0.3s ease-in;
+            background-color: white;
+        }
+    }
+   
+}
+

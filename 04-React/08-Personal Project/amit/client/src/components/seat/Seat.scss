@@ -1,0 +1,16 @@
+.seat{
+    width: 80%;
+    height: 30%;
+    margin-top: 2%;
+    margin-bottom: 0;
+    background-color: seagreen;
+    border-radius: 7px 7px 0px 0px;
+    color: black;
+    vertical-align: middle;
+    text-align: center;
+    cursor: pointer;
+    &:hover{
+        color: white;
+    }
+}
+            

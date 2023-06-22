@@ -12,10 +12,15 @@ const SignIn: FC = () => {
 
   const navigate = useNavigate();
 
+  const handleFieldChange = (value: string, property: string) => {
+    setUserInfo((prev) => {
+      return { ...prev, [property]: value };
+    });
+  };
+
   const signInUser = (user: IUserInfo) => {
     axios.post("http://localhost:3000/user/login", user).then(({ data }) => {
       const { token } = data;
-      console.log(token)
       localStorage.setItem("token", token);
       navigate(ACCOUNT_PATH);
     });
@@ -24,8 +29,7 @@ const SignIn: FC = () => {
   return (
     <div style={{ textAlign: "center" }}>
       <GenericForm
-        fieldInfo={userInfo}
-        setFieldInfo={setUserInfo}
+       changeFieldFunc={handleFieldChange}
         formFields={LOGIN_FIELDS}
         buttonTitle="Sign In"
         buttonFunc={() => {

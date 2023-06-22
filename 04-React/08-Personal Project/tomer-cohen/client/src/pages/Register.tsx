@@ -9,6 +9,7 @@ export interface User {
   _id: string;
   password:string
   email: string;
+  userId:string
 }
 
 function Register() {

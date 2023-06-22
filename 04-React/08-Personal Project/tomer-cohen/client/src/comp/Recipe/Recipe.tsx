@@ -11,10 +11,10 @@ interface UserProps {
   user: User | undefined;
 }
 
-const recipe: FC<RecipeProps> = ({ recipe, user }) => {
+const RecipeProps: FC<RecipeProps> = ({ recipe }) => { // Change the component name from 'recipe' to 'RecipeProps'
   return (
     <div className="recipe-container">
-      {<p>{user?.userName}</p>}
+      <p>Created by: {recipe?.author}</p>
       <h1>{recipe?.title}</h1>
       <img src={recipe?.image} alt="" />
       <p>{recipe?.description}</p>
@@ -22,4 +22,4 @@ const recipe: FC<RecipeProps> = ({ recipe, user }) => {
   );
 };
 
-export default recipe;
+export default RecipeProps;

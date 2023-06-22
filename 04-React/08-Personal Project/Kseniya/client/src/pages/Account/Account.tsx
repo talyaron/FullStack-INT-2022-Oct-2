@@ -23,9 +23,11 @@ const Account: FC = () => {
   }, []);
 
   const logOut = () => {
-    localStorage.removeItem("token");
+    localStorage.clear();
     navigate(HOME_PATH);
   };
+
+  localStorage.setItem("userType", user.userType);
 
   return (
     <div className="accountContainer">
@@ -34,14 +36,15 @@ const Account: FC = () => {
         <div>{user.email}</div>
         <div>{user.phoneNumber}</div>
       </div>
-
       <Button
-      className="log"
+        className="log"
         variant="contained"
         onClick={() => {
           logOut();
         }}
-      >Log Out</Button>
+      >
+        Log Out
+      </Button>
     </div>
   );
 };

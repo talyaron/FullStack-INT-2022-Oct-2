@@ -1,4 +1,5 @@
 import mongoose,{Schema} from "mongoose";
+import UserModel from "../Users/UserModel"
 
 interface Recipe{
     title:string;
@@ -8,6 +9,11 @@ interface Recipe{
 }
 
 const RecipeSchema = new Schema({
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: "users", 
+        required: true,
+      },
     title: {require: true, type:String},
     image: {require: true, type:String},
     description:{require:true, type: String},

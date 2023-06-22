@@ -25,7 +25,7 @@ const NavBar = () => {
                 </div>
                 <div className="logoutLoginDiv">
                     <div className="accountIcon">
-                        <span className="icon material-symbols-outlined">account_circle</span>
+                        <span className="icon material-symbols-outlined">Profile</span>
                         <div className="profileDetails">
                             <p className="username" id="username"></p>
                             <a className="link" id="loginLogoutBtn"></a>

@@ -1,0 +1,8 @@
+.page-transition {
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
+  
+    &.page-transition-exit {
+      opacity: 0;
+    }
+  }
