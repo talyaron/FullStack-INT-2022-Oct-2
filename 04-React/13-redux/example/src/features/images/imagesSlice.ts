@@ -1,7 +1,7 @@
 import {  createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { RootState } from "../../app/store"
 
-interface Image {
+ interface Image {
   id: string;
   title: string;
   url: string;
@@ -24,7 +24,7 @@ export const imagesSlice = createSlice({
   initialState,
   // The `reducers` field lets us define reducers and generate associated actions
   reducers: {
-    addImage: (state, payload:PayloadAction<Image>) => {
+    addImage: (state: { images: any[]; }, payload:PayloadAction<Image>) => {
       
       state.images = [...state.images, payload.payload]
     }
