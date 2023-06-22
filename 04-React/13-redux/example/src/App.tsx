@@ -1,12 +1,18 @@
 import logo from "./logo.svg"
 import { Counter } from "./features/counter/Counter"
 import "./App.css"
+import AddImages from "./features/images/AddImages"
+import { useAppSelector } from "./app/hooks"
+import { selectImages } from "./features/images/imagesSlice"
 
 function App() {
+  const images = useAppSelector(selectImages)
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
+
+        <AddImages />
         <Counter />
         <p>
           Edit <code>src/App.tsx</code> and save to reload.
@@ -50,6 +56,18 @@ function App() {
           </a>
         </span>
       </header>
+      <div className="images">
+      {images.map((image) => {
+        return (
+          <div className="image" key={image.id}>
+            <img src={image.url} alt={image.title} />
+            <p>{image.title}</p>
+          </div>
+        )
+      })}
+      </div>
+
+
     </div>
   )
 }
