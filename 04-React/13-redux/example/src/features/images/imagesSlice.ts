@@ -26,7 +26,11 @@ export const imagesSlice = createSlice({
   reducers: {
     addImage: (state, payload:PayloadAction<Image>) => {
       
-      state.images = [...state.images, payload.payload]
+      state.images = [...state.images, payload.payload];
+    },
+    updateImage:(state, payload:PayloadAction<Image>) => {
+      const index = state.images.findIndex(img=>img.id === payload.payload.id);
+      state.images[index] = payload.payload 
     }
   }
 })

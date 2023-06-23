@@ -6,7 +6,7 @@ import { useAppSelector } from "./app/hooks"
 import { selectImages } from "./features/images/imagesSlice"
 
 function App() {
-  const images = useAppSelector(selectImages)
+  const images = useAppSelector(selectImages);
   return (
     <div className="App">
       <header className="App-header">
