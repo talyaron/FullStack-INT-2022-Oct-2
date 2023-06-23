@@ -1,8 +1,8 @@
-import {  createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { RootState } from "../../app/store"
+import { fetchCount } from "../counter/counterAPI"
 
- interface Image {
-  id: string;
+interface Image {
   title: string;
   url: string;
 }
@@ -18,25 +18,18 @@ const initialState: ImagesState = {
 }
 
 
-
 export const imagesSlice = createSlice({
   name: "images",
   initialState,
   // The `reducers` field lets us define reducers and generate associated actions
   reducers: {
-    addImage: (state: { images: any[]; }, payload:PayloadAction<Image>) => {
-      
+    addImage: (state, payload: PayloadAction<Image>) => {
+
       state.images = [...state.images, payload.payload];
-    },
-    updateImage:(state, payload:PayloadAction<Image>) => {
-      const index = state.images.findIndex(img=>img.id === payload.payload.id);
-      state.images[index] = payload.payload 
     }
-  }
-})
+}})
 
 export const { addImage } = imagesSlice.actions
-
 
 export const selectImages = (state: RootState) => state.images.images
 
