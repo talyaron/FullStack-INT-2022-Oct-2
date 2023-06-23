@@ -4,7 +4,7 @@ export const createEvent = async (req: any, res: any) => {
   try {
     const event = req.body;
     const eventDB = await EventModel.create({
-      title: event.title,
+      label: event.label,
       eventType: event.eventType,
       date: event.date,
       img: event.img,

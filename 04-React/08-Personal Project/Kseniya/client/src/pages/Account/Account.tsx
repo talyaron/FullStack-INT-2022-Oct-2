@@ -3,23 +3,28 @@ import { FC, useEffect, useState } from "react";
 import { IUserInfo } from "../SignIn/ISignInInfo";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { HOME_PATH } from "../../routes/routeData";
+import { HOME_PATH, SIGNIN_PATH } from "../../routes/routeData";
 import "./Account.css";
+import { useUserInfoContext } from "../../context/userContext";
 
 const Account: FC = () => {
   const [user, setUser] = useState<IUserInfo>({} as IUserInfo);
 
+  const { userInfo } = useUserInfoContext();
+
   const navigate = useNavigate();
+
   useEffect(() => {
     const codedId = localStorage.getItem("token");
-    axios.defaults.headers.common["Authorization"] = `Bearer ${codedId}`;
+
     if (codedId) {
-      axios
-        .get<IUserInfo>("http://localhost:3000/user/get")
-        .then(({ data }) => {
-          setUser(data);
-        });
+      setUser(userInfo);
+      console.log(userInfo);
+    } else {
+      navigate(SIGNIN_PATH);
     }
+
+    localStorage.setItem("userType", userInfo.userType);
   }, []);
 
   const logOut = () => {
@@ -27,10 +32,9 @@ const Account: FC = () => {
     navigate(HOME_PATH);
   };
 
-  localStorage.setItem("userType", user.userType);
-
   return (
     <div className="accountContainer">
+      <div>Hi! Welcome back!</div>
       <div className="userName">{user.fullName}</div>
       <div className="userInfo">
         <div>{user.email}</div>
