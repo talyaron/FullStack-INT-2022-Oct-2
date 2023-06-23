@@ -1,8 +1,7 @@
-import { useEffect, useState } from "react";
 import './projects.scss'
 import Navbar from '../components/navbar/Navbar';
 import ProjectComp from '../components/ProjectComp/ProjectComp';
-import { Audio, Grid, Oval, TailSpin, ThreeDots } from 'react-loader-spinner';
+import { ThreeDots } from 'react-loader-spinner';
 import { Outlet } from 'react-router-dom';
 import useLoader from '../hooks/useLoder';
 

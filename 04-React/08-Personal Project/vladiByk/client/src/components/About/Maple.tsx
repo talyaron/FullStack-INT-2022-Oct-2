@@ -1,5 +1,3 @@
-
-
 const Maple = () => {
   return (
     <div className="brand">

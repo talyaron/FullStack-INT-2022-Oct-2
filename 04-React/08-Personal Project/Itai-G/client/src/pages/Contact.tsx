@@ -13,7 +13,7 @@ const Contact: React.FC = () => {
           <ThreeDots height={80} width={80} color="green" ariaLabel="loading" />
         </div>
       ) : (
-        <div className="contact-container">
+        <div className="contactContainer">
           <h2>My Contact Info</h2>
           <p>Email: gelberg4322@gmail.com</p>
           <p>Phone Number: +972544803423</p>

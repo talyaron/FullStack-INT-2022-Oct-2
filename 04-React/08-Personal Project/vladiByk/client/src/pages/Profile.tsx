@@ -1,31 +1,23 @@
-import { useEffect, useState } from "react";
 import "../styles/Profile.scss";
 import axios from "axios";
-import { UserType } from "../App";
 import { useNavigate } from "react-router-dom";
+import { useAppSelector, useAppDispatch } from "../hooks/reduxHook";
+import { selectUser, logout } from "../app/userSlice";
 
 const Profile = () => {
-  const [user, setUser] = useState<UserType | null>(null);
+  const user = useAppSelector(selectUser);
+
+  const dispatch = useAppDispatch();
 
   const navigate = useNavigate();
 
   const handleLogOut = async () => {
+    dispatch(logout());
+
     await axios.delete("api/v1/users/clearUserCookie");
 
     navigate("/");
   };
-
-  useEffect(() => {
-    const fetch = async () => {
-      const { data } = await axios.get("api/v1/users/getUser");
-
-      const user = await data.user;
-
-      setUser((prev) => (prev = user));
-    };
-
-    fetch();
-  }, []);
 
   const content = (
     <div className="userDetails">

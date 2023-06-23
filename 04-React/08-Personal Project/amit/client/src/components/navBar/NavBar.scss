@@ -1,0 +1,34 @@
+.mainContainer{
+    background-color: transparent;
+    width: 100vw;
+    height: 85vh;
+    position: relative;
+
+    .navBar{
+        a.active{
+            span{
+                color: white;
+                vertical-align: middle;
+            }
+        }
+        width: 60%;
+        height: 5%;
+        position: sticky;
+        top:5%;
+        background-color: rgb(255, 102, 0);
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        padding-left: 20%;
+        padding-right: 20%;
+        margin-top: 2%;
+        text-transform: capitalize;
+        span{
+            color: black;
+            vertical-align: middle;
+            &:hover{color: white}
+        }
+        
+    }
+}
+

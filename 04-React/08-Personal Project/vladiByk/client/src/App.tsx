@@ -9,15 +9,6 @@ import Missing from "./pages/Missing";
 import Navbar from "./components/navbar/Navbar";
 import { useState } from "react";
 import Register from "./pages/Register";
-import { CartStateType } from "./context/CartProvider";
-
-export interface UserType {
-  userName: string;
-  email: string;
-  password: string;
-  carts: CartStateType[];
-  _id: string;
-}
 
 function App() {
   const [viewCart, setViewCart] = useState(false);

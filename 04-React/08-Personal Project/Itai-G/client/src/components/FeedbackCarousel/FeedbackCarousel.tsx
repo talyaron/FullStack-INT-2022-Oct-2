@@ -34,8 +34,8 @@ const FeedbackCarousel: React.FC<FeedbackCarouselProps> = ({ feedbackData }) => 
   }
 
   return (
-    <div className="feedback-carousel">
-      <h3>Customer Feedback</h3>
+    <div className="feedbackCarousel">
+      <h3>Feedbacks</h3>
       <div className={`feedback-slide ${isAnimating ? 'fade-in' : ''}`}>
         <p>{feedbackData[currentIndex].message}</p>
         <p>- {feedbackData[currentIndex].name}</p>
