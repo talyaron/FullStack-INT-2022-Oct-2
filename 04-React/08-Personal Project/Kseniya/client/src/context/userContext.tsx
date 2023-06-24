@@ -16,20 +16,19 @@ export const UserInfoProvider: FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const [userInfo, setUserInfo] = useState<IUserInfo>({} as IUserInfo);
+  const token = localStorage.getItem("token");
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     if (token) {
       axios
         .get<IUserInfo>("http://localhost:3000/user/get")
         .then(({ data }) => {
-          console.log(data)
           setUserInfo(data);
         });
     }
   
-  }, []);
+  }, [token]);
 
   const value: IUserContext = {
     userInfo,

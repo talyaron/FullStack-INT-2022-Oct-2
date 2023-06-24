@@ -19,7 +19,6 @@ const Account: FC = () => {
 
     if (codedId) {
       setUser(userInfo);
-      console.log(userInfo);
     } else {
       navigate(SIGNIN_PATH);
     }
