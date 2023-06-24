@@ -8,6 +8,7 @@ export const login = async (req:any, res:any) => {
         const loginCookieName = process.env.LOGIN_COOKIE_NAME
         const jwtSecret = process.env.JWT_SECRET
         const {username, password} = req.body;
+        console.log(username, password)
         if (!username || !password) throw new Error("Missing username or password")
 
         const existingUser = await UserModel.findOne({username, password})
@@ -27,6 +28,7 @@ export const login = async (req:any, res:any) => {
 
 export const loggedIn = async (req:any, res:any) => {
     try {
+        console.log("checking log in")
         const jwtSecret = process.env.JWT_SECRET
         const {isLoggedIn} = req.cookies;
 
