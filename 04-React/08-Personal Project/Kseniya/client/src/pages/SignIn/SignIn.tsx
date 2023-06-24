@@ -29,7 +29,7 @@ const SignIn: FC = () => {
   return (
     <div style={{ textAlign: "center" }}>
       <GenericForm
-       changeFieldFunc={handleFieldChange}
+        changeFieldFunc={handleFieldChange}
         formFields={LOGIN_FIELDS}
         buttonTitle="Sign In"
         buttonFunc={() => {

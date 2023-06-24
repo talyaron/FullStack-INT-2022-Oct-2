@@ -1,27 +1,29 @@
-export const CREATE_EVENT_FIELDS = [
+import { IFormField } from "../../../consts/loginFields";
+
+export const CREATE_EVENT_FIELDS: IFormField[] = [
   {
-    label: "Title",
-    property: "title",
-    type: ''
+    label: "Label",
+    property: "label",
+    type: "",
   },
   {
     label: "Event Type",
     property: "eventType",
-    type: ''
+    type: "",
   },
   {
     label: "",
     property: "date",
-    type: 'date'
+    type: "date",
   },
   {
     label: "Price",
     property: "price",
-    type: ''
+    type: "",
   },
   {
     label: "Image URL",
     property: "img",
-    type: ''
+    type: "",
   },
 ];
