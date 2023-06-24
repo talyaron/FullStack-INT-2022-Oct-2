@@ -1,4 +1,5 @@
 import React from 'react'
+import "../style/style.scss"
 
 const ShipStore = () => {
 
@@ -107,17 +108,17 @@ const ShipStore = () => {
         <div className="video_container">
             <div className="enterShop">Enter</div>
             <div className="darken"></div>
-            {/* <video onClick={openShop} id="spaceshipShopEntrance" onMouseOver={this.play()} onMouseOut={this.pause()} loop src="../index/images/animated/Untitled design (54).mp4"></video> */}
+            {/* <video onClick={openShop} id="spaceshipShopEntrance" onMouseOver={this.play()} onMouseOut={this.pause()} loop src="/src/assets/images/animated/Untitled design (54).mp4"></video> */}
         </div>
     </div>
     <div className="backgroundSides">
         <div className="backgroundAnimation">
-            <img src="../index/images/background/left.png"></img>
-            <img src="../index/images/background/right.png"></img>
+            <img src="/src/assets/images/background/left.png"></img>
+            <img src="/src/assets/images/background/right.png"></img>
         </div>
         <div className="backgroundAnimation">
-            <img src="../index/images/background/left2.png"></img>
-            <img src="../index/images/background/right2.png"></img>
+            <img src="/src/assets/images/background/left2.png"></img>
+            <img src="/src/assets/images/background/right2.png"></img>
         </div>
     </div>
 
