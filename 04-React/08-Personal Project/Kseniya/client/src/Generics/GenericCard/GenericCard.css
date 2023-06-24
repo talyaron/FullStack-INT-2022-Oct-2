@@ -1,7 +1,7 @@
 .cardContainer {
   text-align: center;
   width: 15rem;
-  background-color: rgb(145, 89, 21);
+;
 }
 
 .concertImg {
@@ -17,5 +17,5 @@
 }
 
 .cardContent {
-  background-color: rgb(255, 245, 156);
+  background-color: rgb(255, 240, 144);
 }

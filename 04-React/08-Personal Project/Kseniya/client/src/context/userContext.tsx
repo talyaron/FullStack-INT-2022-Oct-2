@@ -27,7 +27,7 @@ export const UserInfoProvider: FC<{ children: React.ReactNode }> = ({
           setUserInfo(data);
         });
     }
-  
+    localStorage.setItem("userType", userInfo.userType);
   }, [token]);
 
   const value: IUserContext = {

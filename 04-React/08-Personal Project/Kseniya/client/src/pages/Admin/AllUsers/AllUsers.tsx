@@ -11,6 +11,7 @@ import { IUserInfo } from "../../SignIn/ISignInInfo";
 import axios from "axios";
 
 //CSS
+import "./AllUsers.css";
 
 const AllUsers: FC = () => {
   const [allUsers, setAllUsers] = useState<IUserInfo[]>([] as IUserInfo[]);
@@ -36,14 +37,24 @@ const AllUsers: FC = () => {
       <Grid container columns={15} spacing={2}>
         {allUsers.map((user, index) => (
           <Grid key={index} item xs={3}>
-            <Card className="cardContainer" sx={{ minWidth: 200}}>
-              <CardContent className="cardContent" sx={{minHeight: 200,}}>
-               <div>User {user._id}</div>
-               <div>{user.fullName}</div>
-               <div>{user.email}</div>
-               <div>{user.phoneNumber}</div>
-               <div>{user.userType}</div>
-               <Button variant="contained" onClick={() => {deleteUser(user._id)}}>Delete User</Button>
+            <Card className="cardContainer" sx={{ minWidth: 200 }}>
+              <CardContent className="cardContent" sx={{ minHeight: 200 }}>
+                <div id="mainInfo">User ID: {user._id}</div>
+                <div className="info">{user.fullName}</div>
+                <div className="info">{user.email}</div>
+                <div className="info">{user.phoneNumber}</div>
+                <div className="info">user type: {user.userType}</div>
+                <div className="button">
+                  <Button
+                    variant="contained"
+                    onClick={() => {
+                      deleteUser(user._id);
+                    }}
+                    className="button"
+                  >
+                    Delete User
+                  </Button>
+                </div>
               </CardContent>
             </Card>
           </Grid>
