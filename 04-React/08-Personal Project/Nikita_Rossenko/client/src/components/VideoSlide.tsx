@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 
 const VideoSlide = () => {
@@ -18,12 +19,10 @@ const VideoSlide = () => {
             } else {
                 currentSentence += 1
                 setSentence(sentences[currentSentence])
-                console.log(currentSentence)
             }
           }, 10000)
     }
     useEffect (() => {
-        console.log("Changing sentence")
         changeSentence()
     }, [sentence])
 
@@ -32,7 +31,7 @@ const VideoSlide = () => {
     return (
         <div className="videoContainer">
             <div className="sentensesContainer">
-                <h1 className="sentensesSlide w3-animate-fading">
+                <h1 className="sentensesSlide">
                         {sentence}
                 </h1>
             </div>

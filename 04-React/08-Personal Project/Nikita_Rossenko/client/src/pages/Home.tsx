@@ -1,14 +1,12 @@
-import React from 'react'
 import "../style/style.scss"
-import NavBar from '../components/NavBar'
 import VideoSlide from '../components/VideoSlide'
 import HomeCard from '../components/HomeCard'
-import Footer from '../components/Footer'
+import { Outlet } from 'react-router-dom'
 const Home = () => {
 
   return (
     <>
-      <NavBar />
+      <Outlet />
       <VideoSlide />
       <div className="overview_container">
           <div className="brief">
@@ -51,8 +49,6 @@ const Home = () => {
             <HomeCard head="Population growth" number={83} description="Million Annually" />
           </div>
       </div>
-
-      <Footer />
     </>
   )
 }
