@@ -2,10 +2,10 @@
 import { useEffect, useState, FC } from "react";
 
 //Mui
-import { Grid } from "@mui/material";
+import { Button, Grid } from "@mui/material";
 
 //Interfaces
-import { IEvent } from "../IEvent";
+import { IEvent } from "./IEvent";
 
 // Axios
 import axios from "axios";
@@ -14,10 +14,19 @@ import axios from "axios";
 import GenericCard from "../../../Generics/GenericCard/GenericCard";
 
 //CSS
-import './AllEvents.css'
+import "./AllEvents.css";
 
 const AllEvents: FC = () => {
   const [allEvents, setAllEvents] = useState<IEvent[]>([] as IEvent[]);
+
+  const deleteEvent = (_id: string) => {
+    console.log(_id);
+    axios
+      .delete(`http://localhost:3000/event/delete/${_id}`)
+      .then(({ data }) => {
+        setAllEvents(data);
+      });
+  };
 
   useEffect(() => {
     axios.get("http://localhost:3000/event/getAll").then(({ data }) => {
@@ -30,7 +39,14 @@ const AllEvents: FC = () => {
       <Grid container columns={15} spacing={2}>
         {allEvents.map((event, index) => (
           <Grid key={index} item xs={3}>
-            <GenericCard cardInfo={event} />
+            <GenericCard
+              cardInfo={event}
+              cardBtnTitle="Delete Event"
+              cardBtnFunc={() => {
+                deleteEvent(event._id);
+              }}
+              needBtn={true}
+            />
           </Grid>
         ))}
       </Grid>

@@ -2,7 +2,7 @@ import { FC, useEffect, useState } from "react";
 import "./LandingSuggestions.css";
 import { Card, CardContent, Grid } from "@mui/material";
 import axios from "axios";
-import { IEvent } from "../../../pages/Admin/IEvent";
+import { IEvent } from "../../../pages/Admin/AllEvents/IEvent";
 import GenericCard from "../../../Generics/GenericCard/GenericCard";
 
 const LandingSuggestions: FC = () => {
@@ -30,7 +30,7 @@ const LandingSuggestions: FC = () => {
         {/* need to get code from beb for the X scroll */}
         {allConcerts.map((concert, index) => (
           <Grid item xs={3} key={index}>
-            <GenericCard cardInfo={concert} />
+            <GenericCard cardInfo={concert} needBtn={false} />
           </Grid>
         ))}
       </Grid>
@@ -38,7 +38,7 @@ const LandingSuggestions: FC = () => {
       <Grid container spacing={3} columns={15} className="concertsContainer">
         {allFestivals.map((festival, index) => (
           <Grid item xs={3} key={index}>
-            <GenericCard cardInfo={festival} />
+            <GenericCard cardInfo={festival} needBtn={false} />
           </Grid>
         ))}
       </Grid>

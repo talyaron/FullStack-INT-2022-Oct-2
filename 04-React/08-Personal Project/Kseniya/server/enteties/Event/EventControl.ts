@@ -27,3 +27,15 @@ export const getAllEvents = async (req: any, res: any) => {
     res.status(500).send({ error: error.message });
   }
 };
+
+export const deleteEvent = async (req: any, res: any) => {
+  const _id  = req.params._id;
+  try {
+    await EventModel.findByIdAndRemove(_id);
+    const events = await EventModel.find({});
+    res.send(events);
+  } catch (error: any) {
+    console.error(error);
+    res.status(500).send({ error: error.message });
+  }
+};

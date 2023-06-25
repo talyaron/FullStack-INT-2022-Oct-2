@@ -44,11 +44,33 @@ export const login = async (req: any, res: any) => {
 export const getUser = async (req: any, res: any) => {
   try {
     const encodedToken = req.headers.authorization?.split(" ")[1];
-    const {id} = jwt.decode(encodedToken, secret!);
-    console.log(id)
+    const { id } = jwt.decode(encodedToken, secret!);
     const user = await UserModel.findById(id);
     if (!user) throw new Error("no user found");
     res.send(user);
+  } catch (error: any) {
+    console.error(error);
+    res.status(500).send({ error: error.message });
+  }
+};
+
+export const getAllUsers = async (req: any, res: any) => {
+  try {
+    const users = await UserModel.find({});
+    if (!users) throw new Error("no users found");
+    res.send(users);
+  } catch (error: any) {
+    console.error(error);
+    res.status(500).send({ error: error.message });
+  }
+};
+
+export const deleteUser = async (req: any, res: any) => {
+  const _id  = req.params._id;
+  try {
+    await UserModel.findByIdAndRemove(_id);
+    const users = await UserModel.find({});
+    res.send(users);
   } catch (error: any) {
     console.error(error);
     res.status(500).send({ error: error.message });

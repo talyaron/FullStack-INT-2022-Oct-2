@@ -2,7 +2,7 @@ import { Autocomplete, TextField } from "@mui/material";
 import { FC, useEffect, useState } from "react";
 import "./LandingHeader.css";
 import axios from "axios";
-import { IEvent } from "../../../pages/Admin/IEvent";
+import { IEvent } from "../../../pages/Admin/AllEvents/IEvent";
 
 const LandingHeader: FC = () => {
   const [allEvents, setAllEvents] = useState<IEvent[]>([] as IEvent[]);

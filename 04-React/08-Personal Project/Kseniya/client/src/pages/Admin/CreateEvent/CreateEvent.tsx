@@ -1,7 +1,7 @@
 import { FC, useEffect, useState } from "react";
 import GenericForm from "../../../Generics/GenericForm/GenericForm";
 import { CREATE_EVENT_FIELDS } from "./createEvent.data";
-import { IEvent } from "../IEvent";
+import { IEvent } from "../AllEvents/IEvent";
 import axios from "axios";
 
 const CreateEvent: FC = () => {

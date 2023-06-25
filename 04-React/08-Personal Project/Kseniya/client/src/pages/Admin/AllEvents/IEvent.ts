@@ -11,5 +11,6 @@ export interface IEvent {
   date: string;
   price: number;
   img: string;
+  _id: string
 }
 
