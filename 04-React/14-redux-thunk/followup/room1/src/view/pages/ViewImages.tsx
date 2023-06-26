@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { selectImages, selectStatus } from '../../features/images/imagesSlice'
 import ImageCard from '../comp/ImageCard'
-import { getRandomDogAsync } from '../../features/images/imagesAPI'
+import { getRandomDogAync } from '../../features/images/imagesAPI'
 import Loader from '../comp/Loader'
 
 const ViewImages = () => {
@@ -12,7 +12,7 @@ const ViewImages = () => {
     const status = useAppSelector(selectStatus);
 
 function handleGetRandomImage(){
-    dispatch(getRandomDogAsync())
+    dispatch(getRandomDogAync())
 }
 
     return (
