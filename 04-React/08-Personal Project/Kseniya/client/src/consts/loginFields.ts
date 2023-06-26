@@ -1,18 +1,18 @@
 export interface IFormField {
   label: string;
   property: string;
-  type: string
+  type: string;
 }
 
 export const LOGIN_FIELDS: IFormField[] = [
   {
     label: "Email",
     property: "email",
-    type: ''
+    type: "",
   },
   {
     label: "Password",
     property: "password",
-    type: 'password'
+    type: "password",
   },
 ];

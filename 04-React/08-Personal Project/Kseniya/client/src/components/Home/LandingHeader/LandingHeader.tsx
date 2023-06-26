@@ -1,9 +1,18 @@
 import { Autocomplete, TextField } from "@mui/material";
-import { FC } from "react";
-import { CONCERTS_TEST } from "../../../consts/concerts.data";
+import { FC, useEffect, useState } from "react";
 import "./LandingHeader.css";
+import axios from "axios";
+import { IEvent } from "../../../pages/Admin/AllEvents/IEvent";
 
 const LandingHeader: FC = () => {
+  const [allEvents, setAllEvents] = useState<IEvent[]>([] as IEvent[]);
+
+  useEffect(() => {
+    axios.get("http://localhost:3000/event/getAll").then(({ data }) => {
+      setAllEvents(data);
+    });
+  }, []);
+
   return (
     <div className="HeaderContainer">
       <div>
@@ -14,7 +23,7 @@ const LandingHeader: FC = () => {
         <Autocomplete
           disablePortal
           id="combo-box-demo"
-          options={CONCERTS_TEST}
+          options={allEvents}
           popupIcon={false}
           fullWidth
           renderInput={(params) => (

@@ -1,0 +1,21 @@
+.cardContainer {
+  text-align: center;
+  width: 15rem;
+;
+}
+
+.concertImg {
+  width: 90%;
+  height: 15rem;
+  object-fit: fill;
+}
+
+.concertLabel {
+  font-size: 1.4rem;
+  font-weight: bold;
+  padding: 0.5rem;
+}
+
+.cardContent {
+  background-color: rgb(255, 240, 144);
+}
