@@ -5,6 +5,7 @@ import { addNewImage } from "./imgBoxSlice";
 import { Box, Button, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, TextField, Typography } from "@mui/material";
 import SendIcon from '@mui/icons-material/Send';
 import theme from "../../theme";
+import { createImageAsync } from "./ImagesAPI";
 
 
 export const AddImage = () => {
@@ -30,6 +31,7 @@ export const AddImage = () => {
             // if (!category) throw new Error("no category")
             const payload = { name: `${name}`, src: `${src}`, id: `${Math.ceil(Math.random() * 99999)}`, category: `${category}` };
             dispatch(addNewImage(payload));
+            dispatch(createImageAsync(payload))
             setOpen(false);
             ev.target.reset();
 

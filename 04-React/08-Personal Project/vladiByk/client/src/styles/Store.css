@@ -1,0 +1,48 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300&display=swap");
+.productsPage {
+  width: 100%;
+  font-family: "Roboto Mono", monospace;
+}
+.productsPage h1 {
+  text-align: center;
+}
+.productsPage .products {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 1rem;
+  width: 100%;
+  padding: 1rem;
+}
+.productsPage .products h3 {
+  margin: 1rem;
+}
+.productsPage .products .product {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+}
+.productsPage .products .product img {
+  width: 15%;
+  margin-left: auto;
+}
+.productsPage .products .product .action {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.2rem;
+  margin-left: auto;
+}
+.productsPage .products .product .action p {
+  margin-right: 2rem;
+}
+.productsPage .products .product .action .icon {
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.productsPage .products .product .action .icon:active {
+  transform: scale(1.5);
+}
+.productsPage .products button {
+  margin-left: auto;
+}

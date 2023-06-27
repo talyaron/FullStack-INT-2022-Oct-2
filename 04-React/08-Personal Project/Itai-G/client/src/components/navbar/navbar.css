@@ -1,0 +1,67 @@
+.topNav {
+  background-color: rgba(242, 242, 242, 0.2235294118);
+  padding: 10px;
+}
+
+.topNav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.topNav ul a {
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+  margin-right: 10px;
+  position: relative;
+  z-index: 0;
+}
+
+.topNav ul a:hover {
+  color: #ff0000;
+}
+
+.topNav ul a::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  right: 0;
+  background-color: #53d9d1;
+  -webkit-clip-path: circle(0% at 50% 50%);
+          clip-path: circle(0% at 50% 50%);
+  transition: -webkit-clip-path 1s cubic-bezier(0.65, 0, 0.35, 1);
+  transition: clip-path 1s cubic-bezier(0.65, 0, 0.35, 1);
+  transition: clip-path 1s cubic-bezier(0.65, 0, 0.35, 1), -webkit-clip-path 1s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.topNav ul a:hover::before {
+  -webkit-clip-path: circle(100% at 50% 50%);
+          clip-path: circle(100% at 50% 50%);
+}
+
+.topNav ul a::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  right: 0;
+  background-color: #151515;
+  -webkit-clip-path: polygon(40% 10%, 60% 10%, 60% 35%, 40% 35%, 40% 90%, 60% 90%, 60% 65%, 40% 65%);
+          clip-path: polygon(40% 10%, 60% 10%, 60% 35%, 40% 35%, 40% 90%, 60% 90%, 60% 65%, 40% 65%);
+  transition: -webkit-clip-path 1s cubic-bezier(0.65, 0, 0.35, 1);
+  transition: clip-path 1s cubic-bezier(0.65, 0, 0.35, 1);
+  transition: clip-path 1s cubic-bezier(0.65, 0, 0.35, 1), -webkit-clip-path 1s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.topNav ul a:hover::after {
+  -webkit-clip-path: polygon(0% 10%, 100% 0%, 100% 20%, 0% 30%, 0% 100%, 100% 90%, 100% 70%, 0% 80%);
+          clip-path: polygon(0% 10%, 100% 0%, 100% 20%, 0% 30%, 0% 100%, 100% 90%, 100% 70%, 0% 80%);
+}

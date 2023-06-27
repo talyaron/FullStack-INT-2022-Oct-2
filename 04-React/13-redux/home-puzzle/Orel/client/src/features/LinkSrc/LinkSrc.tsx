@@ -33,7 +33,6 @@ const LinkSrc = () => {
     const handleClickLinkUpload = (event: any) => {
         console.log(event)
     }
-console.log(image)
   
     const handleChangeImage = (ev:any) => {
         const {files} = ev.target

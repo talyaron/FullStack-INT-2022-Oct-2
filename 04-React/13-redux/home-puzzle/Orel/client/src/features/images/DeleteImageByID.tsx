@@ -4,10 +4,10 @@ import { deleteImage } from "./imgBoxSlice";
 import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Paper, PaperProps } from "@mui/material";
 import { DeleteForever } from "@mui/icons-material";
 import Draggable from 'react-draggable';
-import { updateImageByIDProps } from "./UpdateImageByID";
+import { UpdateImageByIDProps } from "./UpdateImageByID";
 
 
-export const DeleteImageByID: React.FC<updateImageByIDProps> = ({ id }) => {
+export const DeleteImageByID: React.FC<UpdateImageByIDProps> = ({ _id }) => {
     const [open, setOpen] = useState<boolean>(false);
     const dispatch = useAppDispatch();
 
@@ -17,7 +17,7 @@ export const DeleteImageByID: React.FC<updateImageByIDProps> = ({ id }) => {
     const handleSubmitDeleteImage = () => {
         try {
 
-            dispatch(deleteImage({ id }));
+            dispatch(deleteImage({ _id }));
             handleClickOpenAlert();
 
         } catch (error) {

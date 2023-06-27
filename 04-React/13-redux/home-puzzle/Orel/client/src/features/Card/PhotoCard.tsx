@@ -12,10 +12,10 @@ export interface PhotoCardProps {
   name: string,
   src: string,
   category: string,
-  id:string,
+  _id:string,
 
 }
-const PhotoCard: React.FC<PhotoCardProps> = ({ name, src, category, id }) => {
+const PhotoCard: React.FC<PhotoCardProps> = ({ name, src, category, _id }) => {
   return (
 
     <Card sx={{ width: 400, height: 425 , marginTop:4 , borderRadius:"15px"  , bgcolor:"rgba(255, 255, 255, 0.514)"}} >
@@ -50,8 +50,8 @@ const PhotoCard: React.FC<PhotoCardProps> = ({ name, src, category, id }) => {
               justifyContent:"space-evenly",
               alignItems:"center"
               }}>
-            <UpdateImageByID id={id} />
-            <DeleteImageByID id={id}/>
+            <UpdateImageByID _id={_id} />
+            <DeleteImageByID _id={_id}/>
           </Box>
         </CardContent>
       </CardActionArea>

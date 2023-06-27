@@ -1,18 +1,23 @@
 import { useAppSelector } from "./app/hooks"
-import { useState } from "react"
+import { useState , useEffect} from "react"
 import "./App.css"
 import { Box, Container, Typography } from "@mui/material"
 import Navbar from './features/Navbar/Navbar'
 import {
-  selectImage, IImage
+  selectImage, IImage, selectStatus
 } from "./features/images/imgBoxSlice";
 import PhotoCard from "./features/Card/PhotoCard"
 import ImageScreen from "./features/ImageScreen/ImageScreen";
+import { useDispatch } from "react-redux"
+import { getImagesAsync } from "./features/images/ImagesAPI"
+import { AsyncThunkAction } from "@reduxjs/toolkit"
 
 
 
 function App() {
-  const images = useAppSelector(selectImage).images as IImage[] | null
+  const dispatch = useDispatch()
+  const images = useAppSelector(selectImage) as IImage[]
+  const imagesStatus = useAppSelector(selectStatus) as String
   const [curDetail , setCurDetail] = useState<{name:string , src:string} | null>(null)
   const [display , setDisplay] = useState<string | null>()
 
@@ -24,10 +29,15 @@ setTimeout(()=>{
 },2000)
   }
 
+  useEffect( () => {
+    //@ts-ignore
+     dispatch(getImagesAsync()) 
+  
+  },[])
 
 
   return (
-    <Box className="App" sx={{
+    <Box  className="App" sx={{
       width: "100vw",
       minHeight: "100vh",
       paddingBottom:"25px",
@@ -50,10 +60,8 @@ setTimeout(()=>{
         alignItems: "center"
       }}>
         {images !== null ? images.map((image: any) =>
-         <Box sx={{
-
-         }} onDoubleClick={()=>{handleClickPhoto(image.name , image.src)}}> 
-          <PhotoCard  key={image.id} name={image.name} src={image.src} category={image.category} id={image.id} /> 
+         <Box key={image._id} onDoubleClick={()=>{handleClickPhoto(image.name , image.src)}}> 
+          <PhotoCard   name={image.name} src={image.src} category={image.category} _id={image._id} /> 
           </Box>) 
           : <Typography  variant="h1">no found albums</Typography>}
       </Box>
