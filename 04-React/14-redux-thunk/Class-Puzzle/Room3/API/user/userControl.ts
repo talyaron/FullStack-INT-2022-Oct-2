@@ -6,23 +6,18 @@ import * as dotenv from "dotenv";
 dotenv.config();
 
 
-// export async function addUser (req: any, res: any) {
-//     try {
-//       const { name, username, email, phone, password, cpassword, gender } = req.body;
-//       if(password.length < 4) throw new Error(`Password must be at least 4 characters`)
-//     const arr = [name, username, phone, email, password, gender]
-//     const regex = /^[a-zA-Z0-9!@#$%\^&*)(+=._-]*$/;
-//     if (arr.some((ele) => !regex.test(ele))) {
-//      throw new  Error("Please check your input(Only English characters allowed)")
-//     }
-//       const userDB = await UserModel.create({ name, username, email, phone, password, cpassword, gender });
+export async function addUser (req: any, res: any) {
+    try {
+      const { name, age, url } = req.body;
 
-//       res.send({ ok: true, user: userDB });
-//     } catch (error:any) {
-//       console.error(error);
-//       res.status(500).send({ ok: false, error });
-//     }
-//   }
+      const userDB = await UserModel.create({ name, age, url });
+
+      res.send({ ok: true, user: userDB });
+    } catch (error:any) {
+      console.error(error);
+      res.status(500).send({ ok: false, error });
+    }
+  }
   
 
 // export const login = async (req: any, res: any) => {

@@ -2,25 +2,23 @@ import mongoose, { Schema } from "mongoose";
 
 interface User {
   name: string;
-  username: string;
-  email: string;
-  phone:number;
-  password:string;
-  gender:string;
-  ROLE: ROLE;
+  age: number;
+  url: string;
+
 }
 
-export enum ROLE {
-  PUBLIC = "public",
-  ADMIN = "admin",
-}
+
 
 export const UserSchema = new Schema<User>({
   name: {
     type: String,
     require: true,
   },
-  username: {
+  age: {
+    type: Number,
+    require: true,
+  },
+  url: {
     type: String,
     require: true,
   },
