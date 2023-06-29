@@ -1,5 +1,6 @@
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { RootState, AppThunk } from "../../app/store"
+/* eslint-disable prettier/prettier */
+import { createSlice } from "@reduxjs/toolkit"
+import { RootState } from "../../app/store"
 
 export interface ImageType {
   id: number
@@ -44,8 +45,7 @@ export const imagesSlice = createSlice({
     updateUrl: (state, action) => {
       const { newImgUrl, imgId } = action.payload
       const findImg = state.images.find((img) => img.id === imgId)
-      if(findImg) findImg.imgUrl = newImgUrl
-
+      if (findImg) findImg.imgUrl = newImgUrl
     },
     removeImage: (state, action) => {
       const id = Number(action.payload)
