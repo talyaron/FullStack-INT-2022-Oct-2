@@ -1,0 +1,31 @@
+.mainContainer {
+  background-color: transparent;
+  width: 100vw;
+  height: 85vh;
+  position: relative;
+}
+.mainContainer .navBar {
+  width: 60%;
+  height: 5%;
+  position: sticky;
+  top: 5%;
+  background-color: rgb(255, 102, 0);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding-left: 20%;
+  padding-right: 20%;
+  margin-top: 2%;
+  text-transform: capitalize;
+}
+.mainContainer .navBar a.active span {
+  color: white;
+  vertical-align: middle;
+}
+.mainContainer .navBar span {
+  color: black;
+  vertical-align: middle;
+}
+.mainContainer .navBar span:hover {
+  color: white;
+}
