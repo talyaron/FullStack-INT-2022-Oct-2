@@ -1,49 +1,57 @@
-/* eslint-disable prettier/prettier */
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import type { RootState } from "../../app/store";
-import axios from "axios";
+import {  createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { RootState } from "../../app/store"
+import { getUsersAsync } from "./userAPI";
 
-const USER_URL = "api/v1/users";
-
-export const fetchUser = createAsyncThunk("user/fetchUser", async () => {
-  const response = await axios.get(`${USER_URL}/getUser`);
-  return response.data.user;
-});
-
-export interface UserType {
-  userName: string;
-  email: string;
-  password: string;
+interface User {
   _id: string;
+  name: string;
+  age: number;
+  url: string;
+
 }
 
-const initUserState: UserType = {
-  userName: "",
-  email: "",
-  password: "",
-  _id: "",
-};
+export interface UserState {
+  users: User[];
+  status: "idle" | "loading" | "failed"
+}
 
-export const userSlice = createSlice({
-  name: "user",
-  initialState: { value: initUserState },
+const initialState: UserState = {
+  users: [],
+  status: "idle",
+}
+
+
+
+export const usersSlice = createSlice({
+  name: "users",
+  initialState,
+  // The `reducers` field lets us define reducers and generate associated actions
   reducers: {
-    login: (state, action) => {
-      state.value = action.payload;
-    },
-    logout: (state) => {
-      state.value = initUserState;
+    createUser: (state: { users: User[] }, payload:PayloadAction<User>) => {
+      const { name, age, url, _id } = payload.payload
+      
+      state.users.push( {name, age, url, _id} )
     },
   },
-  extraReducers(builder) {
-    builder.addCase(fetchUser.fulfilled, (state, action) => {
-      state.value = action.payload;
-    });
-  },
-});
+  extraReducers: (builder) => {
+    builder.addCase(getUsersAsync.pending, (state) => {
+      state.status = "loading"
+    })
+    .addCase(getUsersAsync.fulfilled, (state, action) => {
+      state.status = "idle"
+      const user:User = {url:action.payload,_id:`Math.random()`,name:"Random dog"}
+      state.user.push(userDB)
+    })
+    .addCase(getRandomDogAync.rejected, (state) => {
+      state.status = "failed"
+    })
+  }
+})
 
-export const { login, logout } = userSlice.actions;
+export const { createUser } = usersSlice.actions
 
-export const selectUser = (state: RootState) => state.user.value;
 
-export default userSlice.reducer;
+export const selectUsers = (state: RootState) => state.user.users
+
+
+export default usersSlice.reducer

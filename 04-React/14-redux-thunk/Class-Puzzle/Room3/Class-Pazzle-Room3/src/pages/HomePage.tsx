@@ -2,47 +2,41 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
 import './HomePage.scss'; 
+import { useAppDispatch } from '../app/hooks';
+import {selectUsers} from '../features/user/userSlice'
+
+
+
+interface User {
+  _id: string;
+  name: string;
+  age: number;
+  url: string;
+
+}
 
 const HomePage = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch()
   const [name, setName] = useState('');
   const [age, setAge] = useState('');
-  const [namesList, setNamesList] = useState([]);
+  const [namesLists, setNamesLists] = useState<User[]>([]);
 
-  useEffect(() => {
-    fetchNames();
-  }, []);
 
-  const fetchNames = async () => {
+
+  const handleSubmit = async (e:any) => {
+    
     try {
-      const response = await axios.get('/api/names');
-      if (!response){
-        return <div>no names</div>
-      }
-      setNamesList(response.data);
+      e.preventDefault();
+      console.log(selectUsers);
     } catch (error) {
       console.error('Error:', error);
     }
   };
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-
-  //   try {
-  //     const response = await axios.post('/api/add', { name, age });
-  //     dispatch({ type: 'ADD_NAME', payload: response.data });
-  //     setName('');
-  //     setAge('');
-  //     fetchNames();
-  //   } catch (error) {
-  //     console.error('Error:', error);
-  //   }
-  // };
-
   return (
     <div className="HomePage">
       <h1 className="HomePageTitle">Home Page</h1>
-      <form className="HomePageForm">
+      <form className="HomePageForm" onSubmit={handleSubmit}>
         <div>
           <label htmlFor="name">Name:</label>
           <input
@@ -70,9 +64,16 @@ const HomePage = () => {
       <div className="NamesList">
         <h2>Previously Added Names:</h2>
         <ul>
-          {namesList.map((nameData) => (
-            <li key={nameData._id}>{nameData.name}</li>
-          ))}
+        {namesLists.map((namesList, _id) => (
+        <div key={namesList._id}>
+            <h2 key={namesList._id}>{namesList.name}</h2>
+            <img
+              src={namesList.url}
+              key={namesList._id}
+            />
+            <p key={namesList._id}>{namesList.age}</p>
+        </div>
+      ))}
         </ul>
       </div>
     </div>
