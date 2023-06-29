@@ -1,0 +1,45 @@
+.recipes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 5%;
+}
+
+.recipe-container {
+  background-color: #d57474;
+  padding: 5%;
+  margin-top: 5%;
+  text-align: center;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  width: 400px;
+}
+.recipe-container img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.selected-recipe {
+  align-items: center;
+  justify-content: center;
+}
+
+.recipe-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.recipe-link:visited {
+  color: inherit;
+}
+
+.addRecipe {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 5%;
+}

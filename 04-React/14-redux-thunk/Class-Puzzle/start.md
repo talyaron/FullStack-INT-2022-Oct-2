@@ -1,0 +1,1 @@
+craete an app with server, using redux and redux thunk. The app should have one entitey, with full crud from the server
