@@ -25,7 +25,7 @@ export const imagesSlice = createSlice({
   // The `reducers` field lets us define reducers and generate associated actions
   reducers: {
     addImage: (state ,action:PayloadAction<Image>) => {
-        state.images = [...state.images,action.payload]
+        state.images = [ ]
     },
     updateImage: (state ,action:PayloadAction<Image>) => {
       try { 
