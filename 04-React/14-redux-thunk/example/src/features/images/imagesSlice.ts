@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { RootState, AppThunk } from "../../app/store"
-import { getRandomDogAync } from "./imagesAPI"
+import { getRandomDogAsync } from "./imagesAPI"
 
 export interface Image {
     id: string
@@ -51,15 +51,15 @@ export const imagesSlice = createSlice({
     }
   },
   extraReducers: (builder) => {
-    builder.addCase(getRandomDogAync.pending, (state) => {
+    builder.addCase(getRandomDogAsync.pending, (state) => {
       state.status = "loading"
     })
-    .addCase(getRandomDogAync.fulfilled, (state, action) => {
+    .addCase(getRandomDogAsync.fulfilled, (state, action) => {
       state.status = "idle"
       const image:Image = {url:action.payload,id:`Math.random()`,name:"Random dog"}
       state.images.push(image)
     })
-    .addCase(getRandomDogAync.rejected, (state) => {
+    .addCase(getRandomDogAsync.rejected, (state) => {
       state.status = "failed"
     })
   

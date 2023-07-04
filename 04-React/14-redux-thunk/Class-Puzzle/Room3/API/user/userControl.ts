@@ -21,16 +21,16 @@ export const getUsers = async (req: any, res: any) => {
   try {
 
     const { name, age, url } = req.body;
-    const userDB = await UserModel.find({ });
+    const usersDB = await UserModel.find({ });
 
-    if (!userDB) {
+    if (!usersDB) {
       res.status(401).send({
         error: "userDB not found",
       });
       return;
     }
 
-    res.status(201).send({ ok: true, userDB });
+    res.status(201).send({ ok: true, usersDB });
   } catch (error: any) {
     console.error(error);
     res.status(500).send({ error: error.message });
