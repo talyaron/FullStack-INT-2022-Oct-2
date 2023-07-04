@@ -4,8 +4,8 @@ import axios from "axios";
 async function getUsers() {
     const response = await axios.get('/api/user/get-users');
   
-    const { userDB } = response.data;
-    return userDB;
+    const { usersDB } = response.data;
+    return usersDB;
 }
 
 export const getUsersAsync = createAsyncThunk(
