@@ -27,11 +27,12 @@ export const usersSlice = createSlice({
   initialState,
   // The `reducers` field lets us define reducers and generate associated actions
   reducers: {
-    createUser: (state: { users: User[] }, payload:PayloadAction<User>) => {
-      const { name, age, url, _id } = payload.payload
+    createUser: (state: { users: User[] }, action:PayloadAction<User>) => {
+      const { name, age, url, _id } = action.payload
       
       state.users.push( {name, age, url, _id} )
     },
+
   },
   extraReducers: (builder) => {
     builder.addCase(getUsersAsync.pending, (state) => {
@@ -39,12 +40,13 @@ export const usersSlice = createSlice({
     })
     .addCase(getUsersAsync.fulfilled, (state, action) => {
       state.status = "idle"
-      const user:User = {url:action.payload,_id:`Math.random()`,name:"Random dog"}
-      state.user.push(userDB)
+      state.users = action.payload;
     })
-    .addCase(getRandomDogAync.rejected, (state) => {
+    .addCase(getUsersAsync.rejected, (state) => {
       state.status = "failed"
     })
+    
+
   }
 })
 
