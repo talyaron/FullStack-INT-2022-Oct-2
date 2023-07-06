@@ -1,0 +1,1 @@
+insert into orders (comment, customer_id_fk) values ("save as a gift", 1)

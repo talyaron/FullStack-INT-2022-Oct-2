@@ -1,0 +1,1 @@
+insert into buyers (name) values ("Moshe")
