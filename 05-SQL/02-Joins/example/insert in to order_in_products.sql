@@ -1,0 +1,1 @@
+insert into products_in_order (product_id, order_id ) values (2,4)
