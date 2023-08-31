@@ -1,0 +1,29 @@
+.task {
+    color: white;
+    padding: 0 40px;
+    display: flex;
+    height: 40px;
+    width: 80%;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid white;
+}
+
+.task-name, .task-type {
+    margin: 0;
+    width: 33%;
+}
+
+.task-right-wrapper {
+    display: flex;
+    justify-content: space-between;
+    width: 90px;
+}
+
+
+.check-box-task {
+    width: 20px;
+    height: 20px;
+    border: 1px solid white;
+    cursor: pointer;
+}
