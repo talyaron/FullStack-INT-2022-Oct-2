@@ -1,33 +1,55 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useState, useEffect } from 'react'
+
 import './App.css'
+import { addUserToDB } from './controlers/users'
+import { collection, onSnapshot } from 'firebase/firestore'
+import { DB } from './config'
+
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [name, setName] = useState<string>('')
+  const [users, setUsers] = useState<any[]>([])
 
+  useEffect(() => {
+    // (async ()=>{
+    //   const _users = await getUsersFromDB();
+    //   setUsers(_users);
+    //   console.log(_users);
+    // })()
+
+    const usersRef = collection(DB, 'users')
+
+    const unsubscribe = onSnapshot(usersRef, (usersDB) => {
+      const _users2: any[] = [];
+      usersDB.forEach((userDB: any) => {
+        _users2.push(userDB.data())
+      })
+      setUsers(_users2);
+    })
+    
+    return () => {
+      unsubscribe();
+    }
+
+  }, [])
+  function handleAddUser() {
+    if (name)
+      addUserToDB(name);
+
+    setName('');
+  }
+
+  function handleSetName(e: any) {
+    setName(e.target.value)
+  }
   return (
+
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <div className="App">
+        <input type="text" placeholder='name' onKeyUp={handleSetName} defaultValue={name} />
+        <button onClick={handleAddUser}>ADD User</button>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      {users.map((user: any) => <p key={user.id}>{user.first}</p>)}
     </>
   )
 }
