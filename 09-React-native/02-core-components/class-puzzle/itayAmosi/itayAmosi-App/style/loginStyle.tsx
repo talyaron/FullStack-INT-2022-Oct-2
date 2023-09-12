@@ -53,6 +53,10 @@ const styles = StyleSheet.create({
     color: "#24261a",
     textAlign: "center",
   },
+  image:{
+    height: '100%',
+    width: '100%',
+  }
 });
 
 export default styles;
