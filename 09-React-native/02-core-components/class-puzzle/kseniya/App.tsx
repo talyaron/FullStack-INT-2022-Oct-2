@@ -2,44 +2,24 @@ import axios from "axios";
 import { StatusBar } from "expo-status-bar";
 import { useEffect, useState } from "react";
 import { StyleSheet, Text, View, Image, FlatList } from "react-native";
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import Dogs from "./pages/Dogs";
+import Test from "./pages/Test";
 
 export default function App() {
-  const [dogs, setDogs] = useState<string[]>([]);
-
-  useEffect(() => {
-    axios.get("https://dog.ceo/api/breeds/image/random/5").then((res) => {
-      console.log(res.data.message);
-      setDogs(res.data.message);
-    });
-  }, []);
+  const Stack = createNativeStackNavigator();
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>who let the dogs out?</Text>
-      <FlatList
-        data={dogs}
-        renderItem={({ item }) => <Image style={styles.img} source={{ uri: item }} />}
-      />
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="dogs"
+          component={Dogs}
+          options={{ title: "Welcome" }}
+        />
+        <Stack.Screen name="test" component={Test} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "flex-start",
-  },
-  title: {
-    fontSize: 30,
-    paddingTop: 70,
-  },
-  img: {
-    width: 350,
-    height: 200,
-    marginTop: 20,
-    marginBottom: 20,
-  },
-});
