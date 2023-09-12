@@ -16,7 +16,7 @@ export default function LoginPage() {
     }
   };
   const handleNavigation = () => {
-    navigation.navigate("SecondPage");
+    navigation.navigate("Main");
   };
 
   return (

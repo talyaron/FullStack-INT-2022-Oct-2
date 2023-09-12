@@ -1,25 +1,27 @@
-
 import React, { useState, useEffect } from 'react';
-import { View, Text, FlatList, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { View, Text, FlatList, StyleSheet, Image } from 'react-native';
 import axios from 'axios';
+import CustomNavBar from './navBar'; // Assuming you have a 'NavBar' component
 import { useNavigation } from '@react-navigation/native';
 
-export default function SecondPage() {
-  const [dogImages, setDogImages] = useState<Array<string>>([]);
-  const navigation:any = useNavigation();
+export default function UrDog() {
+  const [dogImages, setDogImages] = useState([]);
+    const navigation:any = useNavigation();
 
 
 
   useEffect(() => {
-    (async () => {
+    const fetchDogImage = async () => {
       try {
-        const { data } = await axios.get('https://dog.ceo/api/breeds/image/random/10');
+        const { data } = await axios.get('https://dog.ceo/api/breeds/image/random/1');
         const { message } = data;
         setDogImages(message);
       } catch (error) {
         console.error('Error fetching dog images:', error);
       }
-    })();
+    };
+
+    fetchDogImage();
   }, []);
 
   const getRandomColor = () => {
@@ -27,11 +29,8 @@ export default function SecondPage() {
     const randomIndex = Math.floor(Math.random() * colors.length);
     return colors[randomIndex];
   };
-  const handleNavigation = () => {
-    navigation.navigate("Login");
-  };
 
-  const renderItem = ({ item}:any) => (
+  const renderItem = ({ item }:any) => (
     <View style={styles.item}>
       <View style={[styles.imageContainer, { borderColor: getRandomColor() }]}>
         <Image
@@ -43,53 +42,43 @@ export default function SecondPage() {
   );
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>This is the Second Page</Text>
+<View style={styles.container}>
+      <Text style={styles.text}>UR DOG</Text>
       <FlatList
         data={dogImages}
         renderItem={renderItem}
         keyExtractor={(item) => item}
       />
-      <TouchableOpacity style={styles.button} onPressIn={handleNavigation}>
-        <Text style={styles.buttonText}>Logout</Text>
-      </TouchableOpacity>
+      <CustomNavBar navigation={navigation} />
     </View>
   );
 }
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    
+    alignItems: 'center', // Center content horizontally
+    justifyContent: 'center', // Center content vertically
   },
   text: {
     fontSize: 20,
+    marginBottom: 10, // Add some spacing below the text
   },
   item: {
-    flex: 1,
-    margin: 10,
+    marginVertical: 10, // Add vertical spacing between items
     alignItems: 'center',
   },
   imageContainer: {
     width: 240,
-    height: 240, 
-    borderRadius: 120, 
+    height: 240,
+    borderRadius: 120,
     borderWidth: 5,
     justifyContent: 'center',
+    alignItems: 'center', // Center the image horizontally and vertically
   },
   image: {
-    width: '100%', 
-    height: '100%', 
-    borderRadius: 120, 
-  },
-  button: {
-    backgroundColor: 'blue',
-    paddingVertical: 12,
-    paddingHorizontal: 40,
-    borderRadius: 5,
-  },
-  buttonText: {
-    color: 'white',
-    fontSize: 16,
-    fontWeight: 'bold',
+    width: '100%',
+    height: '100%',
+    borderRadius: 120,
   },
 });

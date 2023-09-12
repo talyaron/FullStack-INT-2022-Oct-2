@@ -3,8 +3,10 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
-import SecondPage from './comp/secondPage';
+import Main from './comp/main';
 import LoginPage from './comp/loginPage';
+import UrDog from './comp/urDog';
+import urDog from './comp/urDog';
 
 const Stack = createStackNavigator();
 
@@ -18,9 +20,14 @@ export default function App() {
           options={{ title: 'Login' }}
         />
         <Stack.Screen
-          name="SecondPage"
-          component={SecondPage}
-          options={{ title: 'Second Page' }}
+          name="Main"
+          component={Main}
+          options={{ title: 'our dogs' }}
+        />
+        <Stack.Screen
+          name="UrDog"
+          component={UrDog}
+          options={{ title: 'Ur dog' }}
         />
       </Stack.Navigator>
     </NavigationContainer>
