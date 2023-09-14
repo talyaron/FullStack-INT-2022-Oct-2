@@ -7,6 +7,7 @@ import Main from './comp/main';
 import LoginPage from './comp/loginPage';
 import UrDog from './comp/urDog';
 import urDog from './comp/urDog';
+import SecondPage from './comp/secondPage';
 
 const Stack = createStackNavigator();
 
@@ -28,6 +29,11 @@ export default function App() {
           name="UrDog"
           component={UrDog}
           options={{ title: 'Ur dog' }}
+        />
+        <Stack.Screen
+          name="SecondPage"
+          component={SecondPage}
+          options={{ title: 'SecondPage' }}
         />
       </Stack.Navigator>
     </NavigationContainer>

@@ -13,6 +13,9 @@ function CustomNavBar({ navigation }: any) {
       <TouchableOpacity onPress={() => navigation.navigate("UrDog")} style={styles.navButton}>
         <Text style={styles.buttonText}>ur dog</Text>
       </TouchableOpacity>
+      <TouchableOpacity onPress={() => navigation.navigate("SecondPage")} style={styles.navButton}>
+        <Text style={styles.buttonText}>SecondPage</Text>
+      </TouchableOpacity>
     </View>
   );
 }
