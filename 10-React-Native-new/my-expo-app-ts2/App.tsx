@@ -9,28 +9,71 @@ import About from './screen/About';
 import Home from './screen/HomeScreen';
 import { Button } from 'react-native-paper';
 import { Feather } from '@expo/vector-icons';
-import { Entypo } from '@expo/vector-icons'; 
+import { Entypo } from '@expo/vector-icons';
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import { useEffect, useState } from 'react';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+
 
 
 // Stack navigator
 const Stack = createNativeStackNavigator();
 
 // Tab navigation
-const Tab = createBottomTabNavigator()
+// const Tab = createBottomTabNavigator()
+const Tab = createMaterialBottomTabNavigator();
+// const Tab = createMaterialTopTabNavigator();
+
 
 // Drawer navigation
+const Drawer = createDrawerNavigator();
 
-export default function App() {
+const TabsStack = () => {
   return (
-    <NavigationContainer>
-      {/* <Stack.Navigator initialRouteName='Home'>
-        <Stack.Screen name="About" component={About} />
-        <Stack.Screen name="Home"
+    <Tab.Navigator
+        initialRouteName="Home Screen"
+        shifting={true}
+        labeled={false}
+        sceneAnimationEnabled={false}
+        activeColor="#00aea2"
+        inactiveColor="#95a5a6"
+        barStyle={{ backgroundColor: '#ffff' }}
+        // activeColor="#f0edf6"
+        // inactiveColor="#3e2465"
+        // barStyle={{ backgroundColor: barColor }}
+      >
+        <Tab.Screen
+          options={{
+            headerShown: false,
+            tabBarLabel: "My Home",
+            tabBarIcon: ({ color, size }) => (
+              <Feather name="home" size={24} color="blue" />
+            )
+          }} name="Home screen" component={HomeStack} />
+        <Tab.Screen
+          name="Todo Screen"
+          options={{
+            tabBarLabel: "Todo List",
+            tabBarIcon: ({ color, size }) => (
+              <Entypo name="add-to-list" size={24} color="red" />
+            )
+          }}
+          component={TodoScreen} />
+      </Tab.Navigator>
+  );
+}
+
+const HomeStack = () => {
+  return (
+    <Stack.Navigator initialRouteName='Home'>
+      <Stack.Screen name="About" component={About} />
+      <Stack.Screen name="Home"
         options={{
           headerShown: false,
         }}
         component={Home} />
-        <Stack.Screen name="Todo App" 
+      <Stack.Screen name="Todo App"
         options={{
           title: "Todo List",
           headerStyle: {
@@ -40,29 +83,57 @@ export default function App() {
           headerRight: () => {
             const navigation: any = useNavigation()
             return (
-              <Button textColor='white' onPress={() => {navigation.navigate("About",{name: "Yuri"})}}> Go to About </Button>
+              <Button textColor='white' onPress={() => { navigation.navigate("About", { name: "Yuri" }) }}> Go to About </Button>
             )
           }
-        }} 
+        }}
         component={TodoScreen} />
-      </Stack.Navigator> */}
-      <Tab.Navigator>
-        <Tab.Screen options={{
-          tabBarLabel : "My Home",
-          tabBarIcon: ({color, size}) => (
-            <Feather name="home" size={24} color="blue" />
-          )
-        }} name="Home" component={Home} />
+    </Stack.Navigator>
+  )
+}
+
+export default function App({}) {
+  const [barColor, setBarColor] = useState("tomato")
+
+
+  return (
+    <NavigationContainer>
+      <Drawer.Navigator>
+        <Drawer.Screen options={{ drawerLabel: 'Home' }} name="Home Screen" component={TabsStack} />
+        <Drawer.Screen options={{ drawerLabel: 'Todo' }} name="Todo Screen" component={TabsStack} />
+      </Drawer.Navigator>
+      {/* <Tab.Navigator
+        initialRouteName="Home"
+        shifting={true}
+        labeled={false}
+        sceneAnimationEnabled={false}
+        activeColor="#00aea2"
+        inactiveColor="#95a5a6"
+        barStyle={{ backgroundColor: '#ffff' }}
+        // activeColor="#f0edf6"
+        // inactiveColor="#3e2465"
+        // barStyle={{ backgroundColor: barColor }}
+        style={{ marginTop: 20 }}
+      >
         <Tab.Screen
-         name="Todo"
-         options={{
-          tabBarLabel : "Todo List",
-          tabBarIcon: ({color, size}) => (
-            <Entypo name="add-to-list" size={24} color="red" />
-          )
-         }}
-        component={TodoScreen} />
-      </Tab.Navigator>
+          options={{
+            headerShown: false,
+            tabBarLabel: "My Home",
+            tabBarIcon: ({ color, size }) => (
+              <Feather name="home" size={24} color="blue" />
+            )
+          }} name="Home screen" component={HomeStack} />
+        <Tab.Screen
+          name="Todo"
+          options={{
+            tabBarLabel: "Todo List",
+            tabBarIcon: ({ color, size }) => (
+              <Entypo name="add-to-list" size={24} color="red" />
+            )
+          }}
+          component={TodoScreen} />
+      </Tab.Navigator> */}
+      <StatusBar style='auto' />
     </NavigationContainer>
     // <View style={styles.container}>
     //   {/* <TodoScreen/> */}

@@ -1,4 +1,4 @@
-import { View, Text, TextInput, TouchableOpacity, FlatList } from 'react-native'
+import { View, Text, TextInput, TouchableOpacity, FlatList, Alert } from 'react-native'
 import React, { useState } from 'react'
 import { Button, IconButton } from 'react-native-paper'
 import Ionicons from '@expo/vector-icons/Ionicons';
@@ -41,8 +41,25 @@ export default function TodoScreen() {
     }
 
     const handleDeleteTodo = (id) => {
-        const updatedTodoList = todoList.filter((todo) => todo.id !== id)
-        setTodoList(updatedTodoList);
+        Alert.alert(
+            "Are your sure?",
+            "Are you sure you want to remove this beautiful box?",
+            [
+                // The "Yes" button
+                {
+                text: "Yes",
+                onPress: () => {
+                    const updatedTodoList = todoList.filter((todo) => todo.id !== id)
+                    setTodoList(updatedTodoList);
+                },
+                },
+                // The "No" button
+                // Does nothing but dismiss the dialog when tapped
+                {
+                text: "No",
+                },
+            ]
+        )
     }
 
     const renderTodo = ({ item, index }) => {
