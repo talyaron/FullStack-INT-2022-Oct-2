@@ -1,5 +1,15 @@
+#root {
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  width: 80%;
+}
+
+
+
 .aboutContainer {
   width: 600px;
+  height: 800px;
   margin: 0 auto;
   padding: 2rem;
   background-color: #fff;

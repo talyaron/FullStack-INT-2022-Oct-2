@@ -7,7 +7,7 @@ import { ThreeDots } from 'react-loader-spinner';
 const About: React.FC = () => {
   const { isLoader } = useLoader();
   return (
-    <div>
+    <div className='mainContainer'>
       {isLoader ? (
         <div className="loaderContainer">
           <ThreeDots
