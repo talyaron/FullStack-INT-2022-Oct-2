@@ -14,6 +14,7 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { useEffect, useState } from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
+import CameraScreen from './screen/CameraScreen';
 
 
 
@@ -32,7 +33,7 @@ const Drawer = createDrawerNavigator();
 const TabsStack = () => {
   return (
     <Tab.Navigator
-        initialRouteName="Home Screen"
+        initialRouteName="Home"
         shifting={true}
         labeled={false}
         sceneAnimationEnabled={false}
@@ -52,7 +53,7 @@ const TabsStack = () => {
             )
           }} name="Home screen" component={HomeStack} />
         <Tab.Screen
-          name="Todo Screen"
+          name="Todo screen"
           options={{
             tabBarLabel: "Todo List",
             tabBarIcon: ({ color, size }) => (
@@ -60,13 +61,24 @@ const TabsStack = () => {
             )
           }}
           component={TodoScreen} />
+
+          <Tab.Screen
+          name="Camera screen"
+          options={{
+            tabBarLabel: "Camera App",
+            tabBarIcon: ({ color, size }) => (
+              <Entypo name="camera" size={24} color="green" />
+            )
+          }}
+          component={CameraScreen} />
       </Tab.Navigator>
   );
 }
 
 const HomeStack = () => {
   return (
-    <Stack.Navigator initialRouteName='Home'>
+    <Stack.Navigator 
+    initialRouteName='Home'>
       <Stack.Screen name="About" component={About} />
       <Stack.Screen name="Home"
         options={{
@@ -99,46 +111,11 @@ export default function App({}) {
   return (
     <NavigationContainer>
       <Drawer.Navigator>
-        <Drawer.Screen options={{ drawerLabel: 'Home' }} name="Home Screen" component={TabsStack} />
+        <Drawer.Screen options={{ headerTransparent: true, headerTitle: '',drawerLabel: 'Home' }} name="Home Screen" component={TabsStack} />
         <Drawer.Screen options={{ drawerLabel: 'Todo' }} name="Todo Screen" component={TabsStack} />
       </Drawer.Navigator>
-      {/* <Tab.Navigator
-        initialRouteName="Home"
-        shifting={true}
-        labeled={false}
-        sceneAnimationEnabled={false}
-        activeColor="#00aea2"
-        inactiveColor="#95a5a6"
-        barStyle={{ backgroundColor: '#ffff' }}
-        // activeColor="#f0edf6"
-        // inactiveColor="#3e2465"
-        // barStyle={{ backgroundColor: barColor }}
-        style={{ marginTop: 20 }}
-      >
-        <Tab.Screen
-          options={{
-            headerShown: false,
-            tabBarLabel: "My Home",
-            tabBarIcon: ({ color, size }) => (
-              <Feather name="home" size={24} color="blue" />
-            )
-          }} name="Home screen" component={HomeStack} />
-        <Tab.Screen
-          name="Todo"
-          options={{
-            tabBarLabel: "Todo List",
-            tabBarIcon: ({ color, size }) => (
-              <Entypo name="add-to-list" size={24} color="red" />
-            )
-          }}
-          component={TodoScreen} />
-      </Tab.Navigator> */}
       <StatusBar style='auto' />
     </NavigationContainer>
-    // <View style={styles.container}>
-    //   {/* <TodoScreen/> */}
-    //   <StatusBar style="auto" />
-    // </View>
   );
 }
 

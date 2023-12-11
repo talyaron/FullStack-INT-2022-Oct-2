@@ -100,7 +100,7 @@ export default function TodoScreen() {
     const navigation: any = useNavigation()
 
     return (
-        <View style={{ marginHorizontal: 16, marginTop: 40 }}>
+        <View style={{ marginHorizontal: 16, marginTop: 60 }}>
             <TextInput
                 style={{
                     borderColor: "#000",
