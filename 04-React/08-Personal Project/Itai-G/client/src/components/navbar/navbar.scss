@@ -1,77 +1,62 @@
 .topNav {
-  background-color: #f2f2f239;
-  padding: 10px;
+  background-color: #f2f2f2; /* Light grey background */
+  padding: 10px 0; /* Vertical padding only */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Subtle shadow for depth */
+  border-radius: 10px;
 }
 
 .topNav ul {
   list-style-type: none;
-  margin: 0;
-  padding: 0;
+  margin: auto;
+  padding: 2px;
   display: flex;
-  justify-content: center;
+  justify-content: space-between; /* Center items horizontally */
+  align-items: center; /* Center items vertically */
+}
+
+.topNav ul li {
+  margin: 0 15px; /* Spacing between menu items */
 }
 
 .topNav ul a {
   text-decoration: none;
-  color: #333;
+  color: #333; /* Dark text for readability */
   font-weight: bold;
-  margin-right: 10px;
-  position: relative;
-  z-index: 0;
+  padding: 5px 10px; /* Padding for larger clickable area */
+  transition: color 0.3s; /* Smooth color transition */
 }
 
-.topNav ul a:hover {
-  color: #ff0000;
+.topNav ul a:hover,
+.topNav ul a:focus { /* Focus for accessibility */
+  color: #ff0000; /* Red color on hover */
+  background-color: #fff; /* White background on hover */
+  border-radius: 5px; /* Rounded corners */
 }
 
+/* Simplified hover effect for cleaner look */
 .topNav ul a::before {
   content: "";
   position: absolute;
-  z-index: -1;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  right: 0;
-  background-color: #53d9d1;
-  clip-path: circle(0% at 50% calc(50%));
-  transition: clip-path 1s cubic-bezier(0.65, 0, 0.35, 1);
+  bottom: -5px; /* Position underline below the text */
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background-color: #ff0000;
+  transition: width 0.3s ease, left 0.3s ease;
 }
 
 .topNav ul a:hover::before {
-  clip-path: circle(100% at 50% 50%);
+  width: 80%; /* Full width on hover */
+  left: 0;
 }
 
-.topNav ul a::after {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  right: 0;
-  background-color: #151515;
-  clip-path: polygon(
-    40% 10%,
-    60% 10%,
-    60% 35%,
-    40% 35%,
-    40% 90%,
-    60% 90%,
-    60% 65%,
-    40% 65%
-  );
-  transition: clip-path 1s cubic-bezier(0.65, 0, 0.35, 1);
-}
+/* Optional: Responsive design for smaller screens */
+@media (max-width: 600px) {
+  .topNav ul {
+    flex-direction: column; /* Stack items vertically */
+  }
 
-.topNav ul a:hover::after {
-  clip-path: polygon(
-    0% 10%,
-    100% 0%,
-    100% 20%,
-    0% 30%,
-    0% 100%,
-    100% 90%,
-    100% 70%,
-    0% 80%
-  );
+  .topNav ul li {
+    margin: 5px 0; /* Adjust margin for vertical layout */
+  }
 }

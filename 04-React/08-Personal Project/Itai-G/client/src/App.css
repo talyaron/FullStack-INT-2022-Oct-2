@@ -38,25 +38,25 @@
 .home-container {
   text-align: center;
   padding: 20px;
-  height: auto;
-  width: 600px;
+  height: 1000px;
+  width: 80%;
   box-sizing: border-box;
-  background-color: #fff;
+  background-color: darkslategray;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(164, 98, 98, 0.1);
-  margin: 0 auto;
+  margin: 2.5% auto;
   margin-bottom: 40px;
 }
 
 .home-container h2 {
-  font-size: 24px;
-  color: green;
+  font-size: 60px;
+  color: black;
   margin-bottom: 1rem;
 }
 
 .home-container p {
-  font-size: 16px;
-  color: green;
+  font-size: 30px;
+  color: black;
   line-height: 1.5;
 }
 
@@ -71,10 +71,11 @@
   background-color: lightblue;
   border-radius: 8px;
   padding: 20px;
+  margin-top: 22rem;
 }
 
 .feedback {
-  margin-bottom: 10px;
+  margin-bottom: 30px;
 }
 
 .feedback p {
@@ -91,7 +92,7 @@
 
 .feedback-slide {
   opacity: 0;
-  transition: opacity 0.5s ease-in-out;
+  transition: opacity 1.5s ease-in-out;
 }
 
 .feedback-slide.fade-in {
