@@ -6,6 +6,9 @@ import * as ImagePicker from 'expo-image-picker';
 import CircleButton from '../components/CircleButton';
 import IconButton from '../components/IconButton';
 import EmojiPicker from '../components/EmojiPicker';
+import EmojiList from '../components/EmojiList';
+import EmojiSticker from '../components/EmojiSticker';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 
 const PlaceholderImage = require('../assets/background.png');
@@ -14,6 +17,7 @@ export default function CameraScreen() {
   const [selectedImage, setSelectedImage] = useState(null);
   const [showAppOptions, setShowAppOptions] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [pickedEmoji, setPickedEmoji] = useState(null);
 
   const pickImageAsync = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -47,12 +51,14 @@ export default function CameraScreen() {
   };
 
   return (
-    <View style={styles.container}>
+    <GestureHandlerRootView style={styles.container}>
+      <View style={styles.container}>
         <View style={styles.imageContainer}>
           <ImageViewer
             placeholderImageSource={PlaceholderImage}
             selectedImage={selectedImage}
           />
+          {pickedEmoji !== null ? <EmojiSticker imageSize={40} stickerSource={pickedEmoji} /> : null}
         </View>
         {
           showAppOptions ? (
@@ -66,14 +72,15 @@ export default function CameraScreen() {
           ) : (
             <View style={styles.footerContainer}>
               <Button label="Choose a photo" theme="primary" onPress={pickImageAsync} />
-              <Button label="Use this photo" />
+              <Button label="Use this photo" onPress={() => setShowAppOptions(true)}  />
             </View>)
         }
+        <EmojiPicker isVisible={isModalVisible} onClose={onModalClose}>
+          <EmojiList onSelect={setPickedEmoji} onCloseModal={onModalClose} />
+        </EmojiPicker>
 
       </View>
-    // <EmojiPicker isVisible={isModalVisible} onClose={onModalClose}>
-      
-    // </EmojiPicker>
+    </GestureHandlerRootView>
 
   )
 }
@@ -95,7 +102,7 @@ const styles = StyleSheet.create({
   },
   optionsContainer: {
     position: 'absolute',
-    bottom: 80,
+    bottom: 20,
   },
   optionsRow: {
     alignItems: 'center',
