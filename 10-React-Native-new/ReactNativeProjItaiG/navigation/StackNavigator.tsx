@@ -9,9 +9,21 @@ const Stack = createStackNavigator();
 const StackNavigator = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="HomeStack" component={HomeScreen} />
-      <Stack.Screen name="MovieDetails" component={MovieDetailsScreen} />
-      <Stack.Screen name="MoviesForRentStack" component={MoviesForRentScreen} />
+      <Stack.Screen
+        name="HomeStack"
+        component={HomeScreen}
+        options={{ headerShown: false }} 
+      />
+      <Stack.Screen
+        name="MovieDetails"
+        component={MovieDetailsScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="MoviesForRentStack"
+        component={MoviesForRentScreen}
+        options={{ headerShown: false }}
+      />
     </Stack.Navigator>
   );
 };
