@@ -5,8 +5,8 @@ import Timer from '../components/Timer';
 
 const HomeScreen = () => {
   const exercises = [
-    { id: '1', name: 'Push-ups', description: 'A basic push-up exercise', imageUrl: 'https://example.com/pushup.jpg' },
-    { id: '2', name: 'Squats', description: 'A basic squat exercise', imageUrl: 'https://example.com/squat.jpg' },
+    { id: '1', name: 'Push-ups', description: 'A basic push-up exercise', imageUrl: 'https://www.fitnesseducation.edu.au/wp-content/uploads/2017/03/Pushups.jpg' },
+    { id: '2', name: 'Squats', description: 'A basic squat exercise', imageUrl: 'https://www.inspireusafoundation.org/wp-content/uploads/2022/06/the-barbell-squat.jpg' },
   ];
 
   return (

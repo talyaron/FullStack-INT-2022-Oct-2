@@ -1,13 +1,31 @@
 import React from 'react';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import ProgressTracker from '../components/ProgressTracker';
-
+import { FlatList } from 'react-native';
 const ProgressScreen = () => {
+  const progressData = [
+    {
+      id: 1,
+      date: '2022-10-01',
+      exercise: 'Push-ups',
+      sets: 5,
+      reps: 10,
+    }
+  ]
+  const filteredProgressData = progressData.filter((item) => item && item.id !== undefined);
   return (
-    <ScrollView style={styles.container}>
+    <View style={styles.container}>
       <Text style={styles.header}>Your Progress</Text>
-      <ProgressTracker />
-    </ScrollView>
+      <FlatList
+        data={filteredProgressData}
+        keyExtractor={(item) => item.id.toString()} // Access 'id' only if it exists
+        renderItem={({ item }) => (
+          <ProgressTracker
+            data={item} // Pass progress data to ProgressTracker
+          />
+        )}
+      />
+    </View>
   );
 };
 
