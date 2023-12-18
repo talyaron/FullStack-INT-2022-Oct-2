@@ -3,13 +3,13 @@ import { View, FlatList, StyleSheet, Alert } from "react-native";
 import { fetchMovies } from "../services/movieService";
 import MovieItem from "../components/MovieItem";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { Movie } from "../types/types"; // Make sure this path is correct
-const RENTED_MOVIES_KEY = '@rented_movies'; // Key for rented movies in AsyncStorage
+import { Movie } from "../types/types"; 
+const RENTED_MOVIES_KEY = '@rented_movies'; 
 
 const MoviesForRentScreen = () => {
-  const [movies, setMovies] = useState<Movie[]>([]); // Updated to use Movie type
-  const [watchlist, setWatchlist] = useState<Movie[]>([]); // Updated to use Movie type
-  const [rentedMovies, setRentedMovies] = useState<Movie[]>([]); // Define state here
+  const [movies, setMovies] = useState<Movie[]>([]); 
+  const [watchlist, setWatchlist] = useState<Movie[]>([]); 
+  const [rentedMovies, setRentedMovies] = useState<Movie[]>([]); 
 
   useEffect(() => {
     const loadMovies = async () => {
@@ -33,6 +33,11 @@ const MoviesForRentScreen = () => {
   }, []);
 
   const addToWatchlist = async (movie: Movie) => {
+    if (watchlist.some(watchlistMovie => watchlistMovie.id === movie.id)) {
+      Alert.alert("Duplicate", "This movie is already in your watchlist.");
+      return;
+    }
+  
     const newWatchlist = [...watchlist, movie];
     setWatchlist(newWatchlist);
     try {
