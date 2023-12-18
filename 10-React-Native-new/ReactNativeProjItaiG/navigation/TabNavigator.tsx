@@ -12,6 +12,9 @@ const TabNavigator = () => {
   return (
 <Tab.Navigator
   screenOptions={({ route }) => ({
+    headerShown: true,
+    headerTitle: "",
+    headerTransparent: true,
     tabBarIcon: ({ focused, color, size }) => {
       let iconName;
       if (route.name === 'HomeTab') {

@@ -46,7 +46,7 @@ const RentedMoviesScreen: React.FC = () => {
     };
     const renderMovieItem = ({ item }: { item: Movie }) => (
         <View style={styles.movieItemContainer}>
-            <MovieItem movie={item} onAddToWatchlist={() => {}} onRent={() => {}} />
+            <MovieItem movie={item} />
             <Button title="Return" onPress={() => returnMovie(item)} />
         </View>
     );

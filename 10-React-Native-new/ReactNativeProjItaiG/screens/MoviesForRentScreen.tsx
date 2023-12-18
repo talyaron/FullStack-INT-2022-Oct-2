@@ -4,6 +4,7 @@ import { fetchMovies } from "../services/movieService";
 import MovieItem from "../components/MovieItem";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Movie } from "../types/types"; 
+import { SafeAreaView } from "react-native-safe-area-context";
 const RENTED_MOVIES_KEY = '@rented_movies'; 
 
 const MoviesForRentScreen = () => {
@@ -68,7 +69,7 @@ const MoviesForRentScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <FlatList
         data={movies}
         renderItem={({ item }) => (
@@ -81,7 +82,7 @@ const MoviesForRentScreen = () => {
         keyExtractor={(item) => item.id.toString()}
         numColumns={3}
       />
-    </View>
+    </SafeAreaView>
   );
 };
 

@@ -12,17 +12,18 @@ const StackNavigator = () => {
       <Stack.Screen
         name="HomeStack"
         component={HomeScreen}
-        options={{ headerShown: false }} 
+        options={{ headerShown: false ,headerTitle: ""}} 
       />
       <Stack.Screen
         name="MovieDetails"
         component={MovieDetailsScreen}
-        options={{ headerShown: false }}
+        options={{ headerShown: false,headerTitle: "",
+      }}
       />
       <Stack.Screen
         name="MoviesForRentStack"
         component={MoviesForRentScreen}
-        options={{ headerShown: false }}
+        options={{ headerShown: false,headerTitle: "" }}
       />
     </Stack.Navigator>
   );

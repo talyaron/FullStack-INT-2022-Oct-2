@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Image, Text, View, StyleSheet, Button, Alert, FlatList } from 'react-native';
+import { Image, Text, View, StyleSheet, Button, Alert, FlatList, SafeAreaView } from 'react-native';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useFocusEffect } from "@react-navigation/native";
 import { Movie } from "../types/types"; // Make sure this path is correct
+import MovieItem from "../components/MovieItem";
 
 const WatchlistScreen = () => {
   const [watchlist, setWatchlist] = useState<Movie[]>([]);
@@ -18,7 +19,7 @@ const WatchlistScreen = () => {
     }
   };
 
-  const removeFromWatchlist = async (movieId) => {
+  const removeFromWatchlist = async (movieId: any) => {
     const newWatchlist = watchlist.filter((movie) => movie.id !== movieId);
     try {
       const jsonValue = JSON.stringify(newWatchlist);
@@ -39,14 +40,12 @@ const WatchlistScreen = () => {
     }, [])
   );
 
-  const renderItem = ({ item }) => (
-    <View style={styles.item}>
-      <Image
-        source={{ uri: item.photoUrl }}
-        style={styles.movieImage}
-        resizeMode="cover"
+  const renderItem = ({ item }: any) => (
+    <SafeAreaView style={styles.item}>
+       <MovieItem
+      movie={item}
       />
-      <View style={styles.movieInfo}>
+      <SafeAreaView style={styles.movieInfo}>
         <Text style={styles.movieTitle}>{item.title}</Text>
         <Text style={styles.movieDescription}>{item.description}</Text>
         <Button
@@ -54,8 +53,8 @@ const WatchlistScreen = () => {
           onPress={() => removeFromWatchlist(item.id)}
           color="#FF6347"
         />
-      </View>
-    </View>
+      </SafeAreaView>
+    </SafeAreaView>
   );
 
   return (
