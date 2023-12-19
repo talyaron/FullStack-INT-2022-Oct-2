@@ -7,11 +7,44 @@ import { Movie } from "../types/types";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useBackground } from "../contexts/BackgroundContext";
 
+const WATCHLIST_KEY = '@watchlist'; 
+const RENTED_MOVIES_KEY = '@rented_movies'; 
+
 const MoviesForRentScreen = () => {
   const { background } = useBackground();
   const [movies, setMovies] = useState<Movie[]>([]);
+  const [watchlist, setWatchlist] = useState<Movie[]>([]); 
+  const [rentedMovies, setRentedMovies] = useState<Movie[]>([]);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    loadMovies();
+    loadWatchlist(); 
+    loadRentedMovies(); 
+  }, []);
+
+  const loadWatchlist = async () => {
+    try {
+      const jsonValue = await AsyncStorage.getItem(WATCHLIST_KEY);
+      if (jsonValue != null) {
+        setWatchlist(JSON.parse(jsonValue));
+      }
+    } catch (e) {
+      Alert.alert("Error", "Failed to load watchlist.");
+    }
+  };
+
+  const loadRentedMovies = async () => {
+    try {
+      const jsonValue = await AsyncStorage.getItem(RENTED_MOVIES_KEY);
+      if (jsonValue != null) {
+        setRentedMovies(JSON.parse(jsonValue));
+      }
+    } catch (e) {
+      Alert.alert("Error", "Failed to load rented movies.");
+    }
+  };
 
   const loadMovies = async (pageNum = 1) => {
     if (loading) return;
@@ -27,10 +60,6 @@ const MoviesForRentScreen = () => {
       setLoading(false);
     }
   };
-
-  useEffect(() => {
-    loadMovies();
-  }, []);
 
   const handleLoadMore = () => {
     loadMovies(page);
@@ -53,19 +82,17 @@ const MoviesForRentScreen = () => {
   };
 
   const rentMovie = async (movie: Movie) => {
-    // Check if the movie is already rented
-    const isRented = rentedMovies.some((rentedMovie) => rentedMovie.id === movie.id);
-    if (isRented) {
-      Alert.alert("Already Rented", "You have already rented this movie.");
+    const isAlreadyRented = rentedMovies.some(m => m.id === movie.id);
+    if (isAlreadyRented) {
+      Alert.alert("Movie Already Rented", "You have already rented this movie.");
       return;
     }
 
+    const updatedRentedMovies = [...rentedMovies, movie];
     try {
-      const newRentedMovies = [...rentedMovies, movie];
-      setRentedMovies(newRentedMovies);
-      const jsonValue = JSON.stringify(newRentedMovies);
-      await AsyncStorage.setItem(RENTED_MOVIES_KEY, jsonValue); // Save to AsyncStorage
-      Alert.alert("Rent Movie", `You have rented: ${movie.title}`);
+      await AsyncStorage.setItem(RENTED_MOVIES_KEY, JSON.stringify(updatedRentedMovies));
+      setRentedMovies(updatedRentedMovies);
+      Alert.alert("Movie Rented", `You have rented: ${movie.title}`);
     } catch (e) {
       Alert.alert("Error", "Failed to rent the movie.");
     }
