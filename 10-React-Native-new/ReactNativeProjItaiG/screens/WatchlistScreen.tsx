@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { Image, Text, View, StyleSheet, Button, Alert, FlatList, SafeAreaView } from 'react-native';
+import { Image, Text, View, StyleSheet, Button, Alert, FlatList, SafeAreaView, ImageBackground } from 'react-native';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useFocusEffect } from "@react-navigation/native";
 import { Movie } from "../types/types"; // Make sure this path is correct
 import MovieItem from "../components/MovieItem";
+import { useBackground } from "../contexts/BackgroundContext";
 
 const WatchlistScreen = () => {
+  const { background } = useBackground();
+
   const [watchlist, setWatchlist] = useState<Movie[]>([]);
 
   const loadWatchlist = async () => {
@@ -46,7 +49,6 @@ const WatchlistScreen = () => {
       movie={item}
       />
       <SafeAreaView style={styles.movieInfo}>
-        <Text style={styles.movieTitle}>{item.title}</Text>
         <Text style={styles.movieDescription}>{item.description}</Text>
         <Button
           title="Remove from List"
@@ -58,13 +60,15 @@ const WatchlistScreen = () => {
   );
 
   return (
-    <View style={styles.container}>
-      <FlatList
+    <ImageBackground source={background} style={styles.backgroundImage}>
+      <SafeAreaView style={styles.container}>
+        <FlatList
         data={watchlist}
         renderItem={renderItem}
         keyExtractor={(_, index) => index.toString()}
       />
-    </View>
+      </SafeAreaView>
+    </ImageBackground>
   );
 };
 
@@ -74,22 +78,27 @@ const styles = StyleSheet.create({
     padding: 10,
     borderBottomWidth: 1,
     borderBottomColor: '#ddd',
-    alignItems: 'center', // Align items vertically
+    alignItems: 'center', 
   },
   movieImage: {
-    width: 100, // Set the width
-    height: 150, // Set the height
-    marginRight: 10, // Add some margin between image and movie info
+    width: 100, 
+    height: 150, 
+    marginRight: 10, 
   },
   movieInfo: {
-    flex: 1, // Take up the remaining space
-    justifyContent: 'center', // Center movie info vertically
+    flex: 1, 
+    justifyContent: 'center',
   },
   movieTitle: {
     fontWeight: 'bold',
   },
   movieDescription: {
     fontSize: 12,
+  },
+  backgroundImage: {
+    flex: 1,
+    resizeMode: 'cover',
+    justifyContent: 'center',
   },
 });
 

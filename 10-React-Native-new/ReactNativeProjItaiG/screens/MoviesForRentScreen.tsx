@@ -1,37 +1,40 @@
 import React, { useEffect, useState } from "react";
-import { View, FlatList, StyleSheet, Alert } from "react-native";
+import { View, FlatList, StyleSheet, Alert, ImageBackground } from "react-native";
 import { fetchMovies } from "../services/movieService";
 import MovieItem from "../components/MovieItem";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { Movie } from "../types/types"; 
+import { Movie } from "../types/types";
 import { SafeAreaView } from "react-native-safe-area-context";
-const RENTED_MOVIES_KEY = '@rented_movies'; 
+import { useBackground } from "../contexts/BackgroundContext";
 
 const MoviesForRentScreen = () => {
-  const [movies, setMovies] = useState<Movie[]>([]); 
-  const [watchlist, setWatchlist] = useState<Movie[]>([]); 
-  const [rentedMovies, setRentedMovies] = useState<Movie[]>([]); 
+  const { background } = useBackground();
+  const [movies, setMovies] = useState<Movie[]>([]);
+  const [page, setPage] = useState(1);
+  const [loading, setLoading] = useState(false);
+
+  const loadMovies = async (pageNum = 1) => {
+    if (loading) return;
+    setLoading(true);
+
+    try {
+      const fetchedMovies = await fetchMovies(pageNum);
+      setMovies(prevMovies => [...prevMovies, ...fetchedMovies]);
+      setPage(pageNum + 1);
+    } catch (e) {
+      Alert.alert("Error", "Failed to load movies.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    const loadMovies = async () => {
-      const fetchedMovies = await fetchMovies();
-      setMovies(fetchedMovies);
-    };
-
-    const loadWatchlist = async () => {
-      try {
-        const jsonValue = await AsyncStorage.getItem("@watchlist");
-        if (jsonValue != null) {
-          setWatchlist(JSON.parse(jsonValue));
-        }
-      } catch (e) {
-        Alert.alert("Error", "Failed to load the watchlist.");
-      }
-    };
-
     loadMovies();
-    loadWatchlist();
   }, []);
+
+  const handleLoadMore = () => {
+    loadMovies(page);
+  };
 
   const addToWatchlist = async (movie: Movie) => {
     if (watchlist.some(watchlistMovie => watchlistMovie.id === movie.id)) {
@@ -69,20 +72,24 @@ const MoviesForRentScreen = () => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <FlatList
-        data={movies}
-        renderItem={({ item }) => (
-          <MovieItem
-            movie={item}
-            onAddToWatchlist={addToWatchlist}
-            onRent={rentMovie}
-          />
-        )}
-        keyExtractor={(item) => item.id.toString()}
-        numColumns={3}
-      />
-    </SafeAreaView>
+    <ImageBackground source={background} style={styles.backgroundImage}>
+      <SafeAreaView style={styles.container}>
+        <FlatList
+          data={movies}
+          renderItem={({ item }) => (
+            <MovieItem
+              movie={item}
+              onAddToWatchlist={addToWatchlist}
+              onRent={rentMovie}
+            />
+          )}
+          keyExtractor={(item) => item.id.toString()}
+          numColumns={3}
+          onEndReached={handleLoadMore}
+          onEndReachedThreshold={0.5}
+        />
+      </SafeAreaView>
+    </ImageBackground>
   );
 };
 
@@ -90,6 +97,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 10,
+  },
+  backgroundImage: {
+    flex: 1,
+    resizeMode: 'cover',
+    justifyContent: 'center',
   },
 });
 

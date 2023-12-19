@@ -3,46 +3,52 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import StackNavigator from "./StackNavigator";
 import WatchlistScreen from "../screens/WatchlistScreen";
 import MoviesForRentScreen from "../screens/MoviesForRentScreen";
-import { Ionicons } from '@expo/vector-icons';
 import RentedMoviesScreen from "../screens/RentedMoviesScreen";
+import SettingsScreen from "../screens/SettingsScreen";
+import { Ionicons } from '@expo/vector-icons';
 
 const Tab = createBottomTabNavigator();
 
 const TabNavigator = () => {
   return (
-<Tab.Navigator
-  screenOptions={({ route }) => ({
-    headerShown: true,
-    headerTitle: "",
-    headerTransparent: true,
-    tabBarIcon: ({ focused, color, size }) => {
-      let iconName;
-      if (route.name === 'HomeTab') {
-        iconName = focused ? 'ios-home' : 'ios-home-outline';
-      } else if (route.name === 'MoviesForRentTab') {
-        iconName = focused ? 'ios-film' : 'ios-film-outline';
-      } else if (route.name === 'WatchlistTab') {
-        iconName = focused ? 'ios-list' : 'ios-list-outline';
-      } else if (route.name === 'RentedMoviesTab') {
-        // Choose an appropriate icon for rented movies
-        iconName = focused ? 'ios-checkmark-circle' : 'ios-checkmark-circle-outline';
-      }
-
-      // You can return any component that you like here!
-      return <Ionicons name={iconName} size={size} color={color} />;
-    },
-  })}
-  tabBarOptions={{
-    activeTintColor: 'tomato',
-    inactiveTintColor: 'gray',
-  }}
->
-  <Tab.Screen name="HomeTab" component={StackNavigator} />
-  <Tab.Screen name="MoviesForRentTab" component={MoviesForRentScreen} />
-  <Tab.Screen name="WatchlistTab" component={WatchlistScreen} />
-  <Tab.Screen name="RentedMoviesTab" component={RentedMoviesScreen} />
-</Tab.Navigator>
-
+    <Tab.Navigator
+      screenOptions={({ route }) => ({
+        headerShown: true,
+        headerTitle: "",
+        headerTransparent: true,
+        tabBarIcon: ({ focused, color, size }) => {
+          let iconName;
+          switch (route.name) {
+            case 'Home':
+              iconName = focused ? 'ios-home' : 'ios-home-outline';
+              break;
+            case 'MoviesForRent':
+              iconName = focused ? 'ios-film' : 'ios-film-outline';
+              break;
+            case 'Watchlist':
+              iconName = focused ? 'ios-list' : 'ios-list-outline';
+              break;
+            case 'RentedMovies':
+              iconName = focused ? 'ios-checkmark-circle' : 'ios-checkmark-circle-outline';
+              break;
+            case 'Settings':
+              iconName = focused ? 'ios-settings' : 'ios-settings-outline';
+              break;
+            default:
+              iconName = 'ios-alert';
+          }
+          return <Ionicons name={iconName} size={size} color={color} />;
+        },
+        tabBarActiveTintColor: 'tomato',
+        tabBarInactiveTintColor: 'gray',
+      })}
+    >
+      <Tab.Screen name="Home" component={StackNavigator} />
+      <Tab.Screen name="MoviesForRent" component={MoviesForRentScreen} />
+      <Tab.Screen name="Watchlist" component={WatchlistScreen} />
+      <Tab.Screen name="RentedMovies" component={RentedMoviesScreen} />
+      <Tab.Screen name="Settings" component={SettingsScreen} />
+    </Tab.Navigator>
   );
 };
 
