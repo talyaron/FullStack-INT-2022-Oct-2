@@ -1,45 +1,71 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image, ScrollView } from 'react-native';
-import * as ImagePicker from 'expo-image-picker';
+import { Camera } from 'expo-camera';
 
-const SelfieScreen: React.FC = () => {
-  const [selfieImages, setSelfieImages] = useState<string[]>([]);
+const SelfieScreen = () => {
+  const [hasPermission, setHasPermission] = useState(null);
+  const [cameraType, setCameraType] = useState(Camera.Constants.Type.front);
+  const [selfies, setSelfies] = useState([]);
+  const [isCameraOpen, setIsCameraOpen] = useState(false);
 
   useEffect(() => {
     (async () => {
-      const { status } = await ImagePicker.requestCameraPermissionsAsync();
-      if (status !== 'granted') {
-        alert('Camera permission required');
-      }
+      const { status } = await Camera.requestPermissionsAsync();
+      setHasPermission(status === 'granted');
     })();
   }, []);
 
-  const openCameraForSelfie = async () => {
-    const result = await ImagePicker.launchCameraAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      allowsEditing: true,
-      aspect: [4, 3],
-      quality: 0.8,
-    });
-
-    if (!result.cancelled && result.uri) {
-      setSelfieImages([...selfieImages, result.uri]);
+  const takeSelfie = async () => {
+    if (camera) {
+      const photo = await camera.takePictureAsync();
+      setSelfies((prevSelfies) => [...prevSelfies, photo.uri]);
+      setIsCameraOpen(false);
     }
   };
 
+  const flipCamera = () => {
+    setCameraType(
+      cameraType === Camera.Constants.Type.front
+        ? Camera.Constants.Type.back
+        : Camera.Constants.Type.front
+    );
+  };
+
+  let camera;
+
+  if (hasPermission === null) {
+    return <View />;
+  }
+  if (hasPermission === false) {
+    return <Text>No access to camera</Text>;
+  }
+
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={openCameraForSelfie}>
-        <Text style={styles.takeSelfieText}>Take a Selfie</Text>
+      {isCameraOpen && (
+        <Camera style={styles.camera} type={cameraType} ref={(ref) => (camera = ref)}>
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity style={styles.flipButton} onPress={flipCamera}>
+              <Text style={styles.flipText}>Flip</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.selfieButton} onPress={takeSelfie}>
+              <Text style={styles.selfieText}>Take a Selfie</Text>
+            </TouchableOpacity>
+          </View>
+        </Camera>
+      )}
+      <TouchableOpacity
+        style={styles.openCameraButton}
+        onPress={() => setIsCameraOpen(true)}
+        disabled={isCameraOpen}
+      >
+        <Text style={styles.openCameraButtonText}>Open Camera</Text>
       </TouchableOpacity>
-
-      <ScrollView horizontal>
-        {selfieImages.map((image, index) => (
-          <Image
-            key={index}
-            source={{ uri: image }}
-            style={styles.selfieImage}
-          />
+      <ScrollView style={styles.selfiesContainer}>
+        {selfies.map((selfieUri, index) => (
+          <View key={index} style={styles.selfieItem}>
+            <Image source={{ uri: selfieUri }} style={styles.selfieImage} />
+          </View>
         ))}
       </ScrollView>
     </View>
@@ -49,19 +75,61 @@ const SelfieScreen: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: '#f0f0f0',
   },
-  takeSelfieText: {
+  camera: {
+    width: '100%',
+    height: '100%',
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingHorizontal: 20,
+    paddingTop: 20,
+  },
+  flipButton: {
+    alignSelf: 'flex-end',
+    alignItems: 'center',
+    padding: 15,
+    backgroundColor: '#007bff',
+    borderRadius: 10,
+  },
+  flipText: {
     fontSize: 18,
-    color: 'blue',
-    marginBottom: 20,
+    color: 'white',
+  },
+  selfieButton: {
+    alignSelf: 'flex-end',
+    alignItems: 'center',
+    padding: 15,
+    backgroundColor: '#28a745',
+    borderRadius: 10,
+  },
+  selfieText: {
+    fontSize: 18,
+    color: 'white',
+  },
+  selfiesContainer: {
+  },
+  selfieItem: {
+    marginBottom: 10,
   },
   selfieImage: {
-    width: 150,
-    height: 150,
-    borderRadius: 75,
-    marginHorizontal: 10,
+    width: 300,
+    height: 300,
+    borderWidth: 2,
+    borderColor: 'white',
+  },
+  openCameraButton: {
+    alignSelf: 'center',
+    padding: 15,
+    margin: 10,
+    backgroundColor: '#17a2b8',
+    borderRadius: 10,
+  },
+  openCameraButtonText: {
+    fontSize: 18,
+    color: 'white',
   },
 });
 
