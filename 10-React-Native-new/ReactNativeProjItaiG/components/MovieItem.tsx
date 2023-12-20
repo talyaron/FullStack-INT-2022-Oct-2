@@ -6,11 +6,13 @@ const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/w500';
 
 interface MovieItemProps {
   movie: Movie;
-  onAddToWatchlist: (movie: Movie) => void;
-  onRent: (movie: Movie) => void;
+  onAddToWatchlist?: (movie: Movie) => void;
+  onRent?: (movie: Movie) => void;
+  screenType: 'rent' | 'watchlist' | 'rented';
 }
 
-const MovieItem: React.FC<MovieItemProps> = ({ movie, onAddToWatchlist, onRent }) => {
+
+const MovieItem: React.FC<MovieItemProps> = ({ movie, onAddToWatchlist, onRent, screenType }) => {
   return (
     <View style={styles.item}>
       <Image
