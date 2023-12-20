@@ -108,6 +108,7 @@ const MoviesForRentScreen = () => {
               movie={item}
               onAddToWatchlist={addToWatchlist}
               onRent={rentMovie}
+              screenType="forRent"
             />
           )}
           keyExtractor={(item) => item.id.toString()}

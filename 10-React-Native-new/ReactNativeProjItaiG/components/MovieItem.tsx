@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Image, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { Movie } from '../types/types'; // Make sure the path is correct
+import { Movie } from '../types/types';
 
 const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/w500';
 
@@ -11,7 +11,6 @@ interface MovieItemProps {
   screenType: 'rent' | 'watchlist' | 'rented';
 }
 
-
 const MovieItem: React.FC<MovieItemProps> = ({ movie, onAddToWatchlist, onRent, screenType }) => {
   return (
     <View style={styles.item}>
@@ -20,17 +19,21 @@ const MovieItem: React.FC<MovieItemProps> = ({ movie, onAddToWatchlist, onRent, 
         style={styles.image}
       />
       <Text style={styles.title}>{movie.title}</Text>
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.button} onPress={() => onRent(movie)}>
-          <Text style={styles.buttonText}>Rent</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={() => onAddToWatchlist(movie)}>
-          <Text style={styles.buttonText}>Watchlist</Text>
-        </TouchableOpacity>
-      </View>
+
+      {screenType === 'forRent' && (
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity style={styles.button} onPress={() => onRent(movie)}>
+            <Text style={styles.buttonText}>Rent</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button} onPress={() => onAddToWatchlist(movie)}>
+            <Text style={styles.buttonText}>Watchlist</Text>
+          </TouchableOpacity>
+        </View>
+      )}
     </View>
   );
 };
+
 
 const styles = StyleSheet.create({
   item: {

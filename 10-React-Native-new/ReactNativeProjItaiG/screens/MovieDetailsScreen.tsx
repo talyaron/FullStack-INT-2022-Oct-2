@@ -5,7 +5,6 @@ const MovieDetailsScreen = () => {
   return (
     <View style={styles.container}>
       <Text>Movie Details Screen</Text>
-      {/* Add movie details here */}
     </View>
   );
 };
