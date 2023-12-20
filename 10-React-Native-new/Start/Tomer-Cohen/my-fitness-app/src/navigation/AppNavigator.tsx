@@ -6,6 +6,7 @@ import CustomWorkoutScreen from '../screens/CustomWorkoutScreen';
 import ProgressScreen from '../screens/ProgressScreen';
 import UserProfileScreen from '../screens/UserProfileScreen';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import SelfieScreen from '../screens/SelfieScreen';
 
 
 const Tab = createBottomTabNavigator();
@@ -38,6 +39,7 @@ const AppNavigator = () => {
         <Tab.Screen name="Custom" component={CustomWorkoutScreen} />
         <Tab.Screen name="Progress" component={ProgressScreen} />
         <Tab.Screen name="Profile" component={UserProfileScreen} />
+        <Tab.Screen name="Ur Self" component={SelfieScreen} />
       </Tab.Navigator>
     );
   };
