@@ -9,30 +9,32 @@ interface MovieItemProps {
   onAddToWatchlist?: (movie: Movie) => void;
   onRent?: (movie: Movie) => void;
   screenType: 'rent' | 'watchlist' | 'rented';
+  onPress?: () => void; 
 }
 
-const MovieItem: React.FC<MovieItemProps> = ({ movie, onAddToWatchlist, onRent, screenType }) => {
+const MovieItem: React.FC<MovieItemProps> = ({ movie, onAddToWatchlist, onRent, screenType, onPress }) => {
   return (
-    <View style={styles.item}>
-      <Image
-        source={{ uri: `${IMAGE_BASE_URL}${movie.poster_path}` }}
-        style={styles.image}
-      />
-      <Text style={styles.title}>{movie.title}</Text>
+    <TouchableOpacity onPress={onPress} style={styles.item}>
+        <Image
+          source={{ uri: `${IMAGE_BASE_URL}${movie.poster_path}` }}
+          style={styles.image}
+        />
+        <Text style={styles.title}>{movie.title}</Text>
 
-      {screenType === 'forRent' && (
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity style={styles.button} onPress={() => onRent(movie)}>
-            <Text style={styles.buttonText}>Rent</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={() => onAddToWatchlist(movie)}>
-            <Text style={styles.buttonText}>Watchlist</Text>
-          </TouchableOpacity>
-        </View>
-      )}
-    </View>
+        {screenType === 'forRent' && (
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity style={styles.button} onPress={() => onRent(movie)}>
+              <Text style={styles.buttonText} numberOfLines={1} ellipsizeMode="tail">Rent</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.button} onPress={() => onAddToWatchlist(movie)}>
+              <Text style={styles.buttonText} numberOfLines={1} ellipsizeMode="tail">Watchlist</Text>
+            </TouchableOpacity>
+          </View>
+        )}
+    </TouchableOpacity>
   );
 };
+
 
 
 const styles = StyleSheet.create({
@@ -62,12 +64,14 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 5,
     flex: 1,
-    marginHorizontal: 4,
+    marginHorizontal: 1,
+    flexShrink: 1, // Adjust flexShrink to handle overflow
   },
   buttonText: {
     textAlign: 'center',
     color: '#fff',
     fontSize: 10,
+    flexShrink: 1, // Adjust flexShrink to handle overflow
   },
 });
 

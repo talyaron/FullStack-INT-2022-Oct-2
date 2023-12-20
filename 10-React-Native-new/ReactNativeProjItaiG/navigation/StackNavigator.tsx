@@ -12,19 +12,23 @@ const StackNavigator = () => {
       <Stack.Screen
         name="HomeStack"
         component={HomeScreen}
-        options={{ headerShown: false ,headerTitle: ""}} 
+        options={{ headerShown: false, headerTitle: "" }}
       />
       <Stack.Screen
         name="MovieDetails"
         component={MovieDetailsScreen}
-        options={{ headerShown: false,headerTitle: "",
-      }}
+        options={{ headerShown: false, headerTitle: "" }}
       />
       <Stack.Screen
         name="MoviesForRentStack"
         component={MoviesForRentScreen}
-        options={{ headerShown: false,headerTitle: "" }}
+        options={{ headerShown: false, headerTitle: "" }}
       />
+      <Stack.Screen
+       name="MovieDetailsScreen"
+       component={MovieDetailsScreen} 
+       options={{ headerShown: false, headerTitle: "" }}
+       />
     </Stack.Navigator>
   );
 };

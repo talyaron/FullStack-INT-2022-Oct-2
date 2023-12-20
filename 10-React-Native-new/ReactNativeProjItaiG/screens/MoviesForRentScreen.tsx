@@ -6,11 +6,13 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Movie } from "../types/types";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useBackground } from "../contexts/BackgroundContext";
+import { useNavigation } from "@react-navigation/native";
 
 const WATCHLIST_KEY = '@watchlist'; 
 const RENTED_MOVIES_KEY = '@rented_movies'; 
 
 const MoviesForRentScreen = () => {
+  const navigation = useNavigation(); 
   const { background } = useBackground();
   const [movies, setMovies] = useState<Movie[]>([]);
   const [watchlist, setWatchlist] = useState<Movie[]>([]); 
@@ -23,6 +25,10 @@ const MoviesForRentScreen = () => {
     loadWatchlist(); 
     loadRentedMovies(); 
   }, []);
+  
+  const navigateToMovieDetails = (movie: Movie) => {
+    navigation.navigate('MovieDetailsScreen', { movie }); // Navigate with movie data
+  };
 
   const loadWatchlist = async () => {
     try {
@@ -64,6 +70,8 @@ const MoviesForRentScreen = () => {
   const handleLoadMore = () => {
     loadMovies(page);
   };
+
+
 
   const addToWatchlist = async (movie: Movie) => {
     if (watchlist.some(watchlistMovie => watchlistMovie.id === movie.id)) {
@@ -109,6 +117,7 @@ const MoviesForRentScreen = () => {
               onAddToWatchlist={addToWatchlist}
               onRent={rentMovie}
               screenType="forRent"
+              onPress={() => navigateToMovieDetails(item)} // Pass the navigate function
             />
           )}
           keyExtractor={(item) => item.id.toString()}
@@ -120,6 +129,7 @@ const MoviesForRentScreen = () => {
     </ImageBackground>
   );
 };
+
 
 const styles = StyleSheet.create({
   container: {
