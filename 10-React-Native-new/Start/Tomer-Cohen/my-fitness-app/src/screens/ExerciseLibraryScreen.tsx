@@ -1,101 +1,63 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, FlatList } from 'react-native';
 import ExerciseCard from '../components/ExerciseCard';
 import DifficultySelector from '../components/DifficultySelector';
-import WorkoutList from '../components/WorkoutList';
-import { FlatList } from 'react-native'; // Import FlatList
-
-
 
 const exercises = [
-  {
-    difficulty: 'Easy',
-    exercises: [
-      { id: '1', name: 'Push-ups', description: 'Standard push-ups', imageUrl: 'https://www.fitnesseducation.edu.au/wp-content/uploads/2017/03/Pushups.jpg' },
-      { id: '2', name: 'Sit-ups', description: 'Basic abdominal sit-ups', imageUrl: 'https://fitnessvolt.com/wp-content/uploads/2021/07/janda-sit-up-exercise-guide.jpg' },
-    ],
-  },
-  {
-    difficulty: 'Medium',
-    exercises: [
-      { id: '3', name: 'Lunges', description: 'Lunges for leg strengthening', imageUrl: 'https://media.istockphoto.com/id/964785648/vector/illustrated-exercise-guide-by-healthy-woman-doing-lunges-workout-in-2-steps.jpg?s=612x612&w=0&k=20&c=aiyOizs_x3B3fI07LVuQ6thVMpRl_oAtbzJurVM56Jw=' },
-      { id: '4', name: 'Squats', description: 'Squats for lower body', imageUrl: 'https://www.inspireusafoundation.org/wp-content/uploads/2022/06/the-barbell-squat.jpg' },
-    ],
-  },
-  {
-    difficulty: 'Hard',
-    exercises: [
-      { id: '5', name: 'Plank', description: 'Plank for core conditioning', imageUrl: 'https://hips.hearstapps.com/hmg-prod/images/hdm119918mh15842-1545237096.png?crop=0.668xw:1.00xh;0.117xw,0&resize=1200:*' },
-      { id: '6', name: 'Jump Rope', description: 'Jump rope for cardio', imageUrl: 'https://www.realsimple.com/thmb/LqkRwhYXpPBcmq5rnYIYJrX5SeI=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/basic-jump-illo2-1-d4bcbd6792b3491f8f90fe26cb0a956c.jpg' },
-    ],
-  },
+  // Easy exercises
+  { id: '1', difficulty: 'Easy', name: 'Push-ups', description: 'Standard push-ups', imageUrl: 'https://www.fitnesseducation.edu.au/wp-content/uploads/2017/03/Pushups.jpg'},
+  { id: '2', difficulty: 'Easy', name: 'Sit-ups', description: 'Basic abdominal sit-ups', imageUrl: 'https://hips.hearstapps.com/hmg-prod/images/v-sit-crunch-1585734647.jpg' },
+  { id: '3', difficulty: 'Easy', name: 'Leg Raises', description: 'Lying leg raises for abs', imageUrl: 'https://static.strengthlevel.com/images/illustrations/lying-leg-raise-1000x1000.jpg' },
+  { id: '4', difficulty: 'Easy', name: 'Jumping Jacks', description: 'Cardio jumping jacks', imageUrl: 'https://www.spotebi.com/wp-content/uploads/2014/10/jumping-jacks-exercise-illustration.jpg' },
+  { id: '5', difficulty: 'Easy', name: 'Bodyweight Squats', description: 'Simple bodyweight squats', imageUrl: 'https://bodybuilding-wizard.com/wp-content/uploads/2019/03/basic-bodyweight-squat-exercise-3.jpg' },
+  { id: '6', difficulty: 'Easy', name: 'Mountain Climbers', description: 'Dynamic mountain climbers', imageUrl: 'https://www.spotebi.com/wp-content/uploads/2014/10/mountain-climbers-exercise-illustration.jpg' },
+  { id: '7', difficulty: 'Easy', name: 'Bicycle Crunches', description: 'Bicycle crunches for abs', imageUrl: 'https://www.spotebi.com/wp-content/uploads/2014/10/bicycle-crunches-exercise-illustration.jpg' },
+  
+  // Medium exercises
+  { id: '8', difficulty: 'Medium', name: 'Dumbbell Lunges', description: 'Lunges with dumbbells', imageUrl: '...' },
+  { id: '9', difficulty: 'Medium', name: 'Bench Press', description: 'Flat bench press', imageUrl: '...' },
+  { id: '10', difficulty: 'Medium', name: 'Deadlifts', description: 'Standard deadlifts', imageUrl: '...' },
+  { id: '11', difficulty: 'Medium', name: 'Pull-ups', description: 'Classic pull-ups', imageUrl: '...' },
+  { id: '12', difficulty: 'Medium', name: 'Box Jumps', description: 'Explosive box jumps', imageUrl: '...' },
+  { id: '13', difficulty: 'Medium', name: 'Kettlebell Swings', description: 'Kettlebell swing workout', imageUrl: '...' },
+  { id: '14', difficulty: 'Medium', name: 'Russian Twists', description: 'Russian twist exercise', imageUrl: '...' },
+
+  // Hard exercises
+  { id: '15', difficulty: 'Hard', name: 'Plank', description: 'Plank for core conditioning', imageUrl: '...' },
+  { id: '16', difficulty: 'Hard', name: 'Burpees', description: 'High-intensity burpees', imageUrl: '...' },
+  { id: '17', difficulty: 'Hard', name: 'Barbell Squats', description: 'Barbell back squats', imageUrl: '...' },
+  { id: '18', difficulty: 'Hard', name: 'Tire Flips', description: 'Heavy tire flipping', imageUrl: '...' },
+  { id: '19', difficulty: 'Hard', name: 'Muscle Ups', description: 'Advanced muscle ups', imageUrl: '...' },
+  { id: '20', difficulty: 'Hard', name: 'Handstand Push-ups', description: 'Handstand push-ups', imageUrl: '...' },
+  { id: '21', difficulty: 'Hard', name: 'Clean and Jerk', description: 'Olympic clean and jerk', imageUrl: '...' },
 ];
 
 const ExerciseLibraryScreen = () => {
   const [selectedDifficulty, setSelectedDifficulty] = useState('All');
-  const [selectedWorkout, setSelectedWorkout] = useState(null);
-
-  const predefinedWorkouts = [
-    {
-      id: '1',
-      name: 'Full Body Workout (Easy)',
-      exercises: exercises.find((group) => group.difficulty === 'Easy').exercises,
-    },
-    {
-      id: '2',
-      name: 'Full Body Workout (Medium)',
-      exercises: exercises.find((group) => group.difficulty === 'Medium').exercises,
-    },
-    {
-      id: '3',
-      name: 'Full Body Workout (Hard)',
-      exercises: exercises.find((group) => group.difficulty === 'Hard').exercises,
-    },
-  ];
-
-  const handleSelectWorkout = (workout) => {
-    setSelectedWorkout(workout);
-  };
 
   const handleSelectDifficulty = (difficulty) => {
     setSelectedDifficulty(difficulty);
   };
 
-  const filteredExercises = selectedDifficulty === 'All' ? 
-    exercises.flatMap((group) => group.exercises) :
-    exercises.find((group) => group.difficulty === selectedDifficulty).exercises;
+  const filteredExercises = selectedDifficulty === 'All' 
+    ? exercises
+    : exercises.filter(exercise => exercise.difficulty === selectedDifficulty);
 
   return (
     <View style={styles.container}>
-      <WorkoutList workouts={predefinedWorkouts} onSelectWorkout={handleSelectWorkout} />
-
-      {selectedWorkout ? (
-        <FlatList
-          data={selectedWorkout.exercises}
-          keyExtractor={(item) => item.id.toString()}
-          renderItem={({ item }) => (
-            <ExerciseCard
-              name={item.name}
-              description={item.description}
-              imageUrl={item.imageUrl}
-            />
-          )}
-          ListHeaderComponent={<Text style={styles.header}>Selected Workout Exercises</Text>}
-        />
-      ) : (
-        <FlatList
-          data={filteredExercises}
-          keyExtractor={(item) => item.id.toString()}
-          renderItem={({ item }) => (
-            <ExerciseCard
-              name={item.name}
-              description={item.description}
-              imageUrl={item.imageUrl}
-            />
-          )}
-          ListHeaderComponent={<Text style={styles.header}>Exercise Library</Text>}
-        />
-      )}
+      <DifficultySelector onSelectDifficulty={handleSelectDifficulty} />
+      <Text style={styles.header}>Exercise Library</Text>
+      <FlatList
+        data={filteredExercises}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => (
+          <ExerciseCard
+            name={item.name}
+            description={item.description}
+            imageUrl={item.imageUrl}
+          />
+        )}
+      />
     </View>
   );
 };
@@ -111,6 +73,7 @@ const styles = StyleSheet.create({
     marginVertical: 20,
     marginLeft: 10,
   },
+  // ... any additional styles you might need
 });
 
 export default ExerciseLibraryScreen;

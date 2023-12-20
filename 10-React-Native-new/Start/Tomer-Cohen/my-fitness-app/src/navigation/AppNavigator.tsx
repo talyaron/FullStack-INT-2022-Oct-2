@@ -29,6 +29,9 @@ const AppNavigator = () => {
             } else if (route.name === 'Profile') {
               iconName = 'person-outline';
             }
+           else if (route.name === 'Ur Self') {
+            iconName = 'person-outline';
+          }
   
             return <Ionicons name={iconName} size={size} color={color} />;
           },
