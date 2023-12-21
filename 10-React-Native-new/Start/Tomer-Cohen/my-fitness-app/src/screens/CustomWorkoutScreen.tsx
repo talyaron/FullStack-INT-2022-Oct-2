@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, FlatList  } from 'react-native';
 import CustomWorkoutBuilder from '../components/CustomWorkoutBuilder';
 
 const exercises = [
@@ -8,13 +8,30 @@ const exercises = [
 ];
 
 const CustomWorkoutScreen = () => {
+  const Header = () => (
+    <Text style={styles.header}>Build Your Custom Workout</Text>
+  );
+
+  // Renders your CustomWorkoutBuilder component
+  const renderItem = ({ item }) => (
+    <CustomWorkoutBuilder exercises={item.exercises} />
+  );
+
+  // Assuming 'exercises' is an array of exercise data
+  const data = [{ exercises }];
+
   return (
-    <ScrollView style={styles.container}>
-      <Text style={styles.header}>Build Your Custom Workout</Text>
-      <CustomWorkoutBuilder exercises={exercises} />
-    </ScrollView>
+    <FlatList
+      style={styles.container}
+      data={data}
+      renderItem={renderItem}
+      ListHeaderComponent={Header}
+      // Key extractor is necessary for identifying each item uniquely
+      keyExtractor={(item, index) => 'key' + index}
+    />
   );
 };
+
 
 const styles = StyleSheet.create({
   container: {

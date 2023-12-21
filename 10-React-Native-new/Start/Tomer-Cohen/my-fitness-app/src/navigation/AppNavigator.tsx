@@ -30,9 +30,8 @@ const AppNavigator = () => {
               iconName = 'person-outline';
             }
            else if (route.name === 'Ur Self') {
-            iconName = 'person-outline';
+            iconName = 'camera-outline';
           }
-  
             return <Ionicons name={iconName} size={size} color={color} />;
           },
         })}

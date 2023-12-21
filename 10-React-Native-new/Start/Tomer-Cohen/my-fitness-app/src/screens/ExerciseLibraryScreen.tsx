@@ -14,22 +14,22 @@ const exercises = [
   { id: '7', difficulty: 'Easy', name: 'Bicycle Crunches', description: 'Bicycle crunches for abs', imageUrl: 'https://www.spotebi.com/wp-content/uploads/2014/10/bicycle-crunches-exercise-illustration.jpg' },
   
   // Medium exercises
-  { id: '8', difficulty: 'Medium', name: 'Dumbbell Lunges', description: 'Lunges with dumbbells', imageUrl: '...' },
-  { id: '9', difficulty: 'Medium', name: 'Bench Press', description: 'Flat bench press', imageUrl: '...' },
-  { id: '10', difficulty: 'Medium', name: 'Deadlifts', description: 'Standard deadlifts', imageUrl: '...' },
-  { id: '11', difficulty: 'Medium', name: 'Pull-ups', description: 'Classic pull-ups', imageUrl: '...' },
-  { id: '12', difficulty: 'Medium', name: 'Box Jumps', description: 'Explosive box jumps', imageUrl: '...' },
-  { id: '13', difficulty: 'Medium', name: 'Kettlebell Swings', description: 'Kettlebell swing workout', imageUrl: '...' },
-  { id: '14', difficulty: 'Medium', name: 'Russian Twists', description: 'Russian twist exercise', imageUrl: '...' },
+  { id: '8', difficulty: 'Medium', name: 'Dumbbell Lunges', description: 'Lunges with dumbbells', imageUrl: 'https://pbs.twimg.com/media/DmouIvGX0AEtkm5.jpg' },
+  { id: '9', difficulty: 'Medium', name: 'Bench Press', description: 'Flat bench press', imageUrl: 'https://i.ytimg.com/vi/SCVCLChPQFY/maxresdefault.jpg' },
+  { id: '10', difficulty: 'Medium', name: 'Deadlifts', description: 'Standard deadlifts', imageUrl: 'https://hips.hearstapps.com/hmg-prod/images/romanian-deadlift-1595930760.jpg' },
+  { id: '11', difficulty: 'Medium', name: 'Pull-ups', description: 'Classic pull-ups', imageUrl: 'https://hips.hearstapps.com/hmg-prod/images/u05-bottomhalfwaytop-ism-mh310118-1558552383.jpg' },
+  { id: '12', difficulty: 'Medium', name: 'Box Jumps', description: 'Explosive box jumps', imageUrl: 'https://movemoresitless.files.wordpress.com/2013/03/screen-shot-2013-03-23-at-7-02-06-pm.png' },
+  { id: '13', difficulty: 'Medium', name: 'Kettlebell Swings', description: 'Kettlebell swing workout', imageUrl: 'https://cdn.oxygenmag.com/wp-content/uploads/2015/02/kettlebell-swing-1.jpg?width=730' },
+  { id: '14', difficulty: 'Medium', name: 'Russian Twists', description: 'Russian twist exercise', imageUrl: 'https://www.spotebi.com/wp-content/uploads/2015/04/russian-twist-exercise-illustration.jpg' },
 
   // Hard exercises
-  { id: '15', difficulty: 'Hard', name: 'Plank', description: 'Plank for core conditioning', imageUrl: '...' },
-  { id: '16', difficulty: 'Hard', name: 'Burpees', description: 'High-intensity burpees', imageUrl: '...' },
-  { id: '17', difficulty: 'Hard', name: 'Barbell Squats', description: 'Barbell back squats', imageUrl: '...' },
-  { id: '18', difficulty: 'Hard', name: 'Tire Flips', description: 'Heavy tire flipping', imageUrl: '...' },
-  { id: '19', difficulty: 'Hard', name: 'Muscle Ups', description: 'Advanced muscle ups', imageUrl: '...' },
-  { id: '20', difficulty: 'Hard', name: 'Handstand Push-ups', description: 'Handstand push-ups', imageUrl: '...' },
-  { id: '21', difficulty: 'Hard', name: 'Clean and Jerk', description: 'Olympic clean and jerk', imageUrl: '...' },
+  { id: '15', difficulty: 'Hard', name: 'Plank', description: 'Plank for core conditioning', imageUrl: 'https://www.spotebi.com/wp-content/uploads/2014/10/plank-exercise-illustration.jpg' },
+  { id: '16', difficulty: 'Hard', name: 'Burpees', description: 'High-intensity burpees', imageUrl: 'https://www.spotebi.com/wp-content/uploads/2014/10/burpees-exercise-illustration.jpg' },
+  { id: '17', difficulty: 'Hard', name: 'Barbell Squats', description: 'Barbell back squats', imageUrl: 'https://hips.hearstapps.com/hmg-prod/images/back-squat-1662030023.jpg' },
+  { id: '18', difficulty: 'Hard', name: 'Tire Flips', description: 'Heavy tire flipping', imageUrl: 'https://www.inspireusafoundation.org/wp-content/uploads/2022/11/muscles-used-to-tire-flip-1024x433.png' },
+  { id: '19', difficulty: 'Hard', name: 'Muscle Ups', description: 'Advanced muscle ups', imageUrl: 'https://www.wikihow.com/images/thumb/0/03/Train-for-Muscle-Ups-Step-9.jpg/aid11342021-v4-1200px-Train-for-Muscle-Ups-Step-9.jpg' },
+  { id: '20', difficulty: 'Hard', name: 'Handstand Push-ups', description: 'Handstand push-ups', imageUrl: 'https://www.hevyapp.com/wp-content/uploads/handstand-press-up-.png' },
+  { id: '21', difficulty: 'Hard', name: 'Clean and Jerk', description: 'Olympic clean and jerk', imageUrl: 'https://i.ytimg.com/vi/PjY1rH4_MOA/maxresdefault.jpg' },
 ];
 
 const ExerciseLibraryScreen = () => {
@@ -73,7 +73,6 @@ const styles = StyleSheet.create({
     marginVertical: 20,
     marginLeft: 10,
   },
-  // ... any additional styles you might need
 });
 
 export default ExerciseLibraryScreen;

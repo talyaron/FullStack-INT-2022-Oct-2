@@ -18,11 +18,11 @@ const CustomWorkoutBuilder = ({ exercises }: { exercises: Exercise[] }) => {
 
   const addCustomExercise = () => {
     const newExercise = {
-      id: Math.random().toString(36).substr(2, 9), // Generating a random ID
+      id: Math.random().toString(36).substr(2, 9), 
       name: newExerciseName,
       description: newExerciseDescription,
     };
-    exercises.push(newExercise); // Adding the new exercise to the main list
+    exercises.push(newExercise); 
     setNewExerciseName('');
     setNewExerciseDescription('');
   };
