@@ -46,7 +46,7 @@ const ExerciseLibraryScreen = () => {
   return (
     <View style={styles.container}>
       <DifficultySelector onSelectDifficulty={handleSelectDifficulty} />
-      <Text style={styles.header}>Exercise Library</Text>
+      <Text style={styles.header}>Exercise Library {selectedDifficulty}</Text>
       <FlatList
         data={filteredExercises}
         keyExtractor={(item) => item.id}

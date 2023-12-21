@@ -12,12 +12,10 @@ const CustomWorkoutScreen = () => {
     <Text style={styles.header}>Build Your Custom Workout</Text>
   );
 
-  // Renders your CustomWorkoutBuilder component
   const renderItem = ({ item }) => (
     <CustomWorkoutBuilder exercises={item.exercises} />
   );
 
-  // Assuming 'exercises' is an array of exercise data
   const data = [{ exercises }];
 
   return (
@@ -26,7 +24,6 @@ const CustomWorkoutScreen = () => {
       data={data}
       renderItem={renderItem}
       ListHeaderComponent={Header}
-      // Key extractor is necessary for identifying each item uniquely
       keyExtractor={(item, index) => 'key' + index}
     />
   );
