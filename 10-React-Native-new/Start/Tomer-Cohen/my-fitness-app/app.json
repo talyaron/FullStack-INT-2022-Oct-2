@@ -1,8 +1,8 @@
 {
   "expo": {
     "name": "my-fitness-app",
-    "slug": "my-fitness-app",
-    "version": "1.0.0",
+    "slug": "tomer-app",
+    "version": "1.0.2",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -15,16 +15,30 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.tomer6633.myfitnessapp"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.tomer6633.myfitnessapp"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "1bcff4ef-191c-4b61-84d0-ab7a23aa209a"
+      }
+    },
+    "owner": "tomer6633",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/1bcff4ef-191c-4b61-84d0-ab7a23aa209a"
     }
   }
 }

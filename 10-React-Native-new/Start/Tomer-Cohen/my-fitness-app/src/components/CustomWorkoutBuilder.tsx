@@ -11,6 +11,7 @@ const CustomWorkoutBuilder = ({ exercises }: { exercises: Exercise[] }) => {
   const [selectedExercises, setSelectedExercises] = useState<Exercise[]>([]);
   const [newExerciseName, setNewExerciseName] = useState('');
   const [newExerciseDescription, setNewExerciseDescription] = useState('');
+  const [editingExercise, setEditingExercise] = useState<{ id: string; name: string } | null>(null);
 
   const addExerciseToWorkout = (exercise: Exercise) => {
     setSelectedExercises((prevExercises) => [...prevExercises, exercise]);
@@ -18,11 +19,11 @@ const CustomWorkoutBuilder = ({ exercises }: { exercises: Exercise[] }) => {
 
   const addCustomExercise = () => {
     const newExercise = {
-      id: Math.random().toString(36).substr(2, 9), // Generating a random ID
+      id: Math.random().toString(36).substr(2, 9),
       name: newExerciseName,
       description: newExerciseDescription,
     };
-    exercises.push(newExercise); // Adding the new exercise to the main list
+    exercises.push(newExercise);
     setNewExerciseName('');
     setNewExerciseDescription('');
   };
@@ -31,6 +32,27 @@ const CustomWorkoutBuilder = ({ exercises }: { exercises: Exercise[] }) => {
     setSelectedExercises((prevExercises) =>
       prevExercises.filter((exercise) => exercise.id !== exerciseId)
     );
+  };
+
+  const startEditingExercise = (exercise: Exercise) => {
+    setEditingExercise({ id: exercise.id, name: exercise.name });
+  };
+
+  const handleEditChange = (name: string) => {
+    if (editingExercise) {
+      setEditingExercise({ ...editingExercise, name });
+    }
+  };
+
+  const saveEditedExercise = () => {
+    if (editingExercise) {
+      setSelectedExercises((prevExercises) =>
+        prevExercises.map((exercise) =>
+          exercise.id === editingExercise.id ? { ...exercise, name: editingExercise.name } : exercise
+        )
+      );
+      setEditingExercise(null);
+    }
   };
 
   const saveCustomWorkout = () => {
@@ -70,8 +92,22 @@ const CustomWorkoutBuilder = ({ exercises }: { exercises: Exercise[] }) => {
         <Text style={styles.header}>Your Workout</Text>
         {selectedExercises.map((exercise) => (
           <View key={exercise.id} style={styles.selectedItem}>
-            <Text style={styles.exerciseText}>{exercise.name}</Text>
-            <Button title="Remove" onPress={() => removeExerciseFromWorkout(exercise.id)} />
+            {editingExercise?.id === exercise.id ? (
+              <>
+                <TextInput
+                  style={styles.input}
+                  value={editingExercise.name}
+                  onChangeText={handleEditChange}
+                />
+                <Button title="Save" onPress={saveEditedExercise} />
+              </>
+            ) : (
+              <>
+                <Text style={styles.exerciseText}>{exercise.name}</Text>
+                <Button title="Edit" onPress={() => startEditingExercise(exercise)} />
+                <Button title="Remove" onPress={() => removeExerciseFromWorkout(exercise.id)} />
+              </>
+            )}
           </View>
         ))}
       </View>
