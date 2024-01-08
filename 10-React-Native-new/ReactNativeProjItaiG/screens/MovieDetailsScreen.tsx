@@ -1,8 +1,10 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, Image, ScrollView, ImageBackground } from 'react-native';
 import { WebView } from 'react-native-webview';
+import { useBackground } from '../contexts/BackgroundContext';
 
 const MovieDetailsScreen = ({ route }: any) => {
+  const { background } = useBackground();
   const { movie } = route.params;
 
   const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/w500';
@@ -12,6 +14,7 @@ const MovieDetailsScreen = ({ route }: any) => {
   const trailerUrl = 'https://www.youtube.com/embed/' + movie.trailer_key; // Replace 'trailer_key' with the actual key
 
   return (
+    <ImageBackground source={background} style={styles.backgroundImage}>
     <ScrollView style={styles.scrollView}>
       <View style={styles.container}>
         <Text style={styles.title}>{movie.title}</Text>
@@ -19,6 +22,7 @@ const MovieDetailsScreen = ({ route }: any) => {
         <Text style={styles.description}>{movie.overview}</Text>
       </View>
     </ScrollView>
+    </ImageBackground>
   );
 };
 
@@ -48,6 +52,11 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: 'justify',
     marginBottom: 10,
+  },
+  backgroundImage: {
+    flex: 1,
+    resizeMode: 'cover',
+    justifyContent: 'center',
   },
 });
 
